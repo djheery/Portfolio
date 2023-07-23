@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@500;600&family=Poppins:wght@400;600;700&display=swap');
+
+* {
+  padding: 0; 
+  margin: 0; 
+  box-sizing: border-box;
+}
+
+
+:root {
+  --primary-blue: #21283E; 
+  --secondary-blue: #394867;
+  --white-accent: #F1F6F9; 
+  --grey-accent: #9BA4B5;  
+}
+
+body {
+  font-family: 'Inconsolata', monospace;
+  font-weight: 400; 
+  color: var(--white-accent);
+  background-color: var(--primary-blue);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.flex {
+  display: flex; 
+}
+
+.pos-r {
+  position: relative; 
+}
+
+.pos-abs {
+  position: absolute; 
+}
+
+/* 
+ ||===========||
+ || Utilities ||
+ ||===========||
+*/
+
+.c__primary-blue { color: var(--primary-blue) }
+.c__secondary-blue { color: var(--secondary-blue) }
+.c__white-accent { color: var(--white-accent) }
+.c__grey-accent { color: var(--grey-accent) }
+
+.bg__primary-blue { background-color: var(--primary-blue) }
+.bg__secondary-blue { background-color: var(--secondary-blue) }
+.bg__white-accent { background-color: var(--white-accent) }
+.bg__grey-accent { background-color: var(--grey-accent) }
