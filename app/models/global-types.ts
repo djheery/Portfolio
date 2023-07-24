@@ -22,3 +22,5 @@ export type BackgroundColor = BackgroundColorOptions.PRIMARY_BLUE
                             | BackgroundColorOptions.SECONDARY_BLUE
                             | BackgroundColorOptions.WHITE_ACCENT
                             | BackgroundColorOptions.GREY_ACCENT
+
+export type InnerText = string;

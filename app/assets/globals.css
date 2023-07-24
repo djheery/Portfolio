@@ -30,9 +30,15 @@ h1 {
   font-size: 1.6rem;
 }
 
+h2 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
 p {
   font-size: 1.2rem;
   margin-bottom: 20px;
+  line-height: 24px;
 }
 
 h1, h2, h3, h4, h5, h6, p, a {
@@ -82,3 +88,9 @@ ul {
 .bg__secondary-blue { background-color: var(--secondary-blue) }
 .bg__white-accent { background-color: var(--white-accent) }
 .bg__grey-accent { background-color: var(--grey-accent) }
+
+
+@media only screen and (min-width: 668px) {
+  h1 { font-size: 1.7rem; }
+  h2 { font-size: 1.5rem; }
+}

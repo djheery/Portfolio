@@ -1,15 +1,23 @@
+import { BackgroundColorOptions, InnerText } from '@/app/models/global-types';
+import { TextColorOptions } from '@/app/models/global-types';
 import styles from './PillTextIcon.module.css';
 
 /**
  * The functional component for the PillTextIcon
- *
- * @param myParam your params here
 */
 
-const PillTextIcon: React.FC = () => {
+const PillTextIcon: React.FC<{text: InnerText}> = ({text}) => {
+  const pillOuterClasses = `
+    ${BackgroundColorOptions.WHITE_ACCENT}
+    ${styles["pill-text-icon"]}
+    fw-bold
+  `
+  
   return (
-    <div>
-      PillTextIcon Component
+    <div className={pillOuterClasses}>
+      <div className={styles["pill-text-icon__inner"]}>
+        <span className={TextColorOptions.PRIMARY_BLUE}>{text}</span>
+      </div>
     </div>
   )
 }
