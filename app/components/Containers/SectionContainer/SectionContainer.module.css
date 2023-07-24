@@ -1,0 +1,11 @@
+.section-container {
+  max-width: 1700px;
+  margin: auto; 
+  padding: 0 10px;
+}
+
+@media only screen and (min-width: 1000px) {
+  .section-container {
+    padding: 0 20px;
+  }
+}

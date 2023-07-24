@@ -1,0 +1,18 @@
+.header-logo {
+  width: max-content;
+  padding: 8px;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  height: 40px; 
+}
+
+.header-logo span {
+  font-weight: 600;
+}
+
+.header-logo__inner {
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

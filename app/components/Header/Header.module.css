@@ -1,0 +1,9 @@
+.site-header {
+  margin: 20px 0;
+  width: 100%;
+}
+
+.site-header__inner {
+  justify-content: space-between;
+  width: 100%;
+}

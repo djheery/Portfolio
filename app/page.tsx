@@ -1,10 +1,10 @@
-import Image from 'next/image'
+import Home from "./components/HomePage/Home";
 
 const HomePage = () => {
   return (
-    <main>
-      <h1>Hello World</h1>
-    </main>
+    <>
+     <Home />
+    </>
   )
 }
 

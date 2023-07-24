@@ -1,0 +1,31 @@
+.hamburger-menu {
+  padding: 10px; 
+  border-radius: 10px;
+  height: 40px;
+  width: 40px;
+}
+
+.hamburger-menu__inner {
+  gap: 5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.hamburger-menu__line {
+  height: 2px;
+  width: 100%;
+  background-color: var(--primary-blue);
+}
+
+.hamburger-menu__line:first-of-type,
+.hamburger-menu__line:last-of-type {
+  width: 80%;
+}
+
+@media only screen and (min-width: 668px) {
+  .hamburger-menu {
+    display: none;
+  }
+}
