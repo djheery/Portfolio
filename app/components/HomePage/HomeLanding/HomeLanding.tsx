@@ -18,7 +18,7 @@ const HomeLanding: React.FC = () => {
     <div className={landingContainerClasses}>
       <SectionContainer>
         <PillTextIcon text="Welcome!"/>
-        <h1>My Name is<br/>Daniel Heery</h1>
+        <h1>My Name is<br className={styles["mobile-line-break"]} /> Daniel Heery</h1>
         <h2 className={TextColorOptions.GREY_ACCENT}>Musician turned Developer.</h2>
         <p>Hi, my name is Daniel Heery, I'm an ex-musician who has retrained as a Developer This website documents my work over the past couple of years. I currently work for Bambridge Accountants.</p>
       </SectionContainer>

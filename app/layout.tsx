@@ -1,6 +1,7 @@
 import './assets/globals.css'
 import { Metadata } from 'next'
 import Header from './components/Header/Header'
+import SocialMediaBar from './components/SocialMediaBar/SocialMediaBar'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,6 +16,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <main>
          {children}
         </main>
+        <SocialMediaBar />
       </body>
     </html>
   )

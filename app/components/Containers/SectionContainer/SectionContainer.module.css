@@ -2,9 +2,10 @@
   max-width: 1700px;
   margin: auto; 
   padding: 0 10px;
+  transition: padding .3s ease-out;
 }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 768px) {
   .section-container {
     padding: 0 20px;
   }
