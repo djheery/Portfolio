@@ -1,0 +1,87 @@
+.portfolio-desktop {
+  display: none;
+}
+
+@media only screen and (min-width: 1000px) {
+  .portfolio-desktop {
+    display: block;
+    margin-top: 70px;
+  }
+
+  .portfolio-desktop__inner {
+    max-width: 80%; 
+    position: relative;
+    margin: auto;
+    height: 300px;
+  }
+
+  .background-filter,
+  .portfolio-desktop__item {
+    border-radius: 10px; 
+    overflow: hidden;
+  }
+
+  .portfolio-desktop__item {
+    width: 400px; 
+    height: 250px;
+    background-position: center;
+    background-size: cover; 
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 50%; 
+    transform: translateX(-50%) scale(1);
+    z-index: 15;
+    transition: all .5s ease-out;
+    box-shadow: .5rem .5rem .5rem rgba(0, 0, 0, .3)
+  } 
+
+
+
+  .portfolio-desktop__item[data-position="left"],
+  .portfolio-desktop__item[data-position="right"] {
+    z-index: 5;
+  }
+
+  .portfolio-desktop__item[data-position="left"] {
+    transform: translateX(-110%) scale(.85);
+  }
+
+  .portfolio-desktop__item[data-position="right"] {
+    transform: translateX(10%) scale(.85);
+    z-index: 4;
+  }
+
+  .portfolio-desktop__inner[data-transition-direction="right"] 
+  .portfolio-desktop__item[data-position="left"] {
+    z-index: 4;
+  }
+
+  .portfolio-desktop__inner[data-transition-direction="right"] 
+  .portfolio-desktop__item[data-position="right"] {
+    z-index: 5;
+  }
+
+  .portfolio-desktop__inner {
+    position: relative;
+  }
+
+  .background-filter {
+    position: absolute; 
+    top: 0; 
+    bottom: 0; 
+    right: 0; 
+    left: 0; 
+    opacity: .3;
+    background-color: #333;
+  }
+}
+
+@media only screen and (min-width: 1170px) {
+  .portfolio-desktop__inner {
+    height: 350px
+  }
+  .portfolio-desktop__item {
+    width: 500px; 
+    height: 350px;
+  } 
+}

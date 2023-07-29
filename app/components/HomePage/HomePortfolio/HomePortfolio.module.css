@@ -1,0 +1,14 @@
+.portfolio-section {
+  min-height: 800px;
+}
+
+.portfolio-section__introduction {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.portfolio-section__introduction h1 {
+  margin-bottom: 20px;
+}
