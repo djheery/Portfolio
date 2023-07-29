@@ -1,9 +1,20 @@
+
+
 .site-header {
-  margin: 20px 0;
+  padding: 20px 0;
   width: 100%;
+  position: fixed; 
+  top: 0;
+  z-index: 1000;
+  transition: all .4s ease-out;
 }
 
 .site-header__inner {
   justify-content: space-between;
   width: 100%;
+}
+
+html:not([data-scroll="0"]) .site-header {
+  border-bottom: 1px solid var(--secondary-blue);
+  padding: 15px 0;
 }

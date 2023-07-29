@@ -3,6 +3,7 @@
   margin: auto; 
   padding: 0 10px;
   transition: padding .3s ease-out;
+  position: relative;
 }
 
 @media only screen and (min-width: 768px) {

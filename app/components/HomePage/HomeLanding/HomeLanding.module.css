@@ -12,6 +12,29 @@
     max-width: 80%;
     margin: auto;
   }
+
+  .home-landing___main {
+    display: flex; 
+    align-items: center;
+  }
+
 }
 
+@media only screen and (min-width: 1200px) and (min-height: 657px) {
+  .home-landing__main,
+  .home-landing__main--inner {
+    position: relative;
+  }
+
+  .home-landing__main--inner {
+    width: 65%;
+  }
+
+  .home-landing__para {
+    
+  }
+
+
+ 
+}
 

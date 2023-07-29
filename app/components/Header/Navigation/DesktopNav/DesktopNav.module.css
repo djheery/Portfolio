@@ -3,6 +3,7 @@
 }
 
 @media only screen and (min-width: 668px) {
+
   .desktop-navigation,
   .desktop-navigation__inner {
     position: relative;
@@ -30,9 +31,14 @@
 
   .site-navigation__item {
     font-size: 1.15rem;
+    transition: font-size .4s ease-out;
   }
 
   .tag-end-decoration {
     opacity: .4;
+  }
+
+  html:not([data-scroll="0"]) .site-navigation__item {
+    font-size: 1.1rem; 
   }
 }
