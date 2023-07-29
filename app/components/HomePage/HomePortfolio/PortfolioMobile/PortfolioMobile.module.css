@@ -4,6 +4,10 @@
   position: relative; 
 }
 
+.portfolio-mobile {
+  margin-bottom: 40px; 
+}
+
 .portfolio-mobile__item-container {
   display: flex; 
   flex-direction: column;

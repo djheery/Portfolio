@@ -1,3 +1,4 @@
+import HomeAbout from './HomeAbout/HomeAbout';
 import HomeLanding from './HomeLanding/HomeLanding';
 import styles from './HomePage.module.css';
 import HomePortfolio from './HomePortfolio/HomePortfolio';
@@ -11,6 +12,7 @@ const Home: React.FC = () => {
     <>
       <HomeLanding />
       <HomePortfolio />
+      <HomeAbout />
     </>
   )
 }
