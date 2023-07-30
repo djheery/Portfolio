@@ -8,10 +8,20 @@
   margin: auto;
   text-align: center;
   margin-bottom: 40px;
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .portfolio-section__introduction h1 {
   margin-bottom: 20px;
+}
+
+.button-section {
+  margin: 40px 0; 
+  display: flex; 
+  justify-content: center;
 }
 
 @media only screen and (min-width: 1000px) {
@@ -35,5 +45,9 @@
   .portfolio-section__inner {
     min-height: 800px;
     display: block;
+  }
+
+  .button-section {
+    margin: 70px 0; 
   }
 }
