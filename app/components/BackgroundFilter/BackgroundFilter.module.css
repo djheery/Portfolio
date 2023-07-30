@@ -1,0 +1,15 @@
+.background-pointer {
+  display: none; 
+}
+
+@media only screen and (min-width: 1000px) {
+  .background-pointer {
+    display: block;
+    position: absolute; 
+    top: 0; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    background: radial-gradient(600px at 40px 40px, rgba(29, 78, 216, 0.15), transparent 80%);
+  }
+}

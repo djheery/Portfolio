@@ -18,7 +18,12 @@ body {
   font-family: 'Inconsolata', monospace;
   font-weight: 400; 
   color: var(--white-accent);
-  background-color: var(--primary-blue);
+  position: relative;
+  background: radial-gradient(
+    600px at 40px 40px, 
+    #1c2236 0%, 
+    #21283E 100%
+  )
 }
 
 h1, h2, h3, h4, h5, h6 {

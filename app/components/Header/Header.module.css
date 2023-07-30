@@ -7,6 +7,7 @@
   top: 0;
   z-index: 1000;
   transition: all .4s ease-out;
+  background: transparent
 }
 
 .site-header__inner {
@@ -17,4 +18,5 @@
 html:not([data-scroll="0"]) .site-header {
   border-bottom: 1px solid var(--secondary-blue);
   padding: 15px 0;
+  background: var(--primary-blue);
 }

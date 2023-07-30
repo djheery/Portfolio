@@ -6,7 +6,7 @@ import styles from './Header.module.css';
 import HeaderLogo from './HeaderLogo/HeaderLogo';
 import Navigation from './Navigation/Navigation';
 import { useEffect } from 'react';
-import { setupHeaderListener } from '@/app/util/debounce';
+import { setupHeaderListener, setupRadialGradiantListener } from '@/app/util/debounce';
 
 const headerInnerStyles = `
 ${styles["site-header__inner"]} flex
@@ -22,7 +22,9 @@ ${BackgroundColorOptions.PRIMARY_BLUE}
 */
 
 const Header: React.FC = () => {
-  useEffect(() => setupHeaderListener(), [])
+  useEffect(() => {
+    setupHeaderListener();
+  }, [])
 
   return (
     <header className={headerOuterStyles}>
