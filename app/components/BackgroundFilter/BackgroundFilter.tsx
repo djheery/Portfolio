@@ -1,6 +1,6 @@
 "use client"
 
-import { animationDebounce, setupRadialGradiantListener } from '@/app/util/debounce';
+import { animationDebounce } from '@/app/util/debounce';
 import { useEffect, useState } from 'react';
 import styles from './BackgroundFilter.module.css';
 

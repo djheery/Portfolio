@@ -1,5 +1,6 @@
 .portfolio-section {
   min-height: 700px;
+  padding: 20px;
 }
 
 .portfolio-section__introduction {
@@ -11,4 +12,28 @@
 
 .portfolio-section__introduction h1 {
   margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 1000px) {
+.portfolio-section__inner {
+  min-height: 600px;
+  display: flex; 
+  align-items: center;
+  flex-direction: column;
+}
+
+.portfolio-section__introduction {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+}
+
+@media only screen and (min-width: 1170px) {
+  .portfolio-section__inner {
+    min-height: 800px;
+    display: block;
+  }
 }
