@@ -1,0 +1,16 @@
+.content-container {
+  padding: 70px 10px;
+  max-width: 1700px;
+  position: relative; 
+  height: 100%;
+  transition: padding .3s ease-out;
+  position: relative;
+}
+
+@media only screen and (min-width: 768px) {
+  .content-container {
+    padding: 70px 20px;
+    max-width: 85%;
+    margin: auto; 
+  }
+}

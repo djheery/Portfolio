@@ -1,0 +1,24 @@
+.landing-section__outer {
+  display: flex; 
+  height: 100%;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 50px;
+  padding: 0 20px;
+}
+
+.page__introduction {
+  text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .landing-section__outer {
+    align-items: center;
+    flex-direction: row;
+  }
+  
+  .page__introduction {
+    text-align: left;
+  }
+}

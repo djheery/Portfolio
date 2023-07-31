@@ -1,0 +1,12 @@
+.cell--alive {
+  background-color: var(--white-accent);
+}
+
+.cell {
+  height: 100%; 
+  width: 100%; 
+}
+
+.cell--dead {
+  background-color: #333;
+}

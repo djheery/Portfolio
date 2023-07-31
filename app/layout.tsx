@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html data-scroll="0" lang="en">
-      <body>
+      <body suppressHydrationWarning={true}>
         <BackgroundFilter />
         <Header />
         <main>
