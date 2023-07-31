@@ -1,41 +1,56 @@
+"use client"
+import styles from './GameGrid.module.css';
+import { getCells, mapCells, getNewGrid } from '../util/gameOfLife';
+import { useEffect, useRef, useState } from 'react';
 import GameCell from '../GameCell/GameCell';
 import { CellStateOptions } from '../GameCell/GameCell';
-import styles from './GameGrid.module.css';
-
-const getCells = () => {
-  const arr: number[][] = []; 
-  const rows = 20; 
-  const cols = 20; 
-  for(let i = 0; i < rows; i++) {
-    arr.push([]);
-    for(let j = 0; j < cols; j++) {
-      arr[i][j] = Math.random() > 0.7 ? 1 : 0;
-    }
-  }
-
-  return arr; 
-}
-
+import { deflateRawSync } from 'zlib';
+import { animationDebounce } from '@/app/util/debounce';
 /**
  * The functional component for the GameGrid
 */
 
 const GameGrid: React.FC = () => {
-  const cells = getCells().map((r, idx1) => {
-    const cellArr = r.map((c, idx2) => {
-      if(c === 1) {
-        return <GameCell cellState={CellStateOptions.ALIVE} key={`${idx1}-${idx2}`}/>
-      } else {
-        return <GameCell cellState={CellStateOptions.DEAD} key={`${idx1}-${idx2}`} />
-      }
-    });
+  let timer: any; 
+  const [cells, setCells] = useState<number[][]>(getCells())
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-    return cellArr
-  })
+
+  const pauseEvolution = () => {
+    if(isPlaying) {
+      clearInterval(timer);
+      setIsPlaying(false);
+    }
+  }
+
+  const startEvolution = () => {
+   if(!isPlaying) setIsPlaying(true);
+   timer = !timer && setInterval(() => {
+    const newCells = getNewGrid(cells);
+    animationDebounce(setCells(newCells));
+   }, 50)
+  }
+
+  useEffect(() => {
+    if(isPlaying) {
+      startEvolution();
+    }
+
+    return () => clearInterval(timer);
+  }, [cells, isPlaying])
+
+
   return (
+    <div>
+
     <div className={styles["game-grid"]}>
       <div className={styles["game-grid__inner"]}>
-        {cells}
+        {mapCells(cells)}
+      </div>
+    </div>
+      <div style={{marginTop: "0px"}}>
+        <button onClick={startEvolution}>play</button>
+        <button onClick={pauseEvolution}>Pause</button>
       </div>
     </div>
   )

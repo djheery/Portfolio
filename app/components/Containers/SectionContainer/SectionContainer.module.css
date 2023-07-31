@@ -1,5 +1,5 @@
 .section-container {
-  max-width: 1700px;
+  /* max-width: 1700px; */
   margin: auto; 
   padding: 0 10px;
   transition: padding .3s ease-out;

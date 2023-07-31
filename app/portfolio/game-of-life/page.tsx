@@ -1,3 +1,5 @@
+"use client"
+
 import ContentContainer from '@/app/components/Containers/ContentContainer/ContentContainer';
 import FullScreenContainer from '@/app/components/Containers/FullScreenContainer/FullScreenContainer';
 import SectionContainer from '@/app/components/Containers/SectionContainer/SectionContainer';

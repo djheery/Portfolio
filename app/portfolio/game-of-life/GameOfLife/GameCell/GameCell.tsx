@@ -1,3 +1,4 @@
+"use client"
 import styles from './GameCell.module.css';
 
 /**
@@ -22,7 +23,7 @@ export type CellState = CellStateOptions.ALIVE | CellStateOptions.DEAD
  * @param myParam your params here
 */
 
-const GameCell: React.FC<{cellState: CellState}> = ({cellState}) => {
+const GameCell: React.FC<{cellState: CellStateOptions}> = ({cellState}) => {
   const cellIndicatorClass = cellState === CellStateOptions.ALIVE 
                           ? `${styles["cell--alive"]}`
                           : `${styles["cell--dead"]}`
