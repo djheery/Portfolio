@@ -2,6 +2,7 @@
 import GameCell from "../GameCell/GameCell";
 import { CellStateOptions } from "../GameCell/GameCell";
 
+// TODO Add comments
 /**
  * Describe your method...
  *
@@ -28,8 +29,8 @@ const movementCoordinates = [
 
 export const getCells = () => {
   const arr: number[][] = []; 
-  const rows = 50; 
-  const cols = 50; 
+  const rows = 40; 
+  const cols = 40; 
   for(let i = 0; i < rows; i++) {
     arr.push([]);
     for(let j = 0; j < cols; j++) {
@@ -106,10 +107,7 @@ const checkCellAliveStatus = (
   let isAlive = 0;
 
   if(cells[cc[0]][cc[1]] === 0) {
-    if(neighbours === 3) 
-      isAlive = 1; 
-    else 
-      isAlive = 0; 
+    isAlive = neighbours === 3 ? 1 : 0;
   } else {
     isAlive = neighbours === 3 || neighbours === 2 ? 1 : 0;
   } 

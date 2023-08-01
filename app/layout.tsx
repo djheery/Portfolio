@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html data-scroll="0" lang="en">
-      <link rel="icon" type="image/x-icon" href="/images/coding.png" />
+      <link rel="icon" type="/icon?<generated>" sizes="<generated>"href="/images/coding.png" />
       <body suppressHydrationWarning={true}>
         <BackgroundFilter />
         <Header />

@@ -2,9 +2,6 @@
 import styles from './GameGrid.module.css';
 import { getCells, mapCells, getNewGrid } from '../util/gameOfLife';
 import { useEffect, useRef, useState } from 'react';
-import GameCell from '../GameCell/GameCell';
-import { CellStateOptions } from '../GameCell/GameCell';
-import { deflateRawSync } from 'zlib';
 import { animationDebounce } from '@/app/util/debounce';
 /**
  * The functional component for the GameGrid
@@ -15,7 +12,6 @@ const GameGrid: React.FC = () => {
   const [cells, setCells] = useState<number[][]>(getCells())
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-
   const pauseEvolution = () => {
     if(isPlaying) {
       clearInterval(timer);
@@ -23,12 +19,24 @@ const GameGrid: React.FC = () => {
     }
   }
 
+  const stepThroughEvolution = () => {
+    if(isPlaying) pauseEvolution();
+    const newCells = getNewGrid(cells);
+    setCells(() => newCells)
+  };
+
   const startEvolution = () => {
    if(!isPlaying) setIsPlaying(true);
    timer = !timer && setInterval(() => {
     const newCells = getNewGrid(cells);
     animationDebounce(setCells(newCells));
-   }, 50)
+   }, 40)
+  }
+
+  const randomise = () => {
+    if(isPlaying) pauseEvolution(); 
+    const newCells = getCells(); 
+    setCells(() => newCells);
   }
 
   useEffect(() => {
@@ -41,16 +49,18 @@ const GameGrid: React.FC = () => {
 
 
   return (
-    <div>
-
-    <div className={styles["game-grid"]}>
-      <div className={styles["game-grid__inner"]}>
-        {mapCells(cells)}
-      </div>
-    </div>
+    <div className={styles["mac-container"]}>
+      <img src="/images/old-mac-computer.png" alt="" className={styles["old-mac-img"]}/>
       <div style={{marginTop: "0px"}}>
-        <button onClick={startEvolution}>play</button>
-        <button onClick={pauseEvolution}>Pause</button>
+          <button className={styles["game-button"]} onClick={startEvolution} disabled={isPlaying}>Play</button>
+          <button className={styles["game-button"]}onClick={pauseEvolution}>Pause</button>
+          <button className={styles["game-button"]} onClick={randomise}>Randomise</button>
+          <button className={styles["game-button"]} onClick={stepThroughEvolution}>Step through Evolution</button>
+        </div>
+      <div className={styles["game-grid"]}>
+        <div className={styles["game-grid__inner"]}>
+          {mapCells(cells)}
+        </div>
       </div>
     </div>
   )
