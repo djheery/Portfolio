@@ -30,7 +30,7 @@ const GameGrid: React.FC = () => {
    timer = !timer && setInterval(() => {
     const newCells = getNewGrid(cells);
     animationDebounce(setCells(newCells));
-   }, 40)
+   }, 30)
   }
 
   const randomise = () => {
@@ -51,17 +51,17 @@ const GameGrid: React.FC = () => {
   return (
     <div className={styles["mac-container"]}>
       <img src="/images/old-mac-computer.png" alt="" className={styles["old-mac-img"]}/>
+      <div className={styles["game-grid"]}>
+        <div className={styles["game-grid__inner"]}>
+          {mapCells(cells)}
+        </div>
+      </div>
       <div style={{marginTop: "0px"}}>
           <button className={styles["game-button"]} onClick={startEvolution} disabled={isPlaying}>Play</button>
           <button className={styles["game-button"]}onClick={pauseEvolution}>Pause</button>
           <button className={styles["game-button"]} onClick={randomise}>Randomise</button>
           <button className={styles["game-button"]} onClick={stepThroughEvolution}>Step through Evolution</button>
         </div>
-      <div className={styles["game-grid"]}>
-        <div className={styles["game-grid__inner"]}>
-          {mapCells(cells)}
-        </div>
-      </div>
     </div>
   )
 }

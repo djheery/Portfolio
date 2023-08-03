@@ -2,7 +2,7 @@
   height: 250px; 
   width: 250px; 
   background-color: #333;
-  transition: all .3s ease-out;
+  /* transition: all .3s ease-out; */
   overflow: hidden;
 }
 
@@ -17,7 +17,7 @@
   z-index: 5;
   height: auto;
   right: -50px;
-  opacity: .3;
+  /* opacity: .3; */
   width: 120%;
 }
 
@@ -27,7 +27,7 @@
   display: grid; 
   position: relative;
   grid-template-columns: repeat(40, 1fr);
-  grid-template-rows: repeat(40, 1fr);
+  grid-template-rows: repeat(30, 1fr);
 }
 
 .gol-canvas {
@@ -67,8 +67,11 @@
 @media only screen and (min-width: 768px) {
   .game-grid,
   .gol-canvas {
-    height: 350px; 
-    width: 350px;
+    position: relative; 
+    height: 252px;
+    top: -25px; 
+    right: -19px; 
+    width: 320px;
   }
 
   .old-mac-img {
@@ -79,20 +82,42 @@
 @media only screen and (min-width: 900px) {
   .game-grid,
   .gol-canvas {
-    height: 260px; 
-    width: 400px;
+    height: 299px; 
+    width: 380px;
+    position: relative; 
+    right: -12px;
+    top: -76px;
   }
   .old-mac-img {
-    /* top: -130px; */
+    top: -130px;
   }
 }
 
 @media only screen and (min-width: 1100px) {
   .game-grid,
   .gol-canvas {
-    height: 430px; 
-    width: 493px;
+    position: relative; 
+    top: -67px;
+    height: 354px; 
+    width: 450px;
+    right: -7px;
   }
 
 
+}
+
+@media only screen and (max-height: 900px) and (min-width: 900px) {
+  .game-grid,
+  .gol-canvas {
+    position: relative; 
+    height: 252px;
+    top: -25px; 
+    right: -19px; 
+    width: 320px;
+  }
+
+
+  .old-mac-img {
+    top: -70px;
+  }
 }

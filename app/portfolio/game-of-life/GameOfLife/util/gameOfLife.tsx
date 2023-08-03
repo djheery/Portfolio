@@ -3,6 +3,11 @@ import GameCell from "../GameCell/GameCell";
 import { CellStateOptions } from "../GameCell/GameCell";
 
 // TODO Add comments
+// TODO Refactor to a class 
+// TODO Try Hashlife Algorithm for optimization 
+// TODO Try Refactoring to a canvas
+// TODO Add Warp Zone Feature
+
 /**
  * Describe your method...
  *
@@ -29,12 +34,12 @@ const movementCoordinates = [
 
 export const getCells = () => {
   const arr: number[][] = []; 
-  const rows = 40; 
+  const rows = 30; 
   const cols = 40; 
   for(let i = 0; i < rows; i++) {
     arr.push([]);
     for(let j = 0; j < cols; j++) {
-      arr[i][j] = Math.random() > 0.7 ? 1 : 0;
+      arr[i][j] = Math.random() > 0.5 ? 1 : 0;
     }
   }
 
