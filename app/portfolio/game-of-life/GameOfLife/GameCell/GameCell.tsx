@@ -1,4 +1,6 @@
 "use client"
+import { useEffect, useState } from 'react';
+import { GameCell as GC} from '../util/GameCell';
 import styles from './GameCell.module.css';
 
 /**
@@ -23,13 +25,19 @@ export type CellState = CellStateOptions.ALIVE | CellStateOptions.DEAD
  * @param myParam your params here
 */
 
-const GameCell: React.FC<{cellState: CellStateOptions}> = ({cellState}) => {
-  const cellIndicatorClass = cellState === CellStateOptions.ALIVE 
+const GameCell: React.FC<{cell: GC}> = ({cell}) => {
+  const [isAlive, setIsAlive] = useState<boolean>(cell.getIsAlive);
+
+  const cellIndicatorClass = isAlive
                           ? `${styles["cell--alive"]}`
                           : `${styles["cell--dead"]}`
 
   const cellClassList = `${styles["cell"]} ${cellIndicatorClass}`
   
+  useEffect(() => {
+    cell.setStateUpdateMethod(setIsAlive);
+  }, [])
+
   return (
     <div className={cellClassList}></div>
   )

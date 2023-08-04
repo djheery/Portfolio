@@ -1,6 +1,7 @@
 "use-client"
-import GameCell from "../GameCell/GameCell";
+import UI from "../GameCell/GameCell";
 import { CellStateOptions } from "../GameCell/GameCell";
+import { GameCell as GC } from "./GameCell";
 
 // TODO Add comments
 // TODO Refactor to a class 
@@ -53,20 +54,12 @@ export const getCells = () => {
  * This param represents...
 */
 
-export const mapCells = (cells: number[][]): JSX.Element[][] => {
+export const mapCells = (cells: GC[][]): JSX.Element[][] => {
   return cells.map((r, idx1) => {
     const cellArr = r.map((c, idx2) => {
-      if(c === 1) {
-        return (
-          <GameCell cellState={CellStateOptions.ALIVE} key={`${idx1}-${idx2}`}/>
-        )
-      } else {
-        return (
-          <GameCell cellState={CellStateOptions.DEAD} key={`${idx1}-${idx2}`} />
-        )
-      }
+      return <UI cell={c} key={`${idx1}-${idx2}`}/>
     });
-
+    
     return cellArr
   })
 }
@@ -138,8 +131,6 @@ export const getNewGrid = (cells: number[][]): number[][] => {
       cellClone[r][c] = checkCellAliveStatus(cells, visitedMap, [r, c]);
     }
   }
-
-  console.log("finished")
   
   return cellClone;
 }
