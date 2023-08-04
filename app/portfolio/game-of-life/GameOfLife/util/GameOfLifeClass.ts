@@ -8,6 +8,14 @@ import { GameCell } from "./GameCell";
 */
 
 class GameOfLife {
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * This param represents...
+  */
+ 
   constructor() {
     this.gridColumns = 60; 
     this.gridRows = 60; 
