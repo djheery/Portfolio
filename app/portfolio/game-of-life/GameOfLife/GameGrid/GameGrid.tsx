@@ -1,8 +1,9 @@
 "use client"
 import styles from './GameGrid.module.css';
 import { getCells, mapCells, getNewGrid } from '../util/gameOfLife';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { animationDebounce } from '@/app/util/debounce';
+import ActionPanel, { PanelOperations, ActionNames } from '../ActionPanel/ActionPanel';
 /**
  * The functional component for the GameGrid
 */
@@ -12,12 +13,12 @@ const GameGrid: React.FC = () => {
   const [cells, setCells] = useState<number[][]>(getCells())
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-  const pauseEvolution = () => {
+  const pauseEvolution = useCallback(() => {
     if(isPlaying) {
       clearInterval(timer);
       setIsPlaying(false);
     }
-  }
+  }, [isPlaying])
 
   const stepThroughEvolution = () => {
     if(isPlaying) pauseEvolution();
@@ -33,11 +34,11 @@ const GameGrid: React.FC = () => {
    }, 30)
   }
 
-  const randomise = () => {
+  const randomise = useCallback(() => {
     if(isPlaying) pauseEvolution(); 
     const newCells = getCells(); 
     setCells(() => newCells);
-  }
+  }, [isPlaying])
 
   useEffect(() => {
     if(isPlaying) {
@@ -45,7 +46,16 @@ const GameGrid: React.FC = () => {
     }
 
     return () => clearInterval(timer);
-  }, [cells, isPlaying])
+  }, [cells, isPlaying]);
+
+
+  const panelOperations: PanelOperations = {
+    [ActionNames.START]: startEvolution, 
+    [ActionNames.PAUSE]: pauseEvolution, 
+    [ActionNames.STEP]: stepThroughEvolution, 
+    [ActionNames.RANDOM]: randomise,
+    [ActionNames.RANGE]: () => {} 
+  }
 
 
   return (
@@ -56,12 +66,7 @@ const GameGrid: React.FC = () => {
           {mapCells(cells)}
         </div>
       </div>
-      <div style={{marginTop: "0px"}}>
-          <button className={styles["game-button"]} onClick={startEvolution} disabled={isPlaying}>Play</button>
-          <button className={styles["game-button"]}onClick={pauseEvolution}>Pause</button>
-          <button className={styles["game-button"]} onClick={randomise}>Randomise</button>
-          <button className={styles["game-button"]} onClick={stepThroughEvolution}>Step through Evolution</button>
-        </div>
+      <ActionPanel operations={panelOperations} />
     </div>
   )
 }

@@ -39,7 +39,7 @@ export const getCells = () => {
   for(let i = 0; i < rows; i++) {
     arr.push([]);
     for(let j = 0; j < cols; j++) {
-      arr[i][j] = Math.random() > 0.5 ? 1 : 0;
+      arr[i][j] = Math.random() > 0.7 ? 1 : 0;
     }
   }
 

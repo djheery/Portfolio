@@ -1,6 +1,5 @@
 .game-grid {
-  height: 250px; 
-  width: 250px; 
+  height: 230px; 
   background-color: #333;
   /* transition: all .3s ease-out; */
   overflow: hidden;
@@ -17,8 +16,8 @@
   z-index: 5;
   height: auto;
   right: -50px;
-  /* opacity: .3; */
   width: 120%;
+  display: none; 
 }
 
 .game-grid__inner {
@@ -36,31 +35,47 @@
   width: 200px;
 }
 
-.game-button {
-  position: relative;
-  z-index: 20;
-}
 @media only screen and (min-width: 340px) {
   .game-grid,
   .gol-canvas {
-    height: 300px; 
-    width: 300px; 
+    position: relative; 
+    height: 200px;
+    top: 0px;  
+    width: 280px;
+  }
+  .old-mac-img {
+    top: -44px;
+    right: -32px;
+    display: block;
+    display: none;
   }
 }
 
 @media only screen and (min-width: 400px) {
   .game-grid,
   .gol-canvas {
-    height: 350px; 
-    width: 350px; 
+    position: relative; 
+    height: 252px;
+    top: 0px;  
+    width: 320px;
+  }
+  .old-mac-img {
+    top: -44px;
+    right: -32px;
+    display: block;
   }
 }
 
 @media only screen and (min-width: 500px) {
   .game-grid,
   .gol-canvas {
-    height: 450px; 
-    width: 450px; 
+    position: relative; 
+    height: 252px;
+    top: 0px; 
+    width: 320px;
+  }
+  .old-mac-img {
+    top: -44px;
   }
 }
 
@@ -76,6 +91,7 @@
 
   .old-mac-img {
     top: -70px;
+    right: -50px;
   }
 }
 
@@ -93,7 +109,7 @@
   }
 }
 
-@media only screen and (min-width: 1100px) {
+@media only screen and (min-width: 1500px) {
   .game-grid,
   .gol-canvas {
     position: relative; 
