@@ -107,7 +107,10 @@ class GameOfLife {
    * This param represents...
   */
 
-  private checkCellStatus(visitedNodes: Map<string, boolean>, currentCoords: number[]) {
+  private checkCellStatus(
+      visitedNodes: Map<string, boolean>, 
+      currentCoords: number[]
+    ): void {
     let cc = currentCoords; 
     let targetCell: GameCell = this.gridState[cc[0]][cc[1]];
     let neighbours = 0; 
@@ -143,7 +146,7 @@ class GameOfLife {
    * This param represents...
   */
 
-  get getNewGrid() {
+  get getNewGrid(): GameCell[][] {
     this.newGrid(); 
     this.currentEvolution = 0; 
     return this.gridState; 
@@ -156,7 +159,18 @@ class GameOfLife {
    * This param represents...
   */
 
-  get getGrid() {
+  get warpzoneEnabled(): boolean {
+    return this.warpZoneEnabled;
+  }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * This param represents...
+  */
+
+  get getGrid(): GameCell[][] {
     return this.gridState; 
   }
 
@@ -167,7 +181,7 @@ class GameOfLife {
    * This param represents...
   */
 
-  get getCurrentEvolution() {
+  get getCurrentEvolution(): number {
     return this.currentEvolution; 
   }
 
@@ -200,7 +214,7 @@ class GameOfLife {
    * This param represents...
   */
 
-  public tick() {
+  public tick(): void {
     const visitedNodes = new Map<string, boolean>();
     const cellClone = JSON.parse(JSON.stringify(this.gridState)); 
 
@@ -213,6 +227,17 @@ class GameOfLife {
     }
 
     this.currentEvolution++; 
+  }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * This param represents...
+  */
+
+  set setWarpZoneEnabled(isEnabled: boolean) {
+    this.warpZoneEnabled = isEnabled; 
   }
 
   private static BOUNDARY_COORDINATES = [
