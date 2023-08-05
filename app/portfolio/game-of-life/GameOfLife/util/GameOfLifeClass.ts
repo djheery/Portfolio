@@ -22,7 +22,7 @@ class GameOfLife {
     this.currentEvolution = 0; 
     this.warpZoneEnabled = true; 
     this.gridState = []; 
-    this.populationDensity = .65;
+    this.populationDensity = .6;
     this.isInitialLoad = true; 
     this.newGrid(); 
   }

@@ -31,9 +31,9 @@ const GameGrid: React.FC = () => {
 
   const startEvolution = () => {
    if(!isPlaying) setIsPlaying(true);
-   timer = !timer && setInterval(() => {
-    animationDebounce(Game.tick());
-   }, 50)
+   timer = !timer &&  animationDebounce(setInterval(() => {
+    Game.tick();
+   }, 80))
   }
 
   const randomise = useCallback(() => {
