@@ -22,7 +22,7 @@ class GameOfLife {
     this.currentEvolution = 0; 
     this.warpZoneEnabled = true; 
     this.gridState = []; 
-    this.populationDensity = .6;
+    this.populationDensity = .45;
     this.isInitialLoad = true; 
     this.newGrid(); 
   }
@@ -38,7 +38,7 @@ class GameOfLife {
     for(let r = 0; r < this.gridRows; r++) {
       if(this.isInitialLoad) this.gridState.push([]);
       for(let c = 0; c < this.gridColumns; c++) {
-        const isAlive = Math.random() > this.populationDensity;
+        const isAlive = Math.random() < this.populationDensity;
         if(this.isInitialLoad) {
           this.gridState[r][c] = new GameCell(r, c, isAlive);
         } else { 
@@ -88,6 +88,15 @@ class GameOfLife {
     
     let isOutOfBounds = this.isOutOfBounds(newBoundary); 
 
+    if(this.warpZoneEnabled && isOutOfBounds) {
+      if(newBoundary[0] < 0) newBoundary[0] = this.gridRows - 1; 
+      if(newBoundary[0] > this.gridRows - 1) newBoundary[0] = 0; 
+      if(newBoundary[1] < 0) newBoundary[1] = this.gridColumns - 1; 
+      if(newBoundary[1] > this.gridColumns - 1) newBoundary[1] = 0;
+
+      isOutOfBounds = false;
+    } 
+
     return [newBoundary, isOutOfBounds]; 
   }
 
@@ -136,6 +145,7 @@ class GameOfLife {
 
   get getNewGrid() {
     this.newGrid(); 
+    this.currentEvolution = 0; 
     return this.gridState; 
   }
 
