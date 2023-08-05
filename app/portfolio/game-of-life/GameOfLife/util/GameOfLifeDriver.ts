@@ -1,6 +1,6 @@
 import { animationDebounce } from "@/app/util/debounce";
 import { Dispatch, SetStateAction } from "react";
-import GameOfLife from "./GameOfLifeClass";
+import GameOfLife from "./GameOfLife";
 
 class GameOfLifeDriver {
   constructor() {
