@@ -1,19 +1,26 @@
 import { GameCell } from "./GameCell";
 
 /**
- * Describe your method...
+ * A class for holding the general state of the 
+ * GameOfLife component/page. 
  *
- * @param paramName This param represents...
- * This param represents...
+ * @param movementCoordiates A Matrix used to aid the boundary Cell 
+ * Checks on an evolution
+ * @param gridColumns The amount of Columns in the grid 
+ * @param gridRows The amount of Rows in the grid 
+ * @param currentEvolution The current evolution number 
+ * @param warpZoneEnabled A boolean flag that indicates if the grid wraps
+ * @param gridState A matrix representing the grid containing Cells
+ * @param isInitialLoad A boolean flag that idicates 
+ * if the program is in the initial load state 
+ * @param populationDensity A floating point number between 1 & 0 
+ * that definies the population density of the grid 
 */
 
 class GameOfLife {
 
   /**
-   * Describe your method...
-   *
-   * @param paramName This param represents...
-   * This param represents...
+   * The default constructor for the Game of Life Class
   */
  
   constructor() {
@@ -28,10 +35,8 @@ class GameOfLife {
   }
 
   /**
-   * Describe your method...
-   *
-   * @param paramName This param represents...
-   * This param represents...
+   * Generate a new Grid. 
+   * Used on initial load and when randomise is selected. 
   */
 
   private newGrid() {
@@ -51,10 +56,10 @@ class GameOfLife {
   }
 
   /**
-   * Describe your method...
+   * Checks if the the boundary to check is out of bounds. 
    *
-   * @param paramName This param represents...
-   * This param represents...
+   * @param boundary A number array representing the 
+   * [row, column] coordinates of the boundary to check. 
   */
 
   private isOutOfBounds(boundary: number[]) {
@@ -70,10 +75,10 @@ class GameOfLife {
   }
 
   /**
-   * Describe your method...
+   * Calculates the boundaries to check and 
    *
-   * @param paramName This param represents...
-   * This param represents...
+   * @param boundary 
+   * @param currentCoords
   */
 
   private boundaryCalculation(
