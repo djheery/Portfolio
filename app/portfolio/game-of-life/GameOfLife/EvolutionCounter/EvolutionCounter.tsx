@@ -1,7 +1,7 @@
 import styles from './EvolutionCounter.module.css';
 import GameOfLifeDriver from '../util/GameOfLifeDriver'
 import { useEffect, useState } from 'react';
-import GameOfLifeUtil from '../util/GameOfLifeUtil';
+import GOLUtil from '../util/GameOfLifeUtil';
 
 /**
  * The functional component for the EvolutionCounter
@@ -12,7 +12,7 @@ import GameOfLifeUtil from '../util/GameOfLifeUtil';
 const EvolutionCounter: React.FC<{driver: GameOfLifeDriver}> = ({driver}) => {
   const [currentEvolution, setCurrentEvolution] = useState<number>(0); 
 
-  const formatedEvolutionNumber = GameOfLifeUtil.formatEvolutionNumber(currentEvolution);
+  const formatedEvolutionNumber = GOLUtil.formatEvolutionNumber(currentEvolution);
   
   useEffect(() => {
     driver.registerEvolutionCounter(setCurrentEvolution);

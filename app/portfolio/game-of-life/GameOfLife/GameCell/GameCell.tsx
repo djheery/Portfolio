@@ -18,7 +18,7 @@ const GameCell: React.FC<{cell: GameCellDriver}> = ({cell}) => {
 
   const cellClassList = `${styles["cell"]} ${cellIndicatorClass}`
   
-  useEffect(() => cell.setStateUpdateMethod(setIsAlive) , [])
+  useEffect(() => cell.registerStateUpdateMethod(setIsAlive) , [])
 
   return (
     <div className={cellClassList}></div>

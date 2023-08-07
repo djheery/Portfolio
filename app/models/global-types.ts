@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export enum BackgroundColorOptions {
   PRIMARY_BLUE = 'bg__primary-blue',
   SECONDARY_BLUE = 'bg__secondary-blue', 
@@ -26,3 +28,5 @@ export type BackgroundColor = BackgroundColorOptions.PRIMARY_BLUE
                             | BackgroundColorOptions.GREY_ACCENT
 
 export type InnerText = string;
+
+export type StateAction<T> = Dispatch<SetStateAction<T>>

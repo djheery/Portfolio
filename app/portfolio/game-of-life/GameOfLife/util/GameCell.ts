@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { StateAction } from "@/app/models/global-types";
 
 /**
  * Describe your method...
@@ -63,8 +63,8 @@ export class GameCell {
    * This param represents...
   */
 
-  public setStateUpdateMethod(stateUpdateMethod: Dispatch<SetStateAction<boolean>>) {
-    this.stateDispatchMethod = stateUpdateMethod; 
+  public registerStateUpdateMethod(updateMethod: StateAction<boolean>) {
+    this.stateDispatchMethod = updateMethod; 
   }
 
   /**
@@ -82,5 +82,5 @@ export class GameCell {
   private x: number; 
   private y: number; 
   private isAlive: boolean;   
-  private stateDispatchMethod?: Dispatch<SetStateAction<boolean>>;
+  private stateDispatchMethod?: StateAction<boolean>;
 } 
