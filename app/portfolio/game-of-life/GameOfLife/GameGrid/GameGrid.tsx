@@ -4,6 +4,8 @@ import GameOfLifeUtil from '../util/GameOfLifeUtil';
 import ActionPanel, { PanelOperations, ActionNames } from '../ActionPanel/ActionPanel';
 import GameOfLifeDriver from '../util/GameOfLifeDriver';
 import EvolutionCounter from '../EvolutionCounter/EvolutionCounter';
+import SettingsPanel from '../SettingsPanel/SettingsPanel';
+import GameOfLifeSettings from '../util/SettingsPanel';
 
 
 /**
@@ -13,6 +15,7 @@ import EvolutionCounter from '../EvolutionCounter/EvolutionCounter';
 const GameGrid: React.FC = () => {
 
   const GameDriver = new GameOfLifeDriver();
+  const SettingsUtil = new GameOfLifeSettings(GameDriver); 
   const grid = GameDriver.getGameGrid();
 
   const panelOperations: PanelOperations = {
@@ -32,6 +35,7 @@ const GameGrid: React.FC = () => {
         <div className={styles["game-grid__inner"]}>
           {GameOfLifeUtil.mapCells(grid)}
         </div>
+        <SettingsPanel settings={SettingsUtil} />
       </div>
       <ActionPanel operations={panelOperations} />
     </div>

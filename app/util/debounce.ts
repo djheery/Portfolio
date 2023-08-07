@@ -21,3 +21,11 @@ export const setupHeaderListener = () => {
 
   storeScrollPosition();
 }
+
+export const inputDebounce = (fn: any, timeout = 300) => {
+  let timer: ReturnType<typeof setTimeout>; 
+  return (...args: any) => {
+    if(timer) clearTimeout(timer); 
+    timer = setTimeout(() => fn.apply(this, args), timeout)
+  }
+}

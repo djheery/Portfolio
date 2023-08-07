@@ -34,6 +34,10 @@ class GameOfLifeUtil {
     
     return `${"0".repeat(baseZeros - num.length)}${num}`; 
   }
+
+  public static numberIsValid(min: number, max: number, currentValue: number) {
+    return currentValue < min || currentValue > max;
+  }
 }
 
 export default GameOfLifeUtil;

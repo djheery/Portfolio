@@ -201,6 +201,10 @@ class GameOfLife {
     this.gridColumns = numCols; 
   }
 
+  get getWarpZoneEnabled() {
+    return this.warpzoneEnabled; 
+  }
+
   /**
    * Describe your method...
    *
@@ -243,6 +247,10 @@ class GameOfLife {
 
   set setWarpZoneEnabled(isEnabled: boolean) {
     this.warpZoneEnabled = isEnabled; 
+  }
+
+  get getPopulationDensity() {
+    return this.populationDensity; 
   }
 
   private static BOUNDARY_COORDINATES = [

@@ -1,6 +1,5 @@
 .cell--alive {
   background-color: var(--white-accent);
-  border-radius: 50%;
 }
 
 .cell {

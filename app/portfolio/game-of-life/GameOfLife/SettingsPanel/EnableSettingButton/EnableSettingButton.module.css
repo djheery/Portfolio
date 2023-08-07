@@ -1,0 +1,95 @@
+.enable-settings-button {
+  min-width: 50px;
+  position: relative; 
+}
+
+.enable-settings-button__inner {
+  width: 100%; 
+  position: relative;
+  display: flex; 
+  background-color: rgba(0, 0, 0, .4);
+  width: 100%; 
+  gap: 10px; 
+  border-radius: 10px; 
+  padding: 5px 7px;
+}
+
+.enable-button,
+.disable-button {
+  background-color: transparent;
+  border: none; 
+  width: 100%; 
+  position: inherit;
+  z-index: 10;
+  color: var(--white-accent);
+  font-weight: bold;
+}
+
+.button-spacer {
+  display: inline-block; 
+  width: 20px;
+}
+
+.indicator-ball {
+  position: absolute;
+  width: 10px; 
+  height: calc(100% - 8px);
+  border-radius: 5px;
+  top: 4px;
+}
+
+.indicator-ball--on {
+  width: 40%; 
+  left: 5px;
+  background-color: green;
+  animation-name: transitionOn;
+  animation-timing-function: linear;
+  animation-duration: .2s;
+  animation-fill-mode: forwards;
+}
+
+.indicator-ball--off {
+  width: 45%;
+  left: 35px;
+  background-color: red;
+  animation-name: transitionOff;
+  animation-timing-function: linear;
+  animation-duration: .2s;
+  animation-fill-mode: forwards;
+}
+
+@media only screen and (min-width: 1000px) {
+  .enable-button:hover,
+  .disable-button:hover {
+    cursor: pointer;
+  }
+}
+
+@keyframes transitionOff {  
+  0% {
+    width: 40%; 
+    left: 5px;
+    background-color: green;
+  }
+
+  100% {
+    width: 45%;
+    left: 35px;
+    background-color: red;
+  }
+}
+
+@keyframes transitionOn {
+  0% {
+    width: 45%;
+    left: 35px;
+    background-color: red;
+  }
+  
+  100% {
+    width: 40%; 
+    left: 5px;
+    background-color: green;
+  }
+}
+

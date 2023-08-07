@@ -1,3 +1,8 @@
+"use client"
+
+import GameOfLifeSettings from '../util/SettingsPanel';
+import EnableSettingButton from './EnableSettingButton/EnableSettingButton';
+import NumberInput, { NumberInputSettings } from './NumberInput/NumberInput';
 import styles from './SettingsPanel.module.css';
 
 /**
@@ -6,11 +11,74 @@ import styles from './SettingsPanel.module.css';
 
 
 
-const SettingsPanel: React.FC = () => {
+const SettingsPanel: React.FC<{settings: GameOfLifeSettings}> = ({settings}) => {
+  const populationDensitySettings = settings.getPopulationDensityInputSettings
+  const evolutionDurationSettings = settings.getEvolutionDurationInputSettings;
+  const warpZoneButtonProps = {
+    settingIsOn: settings.getWarpZoneEnabled, 
+    callback: settings.setWarpZoneEnabled
+  };
+
+  const heatmapButtonProps = {
+    settingIsOn: settings.getHeatMapEnabled, 
+    callback: settings.setHeatMapShowing
+  };
+
+  const currentEvolutionShowingButtonProps = {
+    settingIsOn: settings.getCurrentEvolutionShowing, 
+    callback: settings.setCurrentEvolutionShowing
+  }
+ 
+  const alivePercentageShowingButtonProps = {
+    settingIsOn: settings.getAlivePercentageShowing, 
+    callback: settings.setAlivePercentageShowing,
+  }
+
+  const aliveCountShowingButtonProps = {
+    settingIsOn: settings.getAliveCountShowing, 
+    callback: settings.setAliveCountShowing, 
+  };  
+
+
   return (
     <div className={styles["settings-panel"]}>
       <div className={styles["settings-panel__inner"]}>
-        
+        <h3 className={styles["settings-panel__heading"]}>
+          General Settings <span className={styles["heading-decoration"]}></span>
+        </h3>
+        <div className={styles["settings-list__container"]}>
+          <ul className={styles["settings-list"]}>
+            <li className={styles["settings-list__item"]}>
+              Warpzone Enabled: <EnableSettingButton buttonSettings={warpZoneButtonProps}/>
+            </li>
+            <li className={styles["settings-list__item"]}>
+              Alive Duration Heatmap: <EnableSettingButton buttonSettings={heatmapButtonProps}/>
+            </li>
+            <li className={styles["settings-list__item"]}>
+              Population Density: <NumberInput inputSettings={populationDensitySettings}/>
+            </li>
+            <li className={styles["settings-list__item"]}>
+              Evolution Duration (Ms): <NumberInput inputSettings={evolutionDurationSettings}/>
+            </li>
+          </ul>
+        </div>
+        <h4 className={styles["settings-panel__sub-heading"]}>
+          Legend Settings
+          <span className={styles["heading-decoration"]}></span>
+        </h4>
+        <div className={styles["settings-list__container"]}>
+          <ul className={styles["settings-list"]}>
+            <li className={styles["settings-list__item"]}>
+              Show Current Evolution: <EnableSettingButton buttonSettings={currentEvolutionShowingButtonProps}/>
+            </li>
+            <li className={styles["settings-list__item"]}>
+              Show Alive Percentage: <EnableSettingButton buttonSettings={alivePercentageShowingButtonProps}/>
+            </li>
+            <li className={styles["settings-list__item"]}>
+              Show Alive Count: <EnableSettingButton buttonSettings={aliveCountShowingButtonProps}/>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   )

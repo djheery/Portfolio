@@ -6,6 +6,7 @@ class GameOfLifeDriver {
   constructor() {
     this.game = new GameOfLife();
     this.isPlaying = false; 
+    this.evolutionDuration = 40; 
   }
 
   public getGameGrid() {
@@ -18,7 +19,7 @@ class GameOfLifeDriver {
     this.timer = !this.timer && setInterval(() => {
       animationDebounce(this.game.tick());
       this.evolutionCounterMethod!(this.game.getCurrentEvolution);
-    }, 40);
+    }, this.evolutionDuration);
   }
 
   public pauseEvolution() {
@@ -44,9 +45,22 @@ class GameOfLifeDriver {
     this.evolutionCounterMethod = setStateMethod;
   }
 
+  public setEvolutionDuration(evolutionDuration: number) { 
+    this.evolutionDuration = evolutionDuration;
+  }
+
+  get getGame() {
+    return this.game; 
+  }
+
+  get getEvolutionDuration() { 
+    return this.evolutionDuration;
+  }
+
   private game: GameOfLife;
   private isPlaying: boolean; 
   private timer?: any; 
+  private evolutionDuration: number;
   private evolutionCounterMethod?: Dispatch<SetStateAction<number>>
 }
 

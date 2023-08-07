@@ -1,0 +1,71 @@
+.settings-panel {
+  position: absolute;
+  top: 0; 
+  bottom: 0; 
+  left: 0; 
+  right: 0; 
+  background-color: #333;
+  overflow: hidden;
+  z-index: 20;
+}
+
+.settings-panel__inner {
+  height: 100%;
+  width: 100%; 
+  overflow-y: scroll;
+  padding: 20px;
+  display: flex; 
+  flex-direction: column;
+}
+
+.settings-panel__heading, 
+.settings-panel__sub-heading {
+  font-family: 'Inconsolata', monospace;
+  font-size: 1rem;
+  margin-bottom: 10px; 
+  position: relative;
+}
+
+.settings-list__container {
+  margin-bottom: 10px; 
+}
+
+.settings-list__item {
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.heading-decoration {
+  position: absolute;
+  width: 40%; 
+  height: 2px; 
+  background-color: var(--grey-accent);
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+
+
+.settings-panel__sub-heading {
+  margin-bottom: 10px;
+}
+
+
+@media only screen and (min-width: 1000px) and (min-height: 900px) {
+  .settings-panel__inner {
+    padding: 40px;
+  }
+
+  .heading-decoration {
+    position: absolute;
+    width: 50%; 
+    height: 2px; 
+    background-color: var(--grey-accent);
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+  }
+}

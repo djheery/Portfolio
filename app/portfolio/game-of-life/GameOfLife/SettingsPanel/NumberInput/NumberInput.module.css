@@ -1,0 +1,76 @@
+.number-input__outer,
+.number-input__inner {
+  max-width: 80px;
+  position: relative;
+  padding: 2px 2px 2px 4px;
+}
+
+.number-input__outer {
+  border: 1px solid rgba(0, 0, 0, .4);
+  background-color: rgba(0, 0, 0, .4);
+  border-radius: 5px;
+}
+
+.number-input {
+  width: 44%;
+  background: none ;
+  border: none; 
+  font-family: 'Inconsolata', monospace;
+  color: var(--white-accent);
+  font-size: .9rem;
+  outline: none; 
+  border: transparent;
+  font-weight: bold;
+  -moz-appearance: textfield;
+}
+
+.input-flag {
+  font-size: .8rem;
+  font-weight: bold;
+}
+
+.number-input__inner {
+  display: flex; 
+  gap: 10px;
+}
+
+.number-input::-webkit-inner-spin-button, 
+.number-input::-webkit-outer-spin-button {
+ -webkit-appearance: none;
+}
+
+
+.number-input__outer:focus-within {
+  border: 1px solid var(--white-accent);
+}
+.number-input:focus-within {
+  outline: none;
+}
+
+.spinner-up,
+.spinner-down {
+  position: absolute; 
+  width: 0; 
+  height: 0;
+  right: 3px;  
+  background: none; 
+  border: none; 
+}
+
+.spinner-up {
+  border-bottom: 5px solid var(--white-accent); 
+  border-left: 5px solid transparent; 
+  border-right: 5px solid transparent;
+  top: 3px;
+}
+
+.spinner-down {
+  border-top: 5px solid var(--white-accent); 
+  border-left: 5px solid transparent; 
+  border-right: 5px solid transparent;
+  bottom: 2px;
+}
+
+.input-error { 
+  border: red 1px solid !important;
+}
