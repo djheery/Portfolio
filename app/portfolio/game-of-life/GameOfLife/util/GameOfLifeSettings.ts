@@ -1,3 +1,4 @@
+import { StateAction } from "@/app/models/global-types";
 import { NumberInputSettings } from "../SettingsPanel/NumberInput/NumberInput";
 import GameOfLife from "./GameOfLife";
 import GameOfLifeDriver from "./GameOfLifeDriver";
@@ -10,14 +11,16 @@ class GameOfLifeSettings {
     this.currentEvolutionShowing = true; 
     this.aliveCountShowing = false; 
     this.heatmapEnabled = false; 
+    this.isShowing = false; 
   }
 
   public setWarpZoneEnabled(isEnabled: boolean) {
-
+    this.game.setWarpZoneEnabled(isEnabled);
   }
 
   public setPopulationDensity(populationDensity: number) {
-
+    this.game.setPopulationDensity(populationDensity / 100);
+    this.game.getNewGrid;
   }
 
   public setEvolutionDuration(evolutionDuration: number) {
@@ -38,6 +41,16 @@ class GameOfLifeSettings {
 
   public setCurrentEvolutionShowing() {
 
+  }
+
+  public showPanel() {
+    this.isShowing = !this.isShowing; 
+    this.settingsPanelStateAction!(this.isShowing);
+    if(this.isShowing) this.driver.pauseEvolution();
+  }
+
+  public registerSettingsPanelStateAction(stateAction: StateAction<boolean>) {
+    this.settingsPanelStateAction = stateAction; 
   }
 
   get getCurrentPopulationDensity() {
@@ -81,7 +94,7 @@ class GameOfLifeSettings {
       step: 1, 
       flag: this.populationDensityFlag,
       default: 45, 
-      callback: this.setPopulationDensity
+      callback: this.setPopulationDensity.bind(this)
     }
   }
 
@@ -94,7 +107,7 @@ class GameOfLifeSettings {
       step: 10, 
       flag: this.evolutionDurationFlag,
       default: 30,
-      callback: this.setEvolutionDuration
+      callback: this.setEvolutionDuration.bind(this)
     }
   }
 
@@ -107,6 +120,8 @@ class GameOfLifeSettings {
   private currentEvolutionShowing: boolean; 
   private aliveCountShowing: boolean; 
   private heatmapEnabled: boolean;  
+  private isShowing: boolean;
+  private settingsPanelStateAction?: StateAction<boolean>
 }
 
 export default GameOfLifeSettings; 

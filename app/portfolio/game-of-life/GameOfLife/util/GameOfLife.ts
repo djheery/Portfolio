@@ -55,6 +55,10 @@ class GameOfLife {
     this.isInitialLoad = false; 
   }
 
+  public setPopulationDensity(newDensity: number) {
+    this.populationDensity = newDensity;
+  }
+
   /**
    * Checks if the the boundary to check is out of bounds. 
    *
@@ -190,31 +194,11 @@ class GameOfLife {
     return this.currentEvolution; 
   }
 
-  /**
-   * Describe your method...
-   *
-   * @param paramName This param represents...
-   * This param represents...
-  */
-
-  set setColumns(numCols: number) {
-    this.gridColumns = numCols; 
-  }
 
   get getWarpZoneEnabled() {
     return this.warpzoneEnabled; 
   }
 
-  /**
-   * Describe your method...
-   *
-   * @param paramName This param represents...
-   * This param represents...
-  */
-
-  set setRows(numRows: number) {
-    this.gridRows = numRows; 
-  }
 
   /**
    * Describe your method...
@@ -245,7 +229,7 @@ class GameOfLife {
    * This param represents...
   */
 
-  set setWarpZoneEnabled(isEnabled: boolean) {
+  public setWarpZoneEnabled(isEnabled: boolean) {
     this.warpZoneEnabled = isEnabled; 
   }
 

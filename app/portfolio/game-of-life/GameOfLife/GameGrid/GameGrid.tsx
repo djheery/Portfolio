@@ -5,7 +5,7 @@ import ActionPanel, { PanelOperations, ActionNames } from '../ActionPanel/Action
 import GameOfLifeDriver from '../util/GameOfLifeDriver';
 import EvolutionCounter from '../EvolutionCounter/EvolutionCounter';
 import SettingsPanel from '../SettingsPanel/SettingsPanel';
-import GameOfLifeSettings from '../util/SettingsPanel';
+import GameOfLifeSettings from '../util/GameOfLifeSettings';
 
 
 /**
@@ -23,7 +23,7 @@ const GameGrid: React.FC = () => {
     [ActionNames.PAUSE]: GameDriver.pauseEvolution.bind(GameDriver), 
     [ActionNames.STEP]: GameDriver.stepThroughEvolution.bind(GameDriver), 
     [ActionNames.RANDOM]: GameDriver.randomiseBoard.bind(GameDriver),
-    [ActionNames.RANGE]: () => {} 
+    [ActionNames.SETTINGS]: SettingsUtil.showPanel.bind(SettingsUtil)
   }
 
 

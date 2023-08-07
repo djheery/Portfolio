@@ -10,11 +10,11 @@ import styles from './ActionPanel.module.css';
 */
 
 export const ActionNames = {
-  PAUSE: "PAUSE", 
-  START: "START", 
-  STEP: "STEP",
-  RANDOM: "RANDOM", 
-  RANGE: "RANGE",
+  PAUSE: "Pause", 
+  START: "Start", 
+  STEP: "Step",
+  RANDOM: "Randomise", 
+  SETTINGS: "Settings",
 } as const; 
 
 /**
@@ -35,7 +35,7 @@ export interface PanelOperations {
   [ActionNames.START]: () => void, 
   [ActionNames.STEP]: () => void, 
   [ActionNames.RANDOM]: () => void, 
-  [ActionNames.RANGE]: () => void, 
+  [ActionNames.SETTINGS]: () => void, 
 }
 
 /**
@@ -50,7 +50,7 @@ const createPanelButtons = (operations: PanelOperations): JSX.Element[] => {
   for(const action in operations) {
     const a = action as ActionName
     const buttonObject: ActionButtonProps = { 
-      name: action.toLowerCase() as string,
+      name: action as string,
       method: operations[a] 
     };
 

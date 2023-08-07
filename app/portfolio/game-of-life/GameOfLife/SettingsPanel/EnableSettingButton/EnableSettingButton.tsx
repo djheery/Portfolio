@@ -20,13 +20,13 @@ const EnableSettingButton: React.FC<{buttonSettings: EnableButtonProps}> = ({but
   const toggleOn = () => {
     if(isOn) return; 
     setIsOn(true);
-    buttonSettings.callback(isOn);
+    buttonSettings.callback(true);
   }
 
   const toggleOff = () => {
     if(!isOn) return; 
     setIsOn(false); 
-    buttonSettings.callback(isOn);
+    buttonSettings.callback(false);
   }
 
   let iClass = isOn 

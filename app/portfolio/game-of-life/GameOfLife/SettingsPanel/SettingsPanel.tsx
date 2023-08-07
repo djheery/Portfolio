@@ -1,8 +1,9 @@
 "use client"
 
-import GameOfLifeSettings from '../util/SettingsPanel';
+import { useState, useEffect } from 'react';
+import GameOfLifeSettings from '../util/GameOfLifeSettings';
 import EnableSettingButton from './EnableSettingButton/EnableSettingButton';
-import NumberInput, { NumberInputSettings } from './NumberInput/NumberInput';
+import NumberInput from './NumberInput/NumberInput';
 import styles from './SettingsPanel.module.css';
 
 /**
@@ -12,36 +13,46 @@ import styles from './SettingsPanel.module.css';
 
 
 const SettingsPanel: React.FC<{settings: GameOfLifeSettings}> = ({settings}) => {
+  const [isShowing, setIsShowing] = useState<boolean>(false); 
+  const panelClasses = `
+    ${styles["settings-panel"]}
+    ${isShowing ? `${styles["settings-panel--active"]}` : ""}
+  `
+
   const populationDensitySettings = settings.getPopulationDensityInputSettings
   const evolutionDurationSettings = settings.getEvolutionDurationInputSettings;
   const warpZoneButtonProps = {
     settingIsOn: settings.getWarpZoneEnabled, 
-    callback: settings.setWarpZoneEnabled
+    callback: settings.setWarpZoneEnabled.bind(settings),
   };
 
   const heatmapButtonProps = {
     settingIsOn: settings.getHeatMapEnabled, 
-    callback: settings.setHeatMapShowing
+    callback: settings.setHeatMapShowing.bind(settings)
   };
 
   const currentEvolutionShowingButtonProps = {
     settingIsOn: settings.getCurrentEvolutionShowing, 
-    callback: settings.setCurrentEvolutionShowing
+    callback: settings.setCurrentEvolutionShowing.bind(settings)
   }
  
   const alivePercentageShowingButtonProps = {
     settingIsOn: settings.getAlivePercentageShowing, 
-    callback: settings.setAlivePercentageShowing,
+    callback: settings.setAlivePercentageShowing.bind(settings),
   }
 
   const aliveCountShowingButtonProps = {
     settingIsOn: settings.getAliveCountShowing, 
-    callback: settings.setAliveCountShowing, 
+    callback: settings.setAliveCountShowing.bind(settings), 
   };  
+
+  useEffect(() => {
+    settings.registerSettingsPanelStateAction(setIsShowing)
+  }, [])
 
 
   return (
-    <div className={styles["settings-panel"]}>
+    <div className={panelClasses}>
       <div className={styles["settings-panel__inner"]}>
         <h3 className={styles["settings-panel__heading"]}>
           General Settings <span className={styles["heading-decoration"]}></span>
