@@ -8,5 +8,9 @@ If you wish to fork this repo and use the code within for you own purpose I woul
 
 This code base is not meant to act as a template thus if you should want to use it for that I recomnmend that you understand the basics of Next.js 13/ React and TypeScript. 
 
-Dropshadow
-Innershaddow
+## Anna Notes 
+ 
+- Dropshadow on Main image 
+- Inner Shadow on the side bar
+
+## Game of Life 
