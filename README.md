@@ -13,4 +13,24 @@ This code base is not meant to act as a template thus if you should want to use 
 - Dropshadow on Main image 
 - Inner Shadow on the side bar
 
-## Game of Life 
+## Mini Project Ideas 
+
+[] Conways Game of Life (Rust, Java, JS)
+[] Sorting Algoritm Visualizer (Rust, Java, JS)
+[] Graph Algorithm Visualizer (Java, Rust, JS)
+[] Space Invaders Game (Rust, C++, JS)
+[] Snake Game (Rust, Java, JS) 
+[] UK Tax API (Python)
+[] Markdown Editior (JS, PostgreSQL)
+[] ChatRoom App
+[] 
+
+## Larger Websites 
+
+- Manis Law 
+- Bambridge Accountants 
+- Bambridge Accountants (Client Portal/Api)
+- Georgina Website 
+- Playthrough Practice 
+- Sonic Share 
+

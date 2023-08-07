@@ -1,4 +1,4 @@
-# Game of Life 
+# Conways Game of Life Mini Project  
 
 ## Introduction 
 
@@ -29,7 +29,8 @@
     - Number of Alive cells 
     - Number of Dead Cells 
     - Alive Cell Percentage 
-  - Enable colour change for cells that have been alive the longest amount of time 
-  - 
+  - Enable colour change for cells that have been alive the longest. 
 
-- Add Range Input for Speed d
+- Enable colour changes for the cells that have been alive the longest. 
+- Add Range Input for Speed of the evolutions 
+- 
