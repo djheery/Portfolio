@@ -1,11 +1,11 @@
 "use client"
 import styles from './GameGrid.module.css';
-import GameOfLifeUtil from '../util/GameOfLifeUtil';
+import GameOfLifeUtil from '../../util/GameOfLifeUtil';
 import ActionPanel, { PanelOperations, ActionNames } from '../ActionPanel/ActionPanel';
-import GameOfLifeDriver from '../util/GameOfLifeDriver';
+import GameOfLifeDriver from '../../models/GameOfLifeDriver';
 import EvolutionCounter from '../EvolutionCounter/EvolutionCounter';
 import SettingsPanel from '../SettingsPanel/SettingsPanel';
-import GameOfLifeSettings from '../util/GameOfLifeSettings';
+import GameOfLifeSettings from '../../models/GameOfLifeSettings';
 
 
 /**

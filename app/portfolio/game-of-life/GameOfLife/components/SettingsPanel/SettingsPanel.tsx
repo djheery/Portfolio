@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import GameOfLifeSettings from '../util/GameOfLifeSettings';
+import GameOfLifeSettings from '../../models/GameOfLifeSettings';
 import EnableSettingButton from './EnableSettingButton/EnableSettingButton';
 import NumberInput from './NumberInput/NumberInput';
 import styles from './SettingsPanel.module.css';

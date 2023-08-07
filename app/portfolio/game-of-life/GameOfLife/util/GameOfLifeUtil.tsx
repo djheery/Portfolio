@@ -1,6 +1,6 @@
 "use-client"
-import GameCellUI from "../GameCell/GameCell";
-import { GameCell } from "./GameCell";
+import GameCellUI from "../components/GameCell/GameCell";
+import { GameCell } from "../models/GameCell";
 
 class GameOfLifeUtil {
 

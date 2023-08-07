@@ -1,4 +1,4 @@
-import GameGrid from './GameGrid/GameGrid';
+import GameGrid from './components/GameGrid/GameGrid';
 import styles from './GameOfLife.module.css';
 
 /**

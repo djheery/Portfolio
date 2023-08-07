@@ -1,5 +1,5 @@
 import { StateAction } from "@/app/models/global-types";
-import { NumberInputSettings } from "../SettingsPanel/NumberInput/NumberInput";
+import { NumberInputSettings } from "../components/SettingsPanel/NumberInput/NumberInput";
 import GameOfLife from "./GameOfLife";
 import GameOfLifeDriver from "./GameOfLifeDriver";
 

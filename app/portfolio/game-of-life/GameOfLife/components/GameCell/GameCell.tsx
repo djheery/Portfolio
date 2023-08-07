@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from 'react';
-import { GameCell as GameCellDriver} from '../util/GameCell';
+import { GameCell as GameCellDriver} from '../../models/GameCell';
 import styles from './GameCell.module.css';
 
 /**

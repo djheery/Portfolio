@@ -1,6 +1,5 @@
-import { inputDebounce } from '@/app/util/debounce';
 import { useRef, useState } from 'react';
-import GameOfLifeUtil from '../../util/GameOfLifeUtil';
+import GameOfLifeUtil from '../../../util/GameOfLifeUtil';
 import styles from './NumberInput.module.css';
 
 export interface NumberInputSettings {

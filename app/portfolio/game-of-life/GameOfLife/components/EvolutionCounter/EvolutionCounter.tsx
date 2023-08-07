@@ -1,7 +1,7 @@
 import styles from './EvolutionCounter.module.css';
-import GameOfLifeDriver from '../util/GameOfLifeDriver'
+import GameOfLifeDriver from '../../models/GameOfLifeDriver'
 import { useEffect, useState } from 'react';
-import GOLUtil from '../util/GameOfLifeUtil';
+import GOLUtil from '../../util/GameOfLifeUtil';
 
 /**
  * The functional component for the EvolutionCounter

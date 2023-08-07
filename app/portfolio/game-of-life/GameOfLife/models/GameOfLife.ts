@@ -30,7 +30,8 @@ class GameOfLife {
     this.warpZoneEnabled = true; 
     this.gridState = []; 
     this.populationDensity = .45;
-    this.isInitialLoad = true; 
+    this.isInitialLoad = true;
+    this.currentAliveCount = 0; 
     this.newGrid(); 
   }
 
@@ -49,6 +50,8 @@ class GameOfLife {
         } else { 
           this.gridState[r][c].setAlive(isAlive);
         }
+
+        if(isAlive) this.currentAliveCount++;
       }
     }
 
@@ -148,6 +151,14 @@ class GameOfLife {
     }
   }
 
+  get getAlivePercentage() {
+    return Math.round(((this.gridRows * this.gridColumns) / this.currentAliveCount) * 100); 
+  }
+
+  get getCurrentAliveCount() {
+    return this.currentAliveCount; 
+  }
+
   /**
    * Describe your method...
    *
@@ -199,6 +210,21 @@ class GameOfLife {
     return this.warpzoneEnabled; 
   }
 
+   /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * This param represents...
+  */
+
+    public setWarpZoneEnabled(isEnabled: boolean) {
+      this.warpZoneEnabled = isEnabled; 
+    }
+  
+    get getPopulationDensity() {
+      return this.populationDensity; 
+    }
+
 
   /**
    * Describe your method...
@@ -222,20 +248,7 @@ class GameOfLife {
     this.currentEvolution++; 
   }
 
-  /**
-   * Describe your method...
-   *
-   * @param paramName This param represents...
-   * This param represents...
-  */
-
-  public setWarpZoneEnabled(isEnabled: boolean) {
-    this.warpZoneEnabled = isEnabled; 
-  }
-
-  get getPopulationDensity() {
-    return this.populationDensity; 
-  }
+ 
 
   private static BOUNDARY_COORDINATES = [
                                  [0, 1],[0, -1],[1, -1],[-1, 1], 
@@ -249,6 +262,7 @@ class GameOfLife {
   private gridRows: number; 
   private gridColumns: number; 
   private isInitialLoad: boolean; 
+  private currentAliveCount: number; 
 }
 
 export default GameOfLife;
