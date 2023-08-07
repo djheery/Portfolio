@@ -46,6 +46,11 @@ const SettingsPanel: React.FC<{settings: GameOfLifeSettings}> = ({settings}) => 
     callback: settings.setAliveCountShowing.bind(settings), 
   };  
 
+  const algorithmDurationButtonProps = {
+    settingIsOn: settings.getAlgorithmDurationShowing, 
+    callback: settings.setActualDurationShowing.bind(settings),
+  }
+
   useEffect(() => {
     settings.registerSettingsPanelStateAction(setIsShowing)
   }, [])
@@ -87,6 +92,9 @@ const SettingsPanel: React.FC<{settings: GameOfLifeSettings}> = ({settings}) => 
             </li>
             <li className={styles["settings-list__item"]}>
               Show Alive Count: <EnableSettingButton buttonSettings={aliveCountShowingButtonProps}/>
+            </li>
+            <li className={styles["settings-list__item"]}>
+              Show Time Per Evolution Ms: <EnableSettingButton buttonSettings={algorithmDurationButtonProps}/>
             </li>
           </ul>
         </div>

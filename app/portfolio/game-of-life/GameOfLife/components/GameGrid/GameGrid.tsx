@@ -6,6 +6,7 @@ import GameOfLifeDriver from '../../models/GameOfLifeDriver';
 import EvolutionCounter from '../EvolutionCounter/EvolutionCounter';
 import SettingsPanel from '../SettingsPanel/SettingsPanel';
 import GameOfLifeSettings from '../../models/GameOfLifeSettings';
+import GameLegend from '../GameLegend/GameLegend';
 
 
 /**
@@ -28,10 +29,10 @@ const GameGrid: React.FC = () => {
 
 
   return (
-    <div className={styles["mac-container"]}>
+    <div className={styles["mac-container"]} >
       <img src="/images/old-mac-computer.png" alt="" className={styles["old-mac-img"]}/>
       <div className={styles["game-grid"]}>
-        <EvolutionCounter driver={GameDriver} />
+        <GameLegend eventHandlers={{settings: SettingsUtil}} />
         <div className={styles["game-grid__inner"]}>
           {GameOfLifeUtil.mapCells(grid)}
         </div>

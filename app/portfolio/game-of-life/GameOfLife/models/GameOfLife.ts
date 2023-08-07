@@ -1,3 +1,5 @@
+"use client"
+
 import { GameCell } from "./GameCell";
 
 /**
@@ -32,6 +34,7 @@ class GameOfLife {
     this.populationDensity = .45;
     this.isInitialLoad = true;
     this.currentAliveCount = 0; 
+    this.algorithmDuration = 0; 
     this.newGrid(); 
   }
 
@@ -149,10 +152,12 @@ class GameOfLife {
     } else {
       neighbours > 3 || neighbours < 2  ? targetCell.toggleIsAlive() : null;
     }
+
+    if(targetCell.getIsAlive) this.currentAliveCount++;
   }
 
   get getAlivePercentage() {
-    return Math.round(((this.gridRows * this.gridColumns) / this.currentAliveCount) * 100); 
+    return Math.round((this.currentAliveCount / (this.gridRows * this.gridColumns)) * 100); 
   }
 
   get getCurrentAliveCount() {
@@ -169,6 +174,7 @@ class GameOfLife {
   get getNewGrid(): GameCell[][] {
     this.newGrid(); 
     this.currentEvolution = 0; 
+    this.currentAliveCount = 0; 
     return this.gridState; 
   }
 
@@ -235,7 +241,8 @@ class GameOfLife {
 
   public tick(): void {
     const visitedNodes = new Map<string, boolean>();
-    const cellClone = JSON.parse(JSON.stringify(this.gridState)); 
+    this.currentAliveCount = 0; 
+    const algoStart = Date.now();
 
     for(let r = 0; r < this.gridRows; r++) {
       for(let c = 0; c < this.gridColumns; c++) {
@@ -245,7 +252,12 @@ class GameOfLife {
       }
     }
 
+    this.algorithmDuration = Date.now() - algoStart;
     this.currentEvolution++; 
+  }
+
+  get getAlgorithmDuration() {
+    return this.algorithmDuration; 
   }
 
  
@@ -263,6 +275,7 @@ class GameOfLife {
   private gridColumns: number; 
   private isInitialLoad: boolean; 
   private currentAliveCount: number; 
+  private algorithmDuration: number; 
 }
 
 export default GameOfLife;

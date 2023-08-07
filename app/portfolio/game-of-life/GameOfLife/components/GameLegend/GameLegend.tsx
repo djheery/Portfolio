@@ -1,6 +1,11 @@
+"use client"
+
+import { useEffect, useState } from 'react';
 import GameOfLifeDriver from '../../models/GameOfLifeDriver';
-import GameOfLifeSettings from '../../models/GameOfLifeSettings';
+import GameOfLifeSettings, { LegendItem } from '../../models/GameOfLifeSettings';
+import SettingsPanel from '../SettingsPanel/SettingsPanel';
 import styles from './GameLegend.module.css';
+import GameLegendItem from './GameLegendItem/GameLegendItem';
 
 /**
  * An interface that details...
@@ -9,7 +14,6 @@ import styles from './GameLegend.module.css';
 */
 
 export interface LegendProps {
-  driver: GameOfLifeDriver,
   settings: GameOfLifeSettings,
 }
 
@@ -20,9 +24,24 @@ export interface LegendProps {
 */
 
 const GameLegend: React.FC<{eventHandlers: LegendProps}> = ({eventHandlers}) => {
+  const [items, setItems] = useState<Set<LegendItem>>(eventHandlers.settings.getLegend);
+  
+  useEffect(() => { 
+    eventHandlers.settings.registerLegendPanelStateAction(setItems);
+  }, [])
+
+  const i = Array.from(items);
   return (
-    <div>
-      GameLegend Component
+    <div className={styles["game-legend"]}>
+      <ul className={styles["game-legend__list"]}>
+        {i.map((item, idx) => {
+          return (
+            <li key={idx}>
+              <GameLegendItem itemSettings={item} />
+            </li>
+          )
+        })}
+      </ul>
     </div>
   )
 }

@@ -21,7 +21,7 @@ const GameCell: React.FC<{cell: GameCellDriver}> = ({cell}) => {
   useEffect(() => cell.registerStateUpdateMethod(setIsAlive) , [])
 
   return (
-    <div className={cellClassList}></div>
+    <div className={cellClassList} suppressHydrationWarning={true}></div>
   )
 }
 

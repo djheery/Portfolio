@@ -1,3 +1,4 @@
+import { StateAction } from "@/app/models/global-types";
 import { animationDebounce } from "@/app/util/debounce";
 import { Dispatch, SetStateAction } from "react";
 import GameOfLife from "./GameOfLife";
@@ -18,7 +19,14 @@ class GameOfLifeDriver {
     if(!this.isPlaying) this.isPlaying = true; 
     this.timer = !this.timer && setInterval(() => {
       animationDebounce(this.game.tick());
-      this.evolutionCounterMethod!(this.game.getCurrentEvolution);
+      if(this.evolutionCounterMethod)
+        this.evolutionCounterMethod!(this.game.getCurrentEvolution);
+      if(this.alivePercentageMethod !== undefined)
+        this.alivePercentageMethod(this.game.getAlivePercentage); 
+      if(this.aliveCountMethod !== undefined)
+        this.aliveCountMethod(this.game.getCurrentAliveCount);
+      if(this.algorithmPerformanceMethod !== undefined)
+        this.algorithmPerformanceMethod(this.game.getAlgorithmDuration)
     }, this.evolutionDuration);
   }
 
@@ -33,7 +41,14 @@ class GameOfLifeDriver {
   public randomiseBoard() {
     if(this.isPlaying) this.pauseEvolution();
     this.game.getNewGrid;
+    if(this.evolutionCounterMethod)
     this.evolutionCounterMethod!(this.game.getCurrentEvolution);
+  if(this.alivePercentageMethod !== undefined)
+    this.alivePercentageMethod(this.game.getAlivePercentage); 
+  if(this.aliveCountMethod !== undefined)
+    this.aliveCountMethod(this.game.getCurrentAliveCount);
+  if(this.algorithmPerformanceMethod !== undefined)
+    this.algorithmPerformanceMethod(this.game.getAlgorithmDuration)
   }
 
   public stepThroughEvolution() {
@@ -43,6 +58,34 @@ class GameOfLifeDriver {
 
   public registerEvolutionCounter(setStateMethod: Dispatch<SetStateAction<number>>) {
     this.evolutionCounterMethod = setStateMethod;
+  }
+
+  public destroyEvolutionCounter() {
+    this.evolutionCounterMethod = undefined; 
+  }
+
+  public registerAlivePercentageMethod(setStateMethod: StateAction<number>) {
+    this.alivePercentageMethod = setStateMethod; 
+  } 
+
+  public destroyAlivePercentageMethod() {
+    this.alivePercentageMethod = undefined; 
+  }
+
+  public registerAliveCountMethod(setStateMethod: StateAction<number>) {
+    this.aliveCountMethod = setStateMethod;
+  } 
+
+  public destroyAliveCountMethod() {
+    this.aliveCountMethod = undefined; 
+  }
+
+  public registerAlgorithmPerformanceMethod(setStateMethod: StateAction<number>) {
+    this.algorithmPerformanceMethod = setStateMethod; 
+  }
+
+  public destroyAlgorithmPerformanceMethod() {
+    this.algorithmPerformanceMethod = undefined; 
   }
 
   public setEvolutionDuration(evolutionDuration: number) { 
@@ -62,6 +105,9 @@ class GameOfLifeDriver {
   private timer?: any; 
   private evolutionDuration: number;
   private evolutionCounterMethod?: Dispatch<SetStateAction<number>>
+  private alivePercentageMethod?: StateAction<number>;
+  private aliveCountMethod?: StateAction<number>;
+  private algorithmPerformanceMethod?: StateAction<number>
 }
 
 export default GameOfLifeDriver; 
