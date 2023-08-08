@@ -28,7 +28,7 @@ const HomePortfolio: React.FC = () => {
           <PortfolioMobile />
           <PortfolioDesktop />
           <div className={styles["button-section"]}>
-            <LinkButton url="/portfolio/game-of-life" text="View all Projects!" />
+            <LinkButton url="/portfolio/sorting-algorithm-visualizer" text="View all Projects!" />
           </div>
         </div>
       </div>

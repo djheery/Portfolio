@@ -15,15 +15,21 @@ This code base is not meant to act as a template thus if you should want to use 
 
 ## Mini Project Ideas 
 
-[] Conways Game of Life (Rust, Java, JS)
-[] Sorting Algoritm Visualizer (Rust, Java, JS)
+[x] Conways Game of Life 
+  [x] JavaScript
+  [] Rust 
+  [] Java
+[] Sorting Algoritm Visualizer 
+  [] JavaScript
+  [] Rust
+  [] Python
 [] Graph Algorithm Visualizer (Java, Rust, JS)
 [] Space Invaders Game (Rust, C++, JS)
 [] Snake Game (Rust, Java, JS) 
 [] UK Tax API (Python)
 [] Markdown Editior (JS, PostgreSQL)
 [] ChatRoom App
-[] 
+[] UnNamed AI project 
 
 ## Larger Websites 
 
