@@ -36,7 +36,7 @@ class GameOfLifeUtil {
   }
 
   public static numberIsValid(min: number, max: number, currentValue: number) {
-    return currentValue < min || currentValue > max;
+    return currentValue < min || currentValue > max || currentValue % 1 !== 0;
   }
 }
 

@@ -111,7 +111,7 @@ class GameOfLifeSettings {
   get getPopulationDensityInputSettings(): NumberInputSettings {
     return {
       name: "population-density", 
-      min: 0, 
+      min: 1, 
       max: 100, 
       value: this.game.getPopulationDensity * 100, 
       step: 1, 

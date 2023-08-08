@@ -40,7 +40,7 @@
 
 .indicator-ball--on {
   width: 40%; 
-  left: 3px;
+  left: 4px;
   background-color: green;
   animation-name: transitionOn;
   animation-timing-function: linear;
@@ -68,7 +68,7 @@
 @keyframes transitionOff {  
   0% {
     width: 40%; 
-    left: 3px;
+    left: 4px;
     background-color: green;
   }
 
@@ -88,7 +88,7 @@
   
   100% {
     width: 40%; 
-    left: 3px;
+    left: 4px;
     background-color: green;
   }
 }

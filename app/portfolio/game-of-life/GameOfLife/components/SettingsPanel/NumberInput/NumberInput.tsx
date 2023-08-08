@@ -70,7 +70,7 @@ const NumberInput: React.FC<{inputSettings: NumberInputSettings}> = ({inputSetti
     const isInvalid = GameOfLifeUtil.numberIsValid(
       inputSettings.min, 
       inputSettings.max, 
-      parseInt(inputCurrent.value)
+      parseFloat(inputCurrent.value)
     );  
 
     if(isInvalid) {

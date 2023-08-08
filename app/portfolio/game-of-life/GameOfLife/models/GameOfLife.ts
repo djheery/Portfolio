@@ -172,9 +172,9 @@ class GameOfLife {
   */
 
   get getNewGrid(): GameCell[][] {
-    this.newGrid(); 
     this.currentEvolution = 0; 
     this.currentAliveCount = 0; 
+    this.newGrid(); 
     return this.gridState; 
   }
 

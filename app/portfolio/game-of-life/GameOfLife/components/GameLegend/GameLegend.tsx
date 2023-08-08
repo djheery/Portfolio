@@ -30,19 +30,23 @@ const GameLegend: React.FC<{eventHandlers: LegendProps}> = ({eventHandlers}) => 
     eventHandlers.settings.registerLegendPanelStateAction(setItems);
   }, [])
 
-  const i = Array.from(items);
+  const itemArray = Array.from(items);
   return (
-    <div className={styles["game-legend"]}>
-      <ul className={styles["game-legend__list"]}>
-        {i.map((item, idx) => {
-          return (
-            <li key={idx}>
-              <GameLegendItem itemSettings={item} />
-            </li>
-          )
-        })}
-      </ul>
-    </div>
+    <>
+      { itemArray.length >= 1 &&
+            <div className={styles["game-legend"]}>
+            <ul className={styles["game-legend__list"]}>
+              {itemArray.map((item, idx) => {
+                return (
+                  <li key={idx}>
+                    <GameLegendItem itemSettings={item} />
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+      }
+    </>
   )
 }
 

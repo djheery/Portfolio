@@ -1,11 +1,11 @@
 .game-legend {
   position: absolute; 
-  right: 0; 
+  right: 2px; 
   height: max-content; 
-  background-color: #333;
+  background-color: rgba(0, 0, 0, .8);
   width: 180px;
   top: 0px; 
-  z-index: 12;
+  z-index: 1;
   padding: 5px;
   font-size: .9rem;
 }

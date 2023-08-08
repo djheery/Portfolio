@@ -88,13 +88,13 @@ const SettingsPanel: React.FC<{settings: GameOfLifeSettings}> = ({settings}) => 
               Show Current Evolution: <EnableSettingButton buttonSettings={currentEvolutionShowingButtonProps}/>
             </li>
             <li className={styles["settings-list__item"]}>
-              Show Alive Percentage: <EnableSettingButton buttonSettings={alivePercentageShowingButtonProps}/>
+              Show Alive Cell Percentage: <EnableSettingButton buttonSettings={alivePercentageShowingButtonProps}/>
             </li>
             <li className={styles["settings-list__item"]}>
-              Show Alive Count: <EnableSettingButton buttonSettings={aliveCountShowingButtonProps}/>
+              Show Alive Cell Count: <EnableSettingButton buttonSettings={aliveCountShowingButtonProps}/>
             </li>
             <li className={styles["settings-list__item"]}>
-              Show Time Per Evolution Ms: <EnableSettingButton buttonSettings={algorithmDurationButtonProps}/>
+              Show Algorithm Duration Ms: <EnableSettingButton buttonSettings={algorithmDurationButtonProps}/>
             </li>
           </ul>
         </div>

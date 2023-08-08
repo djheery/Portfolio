@@ -40,15 +40,17 @@ class GameOfLifeDriver {
 
   public randomiseBoard() {
     if(this.isPlaying) this.pauseEvolution();
+    
     this.game.getNewGrid;
+    
     if(this.evolutionCounterMethod)
-    this.evolutionCounterMethod!(this.game.getCurrentEvolution);
-  if(this.alivePercentageMethod !== undefined)
-    this.alivePercentageMethod(this.game.getAlivePercentage); 
-  if(this.aliveCountMethod !== undefined)
-    this.aliveCountMethod(this.game.getCurrentAliveCount);
-  if(this.algorithmPerformanceMethod !== undefined)
-    this.algorithmPerformanceMethod(this.game.getAlgorithmDuration)
+      this.evolutionCounterMethod!(this.game.getCurrentEvolution);
+    if(this.alivePercentageMethod !== undefined)
+      this.alivePercentageMethod(this.game.getAlivePercentage); 
+    if(this.aliveCountMethod !== undefined)
+      this.aliveCountMethod(this.game.getCurrentAliveCount);
+    if(this.algorithmPerformanceMethod !== undefined)
+      this.algorithmPerformanceMethod(this.game.getAlgorithmDuration)
   }
 
   public stepThroughEvolution() {
