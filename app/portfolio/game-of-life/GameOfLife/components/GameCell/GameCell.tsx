@@ -3,25 +3,31 @@ import { useEffect, useState } from 'react';
 import { GameCell as GameCellDriver} from '../../models/GameCell';
 import styles from './GameCell.module.css';
 
+
 /**
  * The functional component for the GameCell
  *
  * @param myParam your params here
 */
 
-const GameCell: React.FC<{cell: GameCellDriver}> = ({cell}) => {
-  const [isAlive, setIsAlive] = useState<boolean>(cell.getIsAlive);
+const GameCell: React.FC<{cellDriver: GameCellDriver}> = ({cellDriver}) => {
+  const [isAlive, setIsAlive] = useState<boolean>(cellDriver.getIsAlive);
 
-  const cellIndicatorClass = isAlive
-                          ? `${styles["cell--alive"]}`
-                          : `${styles["cell--dead"]}`
-
-  const cellClassList = `${styles["cell"]} ${cellIndicatorClass}`
+  let [x, y] = cellDriver.getCoords;
+  const cellClassList = `
+    ${styles["cell"]} 
+    ${isAlive ? `${styles["cell--alive"]}` : `${styles["cell--dead"]}`}
+  `;
   
-  useEffect(() => cell.registerStateUpdateMethod(setIsAlive) , [])
+  useEffect(() => cellDriver.registerStateUpdateMethod(setIsAlive) , [])
 
   return (
-    <div className={cellClassList} suppressHydrationWarning={true}></div>
+    <div 
+      className={cellClassList}
+      suppressHydrationWarning={true}
+    >
+
+    </div>
   )
 }
 

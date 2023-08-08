@@ -26,11 +26,6 @@ const SettingsPanel: React.FC<{settings: GameOfLifeSettings}> = ({settings}) => 
     callback: settings.setWarpZoneEnabled.bind(settings),
   };
 
-  const heatmapButtonProps = {
-    settingIsOn: settings.getHeatMapEnabled, 
-    callback: settings.setHeatMapShowing.bind(settings)
-  };
-
   const currentEvolutionShowingButtonProps = {
     settingIsOn: settings.getCurrentEvolutionShowing, 
     callback: settings.setCurrentEvolutionShowing.bind(settings)
@@ -66,9 +61,6 @@ const SettingsPanel: React.FC<{settings: GameOfLifeSettings}> = ({settings}) => 
           <ul className={styles["settings-list"]}>
             <li className={styles["settings-list__item"]}>
               Warpzone Enabled: <EnableSettingButton buttonSettings={warpZoneButtonProps}/>
-            </li>
-            <li className={styles["settings-list__item"]}>
-              Alive Duration Heatmap: <EnableSettingButton buttonSettings={heatmapButtonProps}/>
             </li>
             <li className={styles["settings-list__item"]}>
               Population Density: <NumberInput inputSettings={populationDensitySettings}/>

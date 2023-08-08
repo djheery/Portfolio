@@ -18,7 +18,6 @@ class GameOfLifeSettings {
     this.alivePercentageShowing = true; 
     this.currentEvolutionShowing = true; 
     this.aliveCountShowing = false; 
-    this.heatmapEnabled = false; 
     this.algorithmDurationShowing = false; 
     this.isShowing = false; 
   }
@@ -36,10 +35,6 @@ class GameOfLifeSettings {
   public setEvolutionDuration(evolutionDuration: number) {
     this.driver.setEvolutionDuration(evolutionDuration); 
     this.legendStateAction!(this.getLegend)
-  }
-
-  public setHeatMapShowing() {
-    this.heatmapEnabled = !this.heatmapEnabled; 
   }
 
   public setAlivePercentageShowing() {
@@ -82,10 +77,6 @@ class GameOfLifeSettings {
 
   get getWarpZoneEnabled() {
     return this.game.getWarpZoneEnabled; 
-  }
-
-  get getHeatMapEnabled() {
-    return this.heatmapEnabled; 
   }
 
   get getCurrentEvolutionShowing() {
@@ -190,7 +181,6 @@ class GameOfLifeSettings {
   private algorithmDurationShowing: boolean; 
   private currentEvolutionShowing: boolean; 
   private aliveCountShowing: boolean; 
-  private heatmapEnabled: boolean;  
   private isShowing: boolean;
   private settingsPanelStateAction?: StateAction<boolean>;
   private legendStateAction?: StateAction<Set<LegendItem>>

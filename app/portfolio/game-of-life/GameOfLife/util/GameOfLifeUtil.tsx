@@ -12,8 +12,8 @@ class GameOfLifeUtil {
   */
   public static mapCells(cells: GameCell[][]): JSX.Element[][] {
     return cells.map((r, idx1) => {
-      const cellArr = r.map((c, idx2) => {
-        return <GameCellUI cell={c} key={`${idx1}-${idx2}`}/>
+      const cellArr = r.map((c: GameCell, idx2: number) => {
+        return <GameCellUI cellDriver={c} key={`${idx1}-${idx2}`}/>
       });
       
       return cellArr

@@ -20,7 +20,6 @@ export class GameCell {
     this.x = x; 
     this.y = y;
     this.isAlive = isAlive; 
-    this.evolutionsAlive = isAlive ? 1 : 0; 
   }
 
   /**
@@ -55,8 +54,8 @@ export class GameCell {
   public toggleIsAlive() {
     this.isAlive = !this.isAlive;  
     this.stateDispatchMethod!(this.isAlive);
-    !this.isAlive ? this.evolutionsAlive = 0 : this.evolutionsAlive = 1; 
   }
+
 
   /**
    * Describe your method...
@@ -84,6 +83,5 @@ export class GameCell {
   private x: number; 
   private y: number; 
   private isAlive: boolean;   
-  private evolutionsAlive: number; 
   private stateDispatchMethod?: StateAction<boolean>;
 } 
