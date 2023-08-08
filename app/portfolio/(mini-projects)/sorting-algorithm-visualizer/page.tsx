@@ -1,17 +1,34 @@
 import styles from './page.module.css';
+import FullScreenContainer from '@/app/components/Containers/FullScreenContainer/FullScreenContainer';
+import ContentContainer from '@/app/components/Containers/ContentContainer/ContentContainer';
+import SortContainer from './components/SortWidgetContainer/SortWidgetContainer';
 
 /**
- * The functional component for the page
+ * The functional component for the SortingAlgorithmVisualizer page
  *
- * @param myParam your params here
 */
 
-const page: React.FC = () => {
+const SortingAlgorithmVisualizerPage: React.FC = () => {
   return (
-    <div>
-      page Component
-    </div>
+    <>
+      <FullScreenContainer>
+        <ContentContainer>
+          <div className={styles["landing-section__outer"]}>
+            <div className={styles["page__introduction"]}>
+              <h1>Sorting Algorithm Visualizer</h1>
+              <p>
+                Below is a visualizer for the most common sorting algorithms. I have built this project 
+                a few times when practicing for Data Structures and Algorithms assessments and Interview practice. 
+              </p>
+            </div>
+          </div>
+        </ContentContainer>
+      </FullScreenContainer>
+      <ContentContainer>
+        <SortContainer />
+      </ContentContainer>
+    </>
   )
 }
 
-export default page;
+export default SortingAlgorithmVisualizerPage;

@@ -1,0 +1,19 @@
+.sort-item {
+  width: 10px; 
+  position: absolute; 
+  height: 90%;
+  bottom: 0; 
+  background-color: var(--white-accent);
+  border-radius: 10px;
+  /* display: flex;  */
+  /* justify-content: center; */
+  /* border: .1px var(--white-accent) solid */
+}
+
+.sort-item__inner {
+  position: relative; 
+  bottom: 0; 
+  width: 99%; 
+  height: 100%; 
+  background-color: var(--primary-blue);
+}

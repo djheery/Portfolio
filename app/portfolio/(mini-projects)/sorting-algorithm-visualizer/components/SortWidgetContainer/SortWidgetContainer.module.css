@@ -1,0 +1,12 @@
+.sort-container {
+  background-color: var(--white-accent);
+  position: relative;
+  border-radius: 10px;
+  box-shadow: .5rem .5rem 1rem rgba(0, 0, 0, .7);
+  max-width: 1400px; 
+  margin: auto;
+}
+
+.sort-container__inner {
+  padding: 20px; 
+}
