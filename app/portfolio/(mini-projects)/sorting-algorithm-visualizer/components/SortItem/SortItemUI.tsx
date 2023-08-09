@@ -15,7 +15,8 @@ const SortItemUI: React.FC<{item: SortItem}> = ({item}) => {
   const s = {
     width: `${itemStyles.width}px`, 
     left: `${itemStyles.left}px`, 
-    height: `${itemStyles.height}%`
+    height: `${itemStyles.height}%`,
+    backgroundColor: `${itemStyles.index === 5 ? "red" : "black"}`
   }
 
   useEffect(() => {

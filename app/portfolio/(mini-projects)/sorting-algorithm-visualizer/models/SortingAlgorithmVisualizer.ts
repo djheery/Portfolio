@@ -24,7 +24,8 @@ class SortingAlgorithmVisualizer {
   private newSortArray() {
     this.sortItems = [];
     for(let i = 0; i < this.sortItemSize; i++) {
-      const item = new SortItem(Math.random(), i);
+      const sortValue = Math.ceil(Math.random() * 100);
+      const item = new SortItem(sortValue < 2 ? 2 : sortValue, i);
       this.sortItems.push(item);
     }
   }
@@ -38,8 +39,11 @@ class SortingAlgorithmVisualizer {
   }
 
   public async startSorting() {
-    await this.insertionSort();
+    const expectedArr = this.sortItems.map(m => m.getValue).sort((a, b) => a-b); 
     if(this.traceOn) this.toString();
+    await this.bubbleSort();
+    if(this.traceOn) this.toString();
+    if(this.traceOn) console.log(`[${expectedArr}]`)
   }
 
   private updateGrid() {
@@ -83,10 +87,10 @@ class SortingAlgorithmVisualizer {
   }
 
   private async insertionSort() {
-    for(let i = 0; i < this.sortItems.length; i++) {
+    for(let i = 1; i < this.sortItems.length; i++) {
       let j = i; 
       while(j > 0 && this.sortItems[j].getValue < this.sortItems[j - 1].getValue) {
-        await this.swap(j, j - 1);
+        await this.swap(j - 1, j);
         j--; 
       }
     }

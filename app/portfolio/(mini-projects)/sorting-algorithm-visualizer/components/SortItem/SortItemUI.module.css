@@ -1,14 +1,8 @@
 .sort-item { 
   position: absolute; 
   bottom: 0; 
-  background-color: var(--white-accent);
   border-radius: 10px;
-}
-
-.sort-item__inner {
-  position: relative; 
-  bottom: 0; 
-  width: 98%; 
-  height: 100%; 
+  border: 1px solid var(--white-accent);
   background-color: var(--primary-blue);
 }
+

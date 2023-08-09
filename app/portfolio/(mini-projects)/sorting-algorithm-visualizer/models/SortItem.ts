@@ -12,12 +12,15 @@ export interface SortItemProps {
   width: number, 
   left: number,
   height: number,
+  isCurrent: boolean;
+  index: number;
 }
 
 class SortItem {
   constructor(sortValue: number, sortIndex: number) {
     this.sortValue = sortValue; 
     this.sortIndex = sortIndex; 
+    this.isCurrent = false;
   }
 
   public changeIndex(sortIndex: number) {
@@ -39,14 +42,17 @@ class SortItem {
   }
 
   get getSortItemValues() {
-    let width = 5; 
+    let width = 10; 
     return {
       width: width, 
       left: 0 + (this.sortIndex * width), 
-      height: this.sortValue * 100
+      height: this.sortValue,
+      isCurrent: this.isCurrent,
+      index: this.sortIndex
     }
   }
 
+  private isCurrent: boolean;
   private sortIndex: number; 
   private sortValue: number; 
   private uiComponentStateAction?: StateAction<SortItemProps>;
