@@ -41,7 +41,7 @@ class SortingAlgorithmVisualizer {
   public async startSorting() {
     const expectedArr = this.sortItems.map(m => m.getValue).sort((a, b) => a-b); 
     if(this.traceOn) this.toString();
-    await this.bubbleSort();
+    await this.insertionSort();
     if(this.traceOn) this.toString();
     if(this.traceOn) console.log(`[${expectedArr}]`)
   }
@@ -55,9 +55,9 @@ class SortingAlgorithmVisualizer {
   }
 
   private async swap(i: number, j: number) { 
-    const temp = this.sortItems[i].getValue; 
-    this.sortItems[i].changeValue(this.sortItems[j].getValue);
-    this.sortItems[j].changeValue(temp);
+    const temp = this.sortItems[i].getSortIndex; 
+    this.sortItems[i].changeIndex(this.sortItems[j].getSortIndex);
+    this.sortItems[j].changeIndex(temp);
     await this.sleep();
   }
 
@@ -90,7 +90,7 @@ class SortingAlgorithmVisualizer {
     for(let i = 1; i < this.sortItems.length; i++) {
       let j = i; 
       while(j > 0 && this.sortItems[j].getValue < this.sortItems[j - 1].getValue) {
-        await this.swap(j - 1, j);
+        await this.swap(j, j-1);
         j--; 
       }
     }

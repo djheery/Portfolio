@@ -41,6 +41,10 @@ class SortItem {
     return this.sortValue; 
   }
 
+  get getSortIndex() {
+    return this.sortIndex; 
+  }
+
   get getSortItemValues() {
     let width = 10; 
     return {
