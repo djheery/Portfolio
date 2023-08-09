@@ -1,3 +1,6 @@
+"use client"
+import SortItem from "./SortItem";
+
 export enum AllowedAlogrithms {
   BUBBLE_SORT = "BUBBLE_SORT", 
   QUICK_SORT = "QUICK_SORT", 
@@ -14,13 +17,15 @@ class SortingAlgorithmVisualizer {
     this.sortItems = []; 
     this.currentAlgorithm = AllowedAlogrithms.BUBBLE_SORT; 
     this.sortItemSize = 100;
+    this.traceOn = true; 
     this.newSortArray(); 
   }
 
   private newSortArray() {
     this.sortItems = [];
     for(let i = 0; i < this.sortItemSize; i++) {
-      this.sortItems.push(Math.random())
+      const item = new SortItem(Math.random(), i);
+      this.sortItems.push(item);
     }
   }
 
@@ -32,19 +37,40 @@ class SortingAlgorithmVisualizer {
     return this.sortItems; 
   }
 
-  public startSorting() {
-
+  public async startSorting() {
+    await this.insertionSort();
+    if(this.traceOn) this.toString();
   }
 
   private updateGrid() {
 
   }
 
-  private bubbleSort() {
-    let sorted = false; 
+  private async sleep(ms = 20) {
+    return new Promise((res) => setTimeout(res, ms));
+  }
+
+  private async swap(i: number, j: number) { 
+    const temp = this.sortItems[i].getValue; 
+    this.sortItems[i].changeValue(this.sortItems[j].getValue);
+    this.sortItems[j].changeValue(temp);
+    await this.sleep();
+  }
+
+  private async bubbleSort() {
+    let sorted = false;
+    let counter = this.sortItems.length - 1;  
     while(!sorted) {
       sorted = true; 
-      
+      for(let i = 0; i < counter; i++) {
+        let j = i + 1;
+        if(this.sortItems[i].getValue > this.sortItems[j].getValue) {
+          sorted = false; 
+          await this.swap(i, j);
+        }
+      }
+
+      counter--;
     }
   }
 
@@ -56,8 +82,14 @@ class SortingAlgorithmVisualizer {
 
   }
 
-  private insertionSort() {
-
+  private async insertionSort() {
+    for(let i = 0; i < this.sortItems.length; i++) {
+      let j = i; 
+      while(j > 0 && this.sortItems[j].getValue < this.sortItems[j - 1].getValue) {
+        await this.swap(j, j - 1);
+        j--; 
+      }
+    }
   }
 
   private heapSort() {
@@ -76,9 +108,21 @@ class SortingAlgorithmVisualizer {
 
   }
 
-  private sortItems: number[]; 
+  private toString() {
+    let str = "[";
+    for(let i = 0; i < this.sortItems.length; i++) {
+      str += `${this.sortItems[i].getValue}, `;
+    }  
+
+    str += `]`;
+
+    console.log(str)
+  }
+
+  private sortItems: SortItem[]; 
   private sortItemSize: number; 
   private currentAlgorithm: AllowedAlogrithms; 
+  private traceOn: boolean; 
 }
 
 export default SortingAlgorithmVisualizer;

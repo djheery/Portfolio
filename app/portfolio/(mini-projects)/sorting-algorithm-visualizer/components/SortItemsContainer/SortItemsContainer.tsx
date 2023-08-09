@@ -1,16 +1,10 @@
+"use client"
+
+import SortingAlgorithmDriver from '../../models/SortingAlgorithmDriver';
 import SortItem from '../../models/SortItem';
-import SortItemUI, { SortItemProps } from '../SortItem/SortItemUI';
+import SortItemUI from '../SortItem/SortItemUI';
 import styles from './SortItemsContainer.module.css';
 
-const getArr = () => {
-  let arr = [];
-  
-  for(let i = 0; i < 100; i++) {
-    arr.push(Math.random());
-  }
-
-  return arr; 
-}
 
 /**
  * The functional component for the SortItemsContainer
@@ -19,21 +13,18 @@ const getArr = () => {
 */
 
 const SortItemsContainer: React.FC = () => {
-  
+  const SortDriver = new SortingAlgorithmDriver(); 
+  const itemArray: SortItem[] = SortDriver.getSortItems();
   
   return (
-    <div className={styles["sort-items-container"]}>
-      {getArr().map((i: number, idx) => {
-        const num =i
-        const itemInfo: SortItemProps = {
-          index: idx, 
-          width: 4,
-          height: num * 100
-        }
-
-        return <SortItemUI itemInfo={itemInfo} />
-      })}
-    </div>
+    <>
+      <div className={styles["sort-items-container"]}>
+        {itemArray.map((i, idx) => {
+          return <SortItemUI key={idx} item={i} />
+        })}
+      </div>
+      <button onClick={SortDriver.startSort.bind(SortDriver)}>Play</button>
+    </>
   )
 }
 

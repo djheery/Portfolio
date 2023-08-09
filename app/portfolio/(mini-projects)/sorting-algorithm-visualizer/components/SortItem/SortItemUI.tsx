@@ -1,10 +1,8 @@
+"use client"
+import { useEffect, useState } from 'react';
+import SortItem, { SortItemProps } from '../../models/SortItem';
 import styles from './SortItemUI.module.css';
 
-export interface SortItemProps {
-  index: number, 
-  width: number,
-  height: number,
-}
 
 /**
  * The functional component for the SortItemUI
@@ -12,20 +10,25 @@ export interface SortItemProps {
  * @param myParam your params here
 */
 
-const SortItemUI: React.FC<{itemInfo: SortItemProps}> = ({itemInfo}) => {
-  const itemStyles = {
-    width: `${itemInfo.width}px`, 
-    height: `${itemInfo.height}%`,
-    left: 0 + ((itemInfo.index * itemInfo.width)), 
+const SortItemUI: React.FC<{item: SortItem}> = ({item}) => {
+  const [itemStyles, setItemStyles] = useState<SortItemProps>(item.getSortItemValues)
+  const s = {
+    width: `${itemStyles.width}px`, 
+    left: `${itemStyles.left}px`, 
+    height: `${itemStyles.height}%`
   }
+
+  useEffect(() => {
+    item.registerStateAction(setItemStyles);
+  }, [])
 
   return (
     <div 
       className={styles["sort-item"]} 
+      style={s}
       suppressHydrationWarning
-      style={itemStyles}
     >
-      {itemInfo.width >= 3 && <div className={styles["sort-item__inner"]}></div>}
+      <div className={styles["sort-item__inner"]} style={{width: "98%"}}></div>
     </div>
   )
 }

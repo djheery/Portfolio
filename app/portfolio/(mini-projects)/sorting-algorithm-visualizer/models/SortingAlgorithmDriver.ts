@@ -1,15 +1,16 @@
 import SortingAlgorithmSettings from "./SortingAlgorithmSettings";
 import SortingAlgorithmVisualizer from "./SortingAlgorithmVisualizer";
+import SortItem from "./SortItem";
 
 class SortingAlgorithmDriver {
   constructor() { 
-    this.sortingLogicDriver = new SortingAlgorithmVisualizer();
+    this.logicDriver = new SortingAlgorithmVisualizer();
     this.algorithmSpeed = 50; 
-    this.settingsDriver = new SortingAlgorithmSettings(this, this.sortingLogicDriver);
+    this.settingsDriver = new SortingAlgorithmSettings(this, this.logicDriver);
   }
 
   public startSort() {
-
+    this.logicDriver.startSorting();
   }
 
   public stopSort() {
@@ -24,8 +25,8 @@ class SortingAlgorithmDriver {
 
   }
 
-  public getSortItems(): number[] {
-    return this.sortingLogicDriver.getSortItems();
+  public getSortItems(): SortItem[] {
+    return this.logicDriver.getSortItems();
   }
 
   public setAlgorithmSpeed(newSpeed: number) {
@@ -33,7 +34,7 @@ class SortingAlgorithmDriver {
     this.algorithmSpeed = newSpeed; 
   }
 
-  private sortingLogicDriver: SortingAlgorithmVisualizer;
+  private logicDriver: SortingAlgorithmVisualizer;
   private settingsDriver: SortingAlgorithmSettings;
   private algorithmSpeed: number; 
 }
