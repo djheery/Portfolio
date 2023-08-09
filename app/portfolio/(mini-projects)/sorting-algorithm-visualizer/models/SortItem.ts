@@ -14,6 +14,7 @@ export interface SortItemProps {
   height: number,
   isCurrent: boolean;
   index: number;
+  begHeight: number; 
 }
 
 class SortItem {
@@ -21,6 +22,7 @@ class SortItem {
     this.sortValue = sortValue; 
     this.sortIndex = sortIndex; 
     this.isCurrent = false;
+    this.begHeight = sortValue; 
   }
 
   public changeIndex(sortIndex: number) {
@@ -52,12 +54,14 @@ class SortItem {
       left: 0 + (this.sortIndex * width), 
       height: this.sortValue,
       isCurrent: this.isCurrent,
-      index: this.sortIndex
+      index: this.sortIndex,
+      begHeight: this.begHeight
     }
   }
 
   private isCurrent: boolean;
   private sortIndex: number; 
+  private begHeight: number; 
   private sortValue: number; 
   private uiComponentStateAction?: StateAction<SortItemProps>;
 }

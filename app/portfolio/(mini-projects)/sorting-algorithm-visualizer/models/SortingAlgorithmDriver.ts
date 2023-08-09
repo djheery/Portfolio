@@ -25,8 +25,12 @@ class SortingAlgorithmDriver {
 
   }
 
-  public getSortItems(): SortItem[] {
-    return this.logicDriver.getSortItems();
+  public resetArray() {
+    this.logicDriver.resetArray();
+  }
+
+  get getSortItems(): SortItem[] {
+    return this.logicDriver.getSortItems;
   }
 
   public setAlgorithmSpeed(newSpeed: number) {

@@ -5,6 +5,10 @@ import SortItem from '../../models/SortItem';
 import SortItemUI from '../SortItem/SortItemUI';
 import styles from './SortItemsContainer.module.css';
 
+const valueCheck = (arr: SortItem[]) => {
+  const expectedArr = arr.map(i => i.getValue); 
+  console.log(expectedArr);
+}
 
 /**
  * The functional component for the SortItemsContainer
@@ -14,8 +18,9 @@ import styles from './SortItemsContainer.module.css';
 
 const SortItemsContainer: React.FC = () => {
   const SortDriver = new SortingAlgorithmDriver(); 
-  const itemArray: SortItem[] = SortDriver.getSortItems();
-  
+  SortDriver.resetArray()
+  let itemArray: SortItem[] = SortDriver.getSortItems;
+  valueCheck(itemArray)
   return (
     <>
       <div className={styles["sort-items-container"]}>
