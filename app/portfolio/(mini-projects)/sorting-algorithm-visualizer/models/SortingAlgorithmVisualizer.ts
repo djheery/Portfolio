@@ -1,4 +1,5 @@
 "use client"
+import { MiddlewareNotFoundError } from "@/node_modules/next/dist/shared/lib/utils";
 import { EndOfLineState } from "@/node_modules/typescript/lib/typescript";
 import SortItem from "./SortItem";
 
@@ -42,7 +43,7 @@ class SortingAlgorithmVisualizer {
 
   public async startSorting() {
     // console.log(expectedArr); 
-    await this.quickSort();
+    await this.insertionSort();
     // if(this.traceOn) this.checkSorted();
     // if(this.traceOn) this.toString();
   }
@@ -51,7 +52,7 @@ class SortingAlgorithmVisualizer {
 
   }
 
-  private async sleep(ms = 1) {
+  private async sleep(ms = 50) {
     return new Promise((res) => setTimeout(res, ms));
   }
 
@@ -107,17 +108,57 @@ class SortingAlgorithmVisualizer {
 
 
 
-  private merge() {
+  private async merge(left: number, mid: number, right: number) {
+    let n1 = mid - left + 1; 
+    let n2 = right - mid; 
 
+    let L = new Array(n1); 
+    let R = new Array(n2); 
+
+    for(let i = 0; i < n1; i++) {
+      L[i] = this.sortItems[left + 1];
+    }
+
+    for(let j = 0; j < n2; j++) {
+      R[j] = this.sortItems[mid + 1 + j];
+    }
+
+    let i = 0, j = 0, k = left; 
+
+    while(i < n1 && j < n2) {
+      if(L[i].getValue <= R[j].getValue) {
+        this.sortItems[k].changeValue(L[i].getValue);
+        i++;
+        await this.sleep();
+      } else {
+        this.sortItems[k].changeValue(R[j].getValue);
+        j++;
+        await this.sleep();
+      }
+      k++;
+    }
+
+    while(i < n1) {
+      this.sortItems[k].changeValue(L[i].getValue);
+      i++; 
+      k++; 
+      await this.sleep();
+    }
+
+    while(j < n2) {
+      this.sortItems[k].changeValue(R[j].getValue);
+      j++; 
+      k++; 
+      await this.sleep(); 
+    }
   }
 
-  private mergeSort(start = 0, end = this.sortItems.length - 1) {
-    if(start < end) {
-      let middle = Math.floor(end / 2); 
-      // Call Merge sort on the start and mid 
-      // Call merge sort on the mid + 1 and end 
-
-    }
+  private async mergeSort(start = 0, end = this.sortItems.length - 1) {
+    if(start >= end) return;     
+      let middle = start + Math.floor((end - start) / 2); 
+      await this.mergeSort(start, middle);
+      await this.mergeSort(middle + 1, end); 
+      await this.merge(start, middle, end); 
   }
 
   private async insertionSort() {
