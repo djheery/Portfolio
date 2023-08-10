@@ -1,9 +1,7 @@
 .sort-item { 
-  position: absolute; 
+  /* position: absolute;  */
   bottom: 0; 
   border-radius: 10px;
-  border: 1px solid var(--white-accent);
   background-color: var(--primary-blue);
-  color: red;
 }
 

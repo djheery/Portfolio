@@ -1,8 +1,7 @@
 "use client"
 import { useEffect, useState } from 'react';
-import SortItem, { SortItemProps } from '../../models/SortItem';
+import React from 'react';
 import styles from './SortItemUI.module.css';
-
 
 /**
  * The functional component for the SortItemUI
@@ -10,26 +9,17 @@ import styles from './SortItemUI.module.css';
  * @param myParam your params here
 */
 
-const SortItemUI: React.FC<{item: SortItem}> = ({item}) => {
-  const [itemStyles, setItemStyles] = useState<SortItemProps>(item.getSortItemValues)
-  const s = {
-    width: `${itemStyles.width}px`, 
-    left: `${itemStyles.left}px`, 
-    height: `${itemStyles.height}%`,
+const SortItemUI: React.FC<{itemValue: number, itemIdx: number}> = React.memo(({itemValue, itemIdx}) => {
+  let s = {
+    width: 5, 
+    height: `${itemValue}%`,
   }
 
-  useEffect(() => {
-    item.registerStateAction(setItemStyles);
-  }, [])
-
   return (
-    <div 
-      className={styles["sort-item"]} 
-      style={s}
-    >
-      <div className={styles["sort-item__inner"]} style={{width: "98%"}}></div>
+    <div className={styles["sort-item"]} style={s}>
+      
     </div>
   )
-}
+})
 
 export default SortItemUI;

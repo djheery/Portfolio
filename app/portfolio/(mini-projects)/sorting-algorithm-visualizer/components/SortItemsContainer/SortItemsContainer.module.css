@@ -1,4 +1,6 @@
 .sort-items-container {
   height: 500px; 
   position: relative; 
+  display: flex; 
+  align-items: baseline;
 }

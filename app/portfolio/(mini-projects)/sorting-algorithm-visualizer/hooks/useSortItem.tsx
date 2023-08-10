@@ -1,4 +1,18 @@
+"use client"
+
+import { SetStateAction, useState } from 'react';
 import styles from './useSortItem.module.css';
+
+/**
+ * An interface that details...
+ *
+ * @param interfaceParam This param represents...
+*/
+
+export interface UseSortItem {
+  value: number,
+  setValue: SetStateAction<number>,
+}
 
 /**
  * The functional component for the useSortItem
@@ -6,12 +20,10 @@ import styles from './useSortItem.module.css';
  * @param myParam your params here
 */
 
-const useSortItem: React.FC = () => {
-  return (
-    <div>
-      useSortItem Component
-    </div>
-  )
+const useSortItem = (initialValue: number) => {
+  const [value, setValue] = useState<number>(initialValue);
+
+  return { value, setValue }
 }
 
-export default useSortItem;q
+export default useSortItem;
