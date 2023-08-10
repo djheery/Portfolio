@@ -27,8 +27,6 @@ const SortItemUI: React.FC<{item: SortItem}> = ({item}) => {
       className={styles["sort-item"]} 
       style={s}
       suppressHydrationWarning
-      data-index={itemStyles.index}
-      data-height={itemStyles.begHeight}
     >
       <div className={styles["sort-item__inner"]} style={{width: "98%"}}></div>
     </div>

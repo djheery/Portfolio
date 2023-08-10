@@ -1,3 +1,4 @@
+"use client"
 import SortingAlgorithmSettings from "./SortingAlgorithmSettings";
 import SortingAlgorithmVisualizer from "./SortingAlgorithmVisualizer";
 import SortItem from "./SortItem";

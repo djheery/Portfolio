@@ -2,7 +2,9 @@
 
 import ContentContainer from '@/app/components/Containers/ContentContainer/ContentContainer';
 import FullScreenContainer from '@/app/components/Containers/FullScreenContainer/FullScreenContainer';
+import NoSSRWrapper from '@/app/components/Containers/NoSSRWrapper/NoSSRWrapper';
 import SectionContainer from '@/app/components/Containers/SectionContainer/SectionContainer';
+import { Suspense } from 'react';
 import GameOfLife from './GameOfLife/GameOfLife';
 import styles from './page.module.css';
 
@@ -19,7 +21,11 @@ const ReactGameOfLife: React.FC = () => {
             <h1>Conaways Game of Life</h1>
             <p>This is a mini-project to create conways game of life. I have made the project in various languages and generally use it as a baseline when I am practicing in new languages.</p>
           </div>
-          <GameOfLife/>
+          <Suspense>
+            <NoSSRWrapper>
+              <GameOfLife/>
+            </NoSSRWrapper>
+          </Suspense>
         </div>
       </ContentContainer>
     </FullScreenContainer>

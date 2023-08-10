@@ -1,14 +1,10 @@
 "use client"
 
+import dynamic from '@/node_modules/next/dynamic';
 import SortingAlgorithmDriver from '../../models/SortingAlgorithmDriver';
 import SortItem from '../../models/SortItem';
 import SortItemUI from '../SortItem/SortItemUI';
 import styles from './SortItemsContainer.module.css';
-
-const valueCheck = (arr: SortItem[]) => {
-  const expectedArr = arr.map(i => i.getValue); 
-  console.log(expectedArr);
-}
 
 /**
  * The functional component for the SortItemsContainer
@@ -20,7 +16,6 @@ const SortItemsContainer: React.FC = () => {
   const SortDriver = new SortingAlgorithmDriver(); 
   SortDriver.resetArray()
   let itemArray: SortItem[] = SortDriver.getSortItems;
-  valueCheck(itemArray)
   return (
     <>
       <div className={styles["sort-items-container"]}>

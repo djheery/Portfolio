@@ -1,4 +1,5 @@
 "use client"
+import { EndOfLineState } from "@/node_modules/typescript/lib/typescript";
 import SortItem from "./SortItem";
 
 export enum AllowedAlogrithms {
@@ -6,7 +7,7 @@ export enum AllowedAlogrithms {
   QUICK_SORT = "QUICK_SORT", 
   MERGE_SORT = "MERGE_SORT", 
   INSERTION_SORT = "INSERTION_SORT",
-  SELECTIONE_SORT = "SELECTION_SORT",
+  SELECTION_SORT = "SELECTION_SORT",
   BOGO_SORT = "BOGO_SORT", 
   SHELL_SORT = "SHELL_SORT", 
   RADIX_SORT = "RADIX_SORT", 
@@ -17,7 +18,7 @@ class SortingAlgorithmVisualizer {
   constructor() {
     this.sortItems = []; 
     this.currentAlgorithm = AllowedAlogrithms.BUBBLE_SORT; 
-    this.sortItemSize = 30;
+    this.sortItemSize = 100;
     this.traceOn = true; 
   }
 
@@ -29,7 +30,6 @@ class SortingAlgorithmVisualizer {
       this.sortItems.push(item);
     }
 
-    this.toString();
   }
 
   public resetArray() {
@@ -41,18 +41,17 @@ class SortingAlgorithmVisualizer {
   }
 
   public async startSorting() {
-    const expectedArr = this.sortItems.map(m => m.getValue)
-    console.log(expectedArr) 
-    await this.bubbleSort();
-    if(this.traceOn) this.checkSorted();
-    if(this.traceOn) this.toString();
+    // console.log(expectedArr); 
+    await this.quickSort();
+    // if(this.traceOn) this.checkSorted();
+    // if(this.traceOn) this.toString();
   }
 
   private updateGrid() {
 
   }
 
-  private async sleep(ms = 20) {
+  private async sleep(ms = 1) {
     return new Promise((res) => setTimeout(res, ms));
   }
 
@@ -60,6 +59,7 @@ class SortingAlgorithmVisualizer {
     const temp = this.sortItems[i].getValue; 
     this.sortItems[i].changeValue(this.sortItems[j].getValue);
     this.sortItems[j].changeValue(temp);
+
     await this.sleep();
   }
 
@@ -100,10 +100,12 @@ class SortingAlgorithmVisualizer {
   private async quickSort(start = 0, end = this.sortItems.length - 1) {
     if(start < end) {
       let p = await this.partition(start, end); 
-      await this.quickSort(start, p - 1);
-      await this.quickSort(p + 1, end);
+      this.quickSort(start, p - 1);
+      this.quickSort(p + 1, end);
     }
   }
+
+
 
   private merge() {
 
@@ -111,9 +113,9 @@ class SortingAlgorithmVisualizer {
 
   private mergeSort(start = 0, end = this.sortItems.length - 1) {
     if(start < end) {
-      // Define the middle 
+      let middle = Math.floor(end / 2); 
       // Call Merge sort on the start and mid 
-      // Call merger sort on the mid + 1 and end 
+      // Call merge sort on the mid + 1 and end 
 
     }
   }

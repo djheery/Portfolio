@@ -12,9 +12,6 @@ export interface SortItemProps {
   width: number, 
   left: number,
   height: number,
-  isCurrent: boolean;
-  index: number;
-  begHeight: number; 
 }
 
 class SortItem {
@@ -31,12 +28,16 @@ class SortItem {
   }
 
   public changeValue(sortValue: number) {
-    this.sortValue = sortValue; 
+    this.sortValue = sortValue;   
     this.uiComponentStateAction!(this.getSortItemValues);
   }
 
   public registerStateAction(stateAction: StateAction<SortItemProps>) {
     this.uiComponentStateAction = stateAction; 
+  }
+
+  public updateUI() {
+    this.uiComponentStateAction!(this.getSortItemValues);
   }
 
   get getValue() {
@@ -47,15 +48,20 @@ class SortItem {
     return this.sortIndex; 
   }
 
+  get getWidth() {
+    return 10; 
+  }
+
+  get getLeft() {
+    return 0 + (this.sortIndex * this.getWidth)
+  }
+
   get getSortItemValues() {
-    let width = 10; 
+    let width = 8.5; 
     return {
       width: width, 
       left: 0 + (this.sortIndex * width), 
       height: this.sortValue,
-      isCurrent: this.isCurrent,
-      index: this.sortIndex,
-      begHeight: this.begHeight
     }
   }
 

@@ -4,5 +4,6 @@
   border-radius: 10px;
   border: 1px solid var(--white-accent);
   background-color: var(--primary-blue);
+  color: red;
 }
 
