@@ -1,5 +1,4 @@
 import { StateAction } from "@/app/models/global-types";
-import { animationDebounce } from "@/app/util/debounce";
 import { Dispatch, SetStateAction } from "react";
 import GameOfLife from "./GameOfLife";
 
@@ -18,7 +17,7 @@ class GameOfLifeDriver {
     if(this.isPlaying) return;
     if(!this.isPlaying) this.isPlaying = true; 
     this.timer = !this.timer && setInterval(() => {
-      animationDebounce(this.game.tick());
+      this.game.tick();
       if(this.evolutionCounterMethod)
         this.evolutionCounterMethod!(this.game.getCurrentEvolution);
       if(this.alivePercentageMethod !== undefined)

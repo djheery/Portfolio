@@ -1,5 +1,6 @@
 "use client"
 
+import { animationDebounce } from "@/app/util/debounce";
 import { GameCell } from "./GameCell";
 
 /**
@@ -123,7 +124,6 @@ class GameOfLife {
   */
 
   private checkCellStatus(
-      visitedNodes: Map<string, boolean>, 
       currentCoords: number[]
     ): void {
     let cc = currentCoords; 
@@ -135,7 +135,7 @@ class GameOfLife {
       const [[r, c], isOutOfBounds] = this.boundaryCalculation(boundaries[i], cc);      
       if(isOutOfBounds) continue; 
 
-      const checkVisited = visitedNodes.get(`${r}-${c}`);
+      const checkVisited = this.visitedNodes!.get(`${r}-${c}`);
 
       if(checkVisited !== undefined) {
         neighbours += checkVisited ? 1 : 0; 
@@ -144,13 +144,13 @@ class GameOfLife {
 
       const boundaryCellIsAlive = this.gridState[r][c].getIsAlive;
       neighbours += boundaryCellIsAlive ? 1 : 0; 
-      visitedNodes.set(`${r}-${c}`, boundaryCellIsAlive);
+      this.visitedNodes!.set(`${r}-${c}`, boundaryCellIsAlive);
     }
 
     if(!targetCell.getIsAlive) {
-      neighbours === 3 ? targetCell.toggleIsAlive() : null; 
+      neighbours === 3 ? animationDebounce(targetCell.toggleIsAlive()) : null; 
     } else {
-      neighbours > 3 || neighbours < 2  ? targetCell.toggleIsAlive() : null;
+      neighbours > 3 || neighbours < 2  ? animationDebounce(targetCell.toggleIsAlive()) : null;
     }
 
     if(targetCell.getIsAlive) this.currentAliveCount++;
@@ -240,15 +240,15 @@ class GameOfLife {
   */
 
   public tick(): void {
-    const visitedNodes = new Map<string, boolean>();
+    this.visitedNodes = new Map<string, boolean>();
     this.currentAliveCount = 0; 
     const algoStart = Date.now();
 
     for(let r = 0; r < this.gridRows; r++) {
       for(let c = 0; c < this.gridColumns; c++) {
         let isAlive = this.gridState[r][c].getIsAlive;
-        visitedNodes.set(`${r}-${c}`, isAlive);
-        this.checkCellStatus(visitedNodes, [r, c]);
+        this.visitedNodes.set(`${r}-${c}`, isAlive);
+        this.checkCellStatus([r, c]);
       }
     }
 
@@ -276,6 +276,7 @@ class GameOfLife {
   private isInitialLoad: boolean; 
   private currentAliveCount: number; 
   private algorithmDuration: number; 
+  private visitedNodes?: Map<string, boolean>
 }
 
 export default GameOfLife;
