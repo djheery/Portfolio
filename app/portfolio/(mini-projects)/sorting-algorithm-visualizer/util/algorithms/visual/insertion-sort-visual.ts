@@ -1,4 +1,4 @@
-import { SortItemArray, SwapFn } from "../../../components/models/sort-models";
+import { SortItemArray, SwapFn } from "../../../models/sort-models";
 
 export const insertionSortVisual = async (sortItemArray: SortItemArray, swap: SwapFn) => {
   for(let i = 1; i < sortItemArray.length; i++) {

@@ -1,4 +1,4 @@
-import { SetAtIndexFn, SortItemArray, SwapFn } from "../../../components/models/sort-models";
+import { SetAtIndexFn, SortItemArray, SwapFn } from "../../../models/sort-models";
 
 export const mergeSortVisual = async (
   sortItemArray: SortItemArray,  

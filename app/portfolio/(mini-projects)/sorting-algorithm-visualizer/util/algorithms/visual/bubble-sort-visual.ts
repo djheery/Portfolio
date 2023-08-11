@@ -1,4 +1,4 @@
-import { SortItemArray, SwapFn } from "../../../components/models/sort-models";
+import { SortItemArray, SwapFn } from "../../../models/sort-models";
 
 export const bubbleSortVisual = async (sortItemArray: SortItemArray, swap: SwapFn) => {
   let sorted = false; 

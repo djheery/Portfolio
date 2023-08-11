@@ -9,7 +9,6 @@ import { mergeSortVisual } from '../util/algorithms/visual/merge-sort-visual';
 import { quickSortVisual } from '../util/algorithms/visual/quick-sort-visual';
 import { selectionSortVisual } from '../util/algorithms/visual/selection-sort-visual';
 import styles from './useSortingVisualizer.module.css';
-import useSortItem, { UseSortItem } from './useSortItem';
 
 /**
  * The functional component for the useSortingVisualizer
@@ -31,9 +30,9 @@ const useSortingVisualizer = () => {
 
   const newSortItemArray = useCallback(() => {
     const newItems = []; 
-    for(let i = 0; i < 300; i ++) {
+    for(let i = 0; i < 100; i ++) {
       const sortValue = Math.random() * 100; 
-      newItems.push([sortValue, i]);
+      newItems.push([sortValue < 1 ? 1 : sortValue, i]);
     }
 
     setSortItemArray(newItems)
@@ -48,7 +47,7 @@ const useSortingVisualizer = () => {
 
   const startSorting = async () => {
     if(isRunning) return; 
-    bogoSortVisual(sortItemArray, swap);
+    quickSortVisual(sortItemArray, swap);
   }
 
   /**
@@ -58,7 +57,7 @@ const useSortingVisualizer = () => {
    * This param represents...
   */
 
-  const sleep = async (ms = 1) => {
+  const sleep = async (ms = 10) => {
     return new Promise((res) => setTimeout(res, ms));
   }
 

@@ -1,6 +1,6 @@
 import { animationDebounce } from "@/app/util/debounce";
 import { addSyntheticLeadingComment } from "@/node_modules/typescript/lib/typescript";
-import { SortItemArray, SwapFn } from "../../../components/models/sort-models"
+import { SortItemArray, SwapFn } from "../../../models/sort-models"
 
 export const bogoSortVisual = async (sortItemArray: SortItemArray, swap: SwapFn) => {
   let iterationCount = 0;

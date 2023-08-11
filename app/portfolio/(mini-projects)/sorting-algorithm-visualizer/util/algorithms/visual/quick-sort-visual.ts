@@ -1,4 +1,4 @@
-import { SortItemArray, SwapFn } from "../../../components/models/sort-models";
+import { SortItemArray, SwapFn } from "../../../models/sort-models";
 
 /**
  * Describe your method...
@@ -27,8 +27,8 @@ const quickSortHelper = async (
 
   if(start < end) {
     let p = await partition(sortItemArray, start, end, swap); 
-    quickSortHelper(sortItemArray, start, p - 1, swap);
-    quickSortHelper(sortItemArray, p + 1, end, swap);
+    await quickSortHelper(sortItemArray, start, p - 1, swap);
+    await quickSortHelper(sortItemArray, p + 1, end, swap);
   }
 }
 
