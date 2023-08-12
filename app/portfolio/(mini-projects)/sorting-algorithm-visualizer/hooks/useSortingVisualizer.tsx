@@ -2,7 +2,6 @@
 
 import { animationDebounce } from '@/app/util/debounce';
 import { useCallback, useEffect, useState } from 'react';
-import { SortOptionItemArray } from '../models/sort-models';
 import { bogoSortVisual } from '../util/algorithms/visual/bogo-sort-visual';
 import { bubbleSortVisual } from '../util/algorithms/visual/bubble-sort-visual';
 import { insertionSortVisual } from '../util/algorithms/visual/insertion-sort-visual';
