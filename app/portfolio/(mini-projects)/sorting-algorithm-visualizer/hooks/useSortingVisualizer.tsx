@@ -2,16 +2,9 @@
 
 import { animationDebounce } from '@/app/util/debounce';
 import { useCallback, useEffect, useState } from 'react';
-import { SettingsPanelItem, SortingAlgorithmVisualKeys, SortingAlgorithmVisualValues, SortPanelOptionKeys } from '../models/sort-models';
-import { bogoSortVisual } from '../util/algorithms/visual/bogo-sort-visual';
-import { bubbleSortVisual } from '../util/algorithms/visual/bubble-sort-visual';
-import { insertionSortVisual } from '../util/algorithms/visual/insertion-sort-visual';
-import { mergeSortVisual } from '../util/algorithms/visual/merge-sort-visual';
-import { quickSortVisual } from '../util/algorithms/visual/quick-sort-visual';
-import { selectionSortVisual } from '../util/algorithms/visual/selection-sort-visual';
-import { SortPanelOptions, sortSettingsPanelOptions } from '../util/sort-visualizer-helpers';
+import { SettingsPanelItem, SortingAlgorithmVisualKeys, SortPanelOptionKeys } from '../models/sort-models';
+import { sortSettingsPanelOptions } from '../util/sort-visualizer-helpers';
 import { SortAlgorithmVisualOptions } from '../util/sort-visualizer-helpers';
-import styles from './useSortingVisualizer.module.css';
 
 /**
  * The functional component for the useSortingVisualizer
@@ -21,7 +14,7 @@ import styles from './useSortingVisualizer.module.css';
 
 const useSortingVisualizer = () => {
   const [sortItemArray, setSortItemArray] = useState<number[][]>([]);
-  const [currentSortingAlgorithm, setCurrentSortingAlgorithm] = useState<SortingAlgorithmVisualKeys>("QUICK"); 
+  const [currentSortingAlgorithm, setCurrentSortingAlgorithm] = useState<SortingAlgorithmVisualKeys>("BUBBLE"); 
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
   /**
@@ -86,7 +79,16 @@ const useSortingVisualizer = () => {
     }));
 
     await sleep();
+
+    return isRunning;
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   const setAtIndex = async (i: number, value: number) => {
     animationDebounce(setSortItemArray((prevItems) => {
@@ -97,6 +99,13 @@ const useSortingVisualizer = () => {
 
     await sleep();
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
   
   const setCurrentAlgorithm = (key: SortPanelOptionKeys) => {
     const currentAlgo = sortSettingsPanelOptions.find(i => i.isSelected); 
@@ -107,7 +116,20 @@ const useSortingVisualizer = () => {
     setCurrentSortingAlgorithm(key);
   };
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   const setAlgorithmSpeed = () => {};
+
+  /**
+   * An interface that details...
+   *
+   * @param interfaceParam This param represents...
+  */
 
   const actions: SettingsPanelItem[] = [
     {
@@ -134,9 +156,15 @@ const useSortingVisualizer = () => {
     },
   ] 
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   useEffect(() => {
-    newSortItemArray()
+    newSortItemArray();
   }, []);
 
   

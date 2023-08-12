@@ -1,5 +1,12 @@
 import { SortItemArray, SwapFn } from "../../../models/sort-models";
 
+/**
+ * Describe your method...
+ *
+ * @param paramName This param represents...
+ * @returns This method returns...
+*/
+
 export const insertionSortVisual = async (sortItemArray: SortItemArray, swap: SwapFn) => {
   for(let i = 1; i < sortItemArray.length; i++) {
     let j = i;

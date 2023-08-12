@@ -1,5 +1,12 @@
 import { SortItemArray, SwapFn } from "../../../models/sort-models";
 
+/**
+ * Describe your method...
+ *
+ * @param paramName This param represents...
+ * @returns This method returns...
+*/
+
 export const selectionSortVisual = async (sortItemArray: SortItemArray, swap: SwapFn) => {
   let n = sortItemArray.length; 
 

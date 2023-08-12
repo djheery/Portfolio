@@ -1,5 +1,12 @@
 import { swap } from "../../sort-visualizer-helpers";
 
+/**
+ * Describe your method...
+ *
+ * @param paramName This param represents...
+ * @returns This method returns...
+*/
+
 export const bubbleSortMetrics = async (sortItemArray: number[]) => {
   let fullArrayIterations = 0; 
   let numberOfSteps = 0; 

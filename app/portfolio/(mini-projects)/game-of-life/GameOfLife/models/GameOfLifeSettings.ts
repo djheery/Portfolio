@@ -3,6 +3,12 @@ import { NumberInputSettings } from "../components/SettingsPanel/NumberInput/Num
 import GameOfLife from "./GameOfLife";
 import GameOfLifeDriver from "./GameOfLifeDriver";
 
+/**
+ * An interface that details...
+ *
+ * @param interfaceParam This param represents...
+*/
+
 export interface LegendItem {
   name: string, 
   driverRegisterMethod: (method: StateAction<number>) => void,
@@ -10,6 +16,10 @@ export interface LegendItem {
   defaultValue: number,
   flag?: string,
 }
+
+/**
+ * Describe your class...
+*/
 
 class GameOfLifeSettings {
   constructor(driver: GameOfLifeDriver) {
@@ -22,9 +32,23 @@ class GameOfLifeSettings {
     this.isShowing = false; 
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   public setWarpZoneEnabled(isEnabled: boolean) {
     this.game.setWarpZoneEnabled(isEnabled);
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   public setPopulationDensity(populationDensity: number) {
     this.game.setPopulationDensity(populationDensity / 100);
@@ -32,30 +56,72 @@ class GameOfLifeSettings {
     this.legendStateAction!(this.getLegend)
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   public setEvolutionDuration(evolutionDuration: number) {
     this.driver.setEvolutionDuration(evolutionDuration); 
     this.legendStateAction!(this.getLegend)
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   public setAlivePercentageShowing() {
     this.alivePercentageShowing = !this.alivePercentageShowing; 
     this.legendStateAction!(this.getLegend);
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   public setAliveCountShowing() {
     this.aliveCountShowing = !this.aliveCountShowing;
     this.legendStateAction!(this.getLegend);
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   public setCurrentEvolutionShowing(isEnabled: boolean) {
     this.currentEvolutionShowing = isEnabled; 
     this.legendStateAction!(this.getLegend);
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   public setActualDurationShowing(isEnabled: boolean) {
     this.algorithmDurationShowing = isEnabled; 
     this.legendStateAction!(this.getLegend);
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   public showPanel() {
     this.isShowing = !this.isShowing; 
@@ -63,41 +129,111 @@ class GameOfLifeSettings {
     if(this.isShowing) this.driver.pauseEvolution();
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   public registerSettingsPanelStateAction(stateAction: StateAction<boolean>) {
     this.settingsPanelStateAction = stateAction; 
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   get getCurrentPopulationDensity() {
     return 0; 
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   get getEvolutionDuration() {
     return this.driver.getEvolutionDuration; 
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   get getWarpZoneEnabled() {
     return this.game.getWarpZoneEnabled; 
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   get getCurrentEvolutionShowing() {
     return this.currentEvolutionShowing; 
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   get getTimeEvolutionTook() {
     return this.driver.getEvolutionDuration; 
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   get getAlivePercentageShowing() {
     return this.alivePercentageShowing;
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   get getAliveCountShowing() {
     return this.aliveCountShowing; 
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   get getAlgorithmDurationShowing() {
     return this.algorithmDurationShowing
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   get getPopulationDensityInputSettings(): NumberInputSettings {
     return {
@@ -112,6 +248,13 @@ class GameOfLifeSettings {
     }
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   get getEvolutionDurationInputSettings(): NumberInputSettings {
     return {
       name: "evolution-duration", 
@@ -124,6 +267,13 @@ class GameOfLifeSettings {
       callback: this.setEvolutionDuration.bind(this)
     }
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   get getLegend() {
     const legendSet = new Set<LegendItem>(); 
@@ -167,6 +317,13 @@ class GameOfLifeSettings {
     
     return legendSet; 
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   public registerLegendPanelStateAction(stateMethod: StateAction<Set<LegendItem>>) {
     this.legendStateAction = stateMethod; 

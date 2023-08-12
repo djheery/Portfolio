@@ -2,6 +2,12 @@
 import { useState } from 'react';
 import styles from './EnableSettingButton.module.css';
 
+/**
+ * An interface that details...
+ *
+ * @param interfaceParam This param represents...
+*/
+
 interface EnableButtonProps {
   settingIsOn: boolean, 
   callback: (isEnabled: boolean) => void;

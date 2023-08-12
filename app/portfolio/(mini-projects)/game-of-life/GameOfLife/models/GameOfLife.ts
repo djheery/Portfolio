@@ -156,9 +156,23 @@ class GameOfLife {
     if(targetCell.getIsAlive) this.currentAliveCount++;
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   get getAlivePercentage() {
     return Math.round((this.currentAliveCount / (this.gridRows * this.gridColumns)) * 100); 
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   get getCurrentAliveCount() {
     return this.currentAliveCount; 
@@ -255,6 +269,13 @@ class GameOfLife {
     this.algorithmDuration = Date.now() - algoStart;
     this.currentEvolution++; 
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   get getAlgorithmDuration() {
     return this.algorithmDuration; 

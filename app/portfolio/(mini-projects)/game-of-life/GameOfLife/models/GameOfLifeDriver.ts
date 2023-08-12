@@ -9,9 +9,23 @@ class GameOfLifeDriver {
     this.evolutionDuration = 40; 
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   public getGameGrid() {
     return this.game.getGrid;
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   public startEvolution() {
     if(this.isPlaying) return;
@@ -29,6 +43,13 @@ class GameOfLifeDriver {
     }, this.evolutionDuration);
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   public pauseEvolution() {
     if(this.isPlaying) {
       clearInterval(this.timer);
@@ -36,6 +57,13 @@ class GameOfLifeDriver {
       this.isPlaying = false; 
     }
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   public randomiseBoard() {
     if(this.isPlaying) this.pauseEvolution();
@@ -52,50 +80,134 @@ class GameOfLifeDriver {
       this.algorithmPerformanceMethod(this.game.getAlgorithmDuration)
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   public stepThroughEvolution() {
     if(this.isPlaying) this.pauseEvolution(); 
     this.game.tick();  
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   public registerEvolutionCounter(setStateMethod: Dispatch<SetStateAction<number>>) {
     this.evolutionCounterMethod = setStateMethod;
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   public destroyEvolutionCounter() {
     this.evolutionCounterMethod = undefined; 
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   public registerAlivePercentageMethod(setStateMethod: StateAction<number>) {
     this.alivePercentageMethod = setStateMethod; 
   } 
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   public destroyAlivePercentageMethod() {
     this.alivePercentageMethod = undefined; 
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   public registerAliveCountMethod(setStateMethod: StateAction<number>) {
     this.aliveCountMethod = setStateMethod;
   } 
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   public destroyAliveCountMethod() {
     this.aliveCountMethod = undefined; 
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   public registerAlgorithmPerformanceMethod(setStateMethod: StateAction<number>) {
     this.algorithmPerformanceMethod = setStateMethod; 
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   public destroyAlgorithmPerformanceMethod() {
     this.algorithmPerformanceMethod = undefined; 
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   public setEvolutionDuration(evolutionDuration: number) { 
     this.evolutionDuration = evolutionDuration;
   }
 
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
   get getGame() {
     return this.game; 
   }
+
+  /**
+   * Describe your method...
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
 
   get getEvolutionDuration() { 
     return this.evolutionDuration;

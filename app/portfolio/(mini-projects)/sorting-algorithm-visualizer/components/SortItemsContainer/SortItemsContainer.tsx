@@ -5,6 +5,12 @@ import { SortItemArray } from '../../models/sort-models';
 import SortItemUI from '../SortItem/SortItemUI';
 import styles from './SortItemsContainer.module.css';
 
+/**
+ * Describe your method...
+ *
+ * @param paramName This param represents...
+ * @returns This method returns...
+*/
 
 const SortItemsContainer: React.FC<{sortItemArray: SortItemArray}> = ({sortItemArray}) => {
 

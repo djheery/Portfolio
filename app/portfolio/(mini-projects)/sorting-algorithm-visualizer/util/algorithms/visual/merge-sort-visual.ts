@@ -1,4 +1,11 @@
-import { SetAtIndexFn, SortItemArray, SwapFn } from "../../../models/sort-models";
+import { SetAtIndexFn, SortItemArray } from "../../../models/sort-models";
+
+/**
+ * Describe your method...
+ *
+ * @param paramName This param represents...
+ * @returns This method returns...
+*/
 
 export const mergeSortVisual = async (
   sortItemArray: SortItemArray,  
@@ -8,6 +15,13 @@ export const mergeSortVisual = async (
 
     await mergeSortHelper(sortItemArray, start, end, setAtIndex);
 }
+
+/**
+ * Describe your method...
+ *
+ * @param paramName This param represents...
+ * @returns This method returns...
+*/
 
 const mergeSortHelper = async (
   sortItemArray: SortItemArray, 
@@ -23,6 +37,13 @@ const mergeSortHelper = async (
   }
 
 }
+
+/**
+ * Describe your method...
+ *
+ * @param paramName This param represents...
+ * @returns This method returns...
+*/
 
 const merge = async (
   sortItemArray: SortItemArray, 
@@ -45,11 +66,7 @@ const merge = async (
   
   let subOneIdx = 0, subTwoIdx = 0, mergedIdx = start;
   
-  let boolCheck = subOneIdx < subArrayOneLength 
-                  && subTwoIdx < subArrayTwoLength
-  
-  while(subOneIdx < subArrayOneLength 
-    && subTwoIdx < subArrayTwoLength) {
+  while(subOneIdx < subArrayOneLength && subTwoIdx < subArrayTwoLength) {
     if(subArrayOne[subOneIdx] <= subArrayTwo[subTwoIdx]) {
       await setAtIndex(mergedIdx, subArrayOne[subOneIdx]);
       subOneIdx++;

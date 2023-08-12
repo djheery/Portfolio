@@ -1,5 +1,12 @@
 import { SortItemArray, SwapFn } from "../../../models/sort-models";
 
+/**
+ * Describe your method...
+ *
+ * @param paramName This param represents...
+ * @returns This method returns...
+*/
+
 export const bubbleSortVisual = async (sortItemArray: SortItemArray, swap: SwapFn) => {
   let sorted = false; 
   let counter = sortItemArray.length - 1; 

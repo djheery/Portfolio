@@ -2,6 +2,13 @@ import { animationDebounce } from "@/app/util/debounce";
 import { addSyntheticLeadingComment } from "@/node_modules/typescript/lib/typescript";
 import { SortItemArray, SwapFn } from "../../../models/sort-models"
 
+/**
+ * Describe your method...
+ *
+ * @param paramName This param represents...
+ * @returns This method returns...
+*/
+
 export const bogoSortVisual = async (sortItemArray: SortItemArray, swap: SwapFn) => {
   let iterationCount = 0;
   let isSorted = false;  
@@ -19,6 +26,13 @@ export const bogoSortVisual = async (sortItemArray: SortItemArray, swap: SwapFn)
     iterationCount++; 
   }
 }
+
+/**
+ * Describe your method...
+ *
+ * @param paramName This param represents...
+ * @returns This method returns...
+*/
 
 const checkSorted = (sortItemArray: SortItemArray) => {
   const n = sortItemArray.length; 
