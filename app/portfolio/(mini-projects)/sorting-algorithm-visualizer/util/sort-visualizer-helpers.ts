@@ -1,5 +1,14 @@
 import { SortOptionItem } from "../models/sort-models";
-import { ObjectKeys, ObjectValues } from "@/app/models/global-types";
+import { SortPanelOptionKeys } from "../models/sort-models";
+import { bogoSortVisual } from "./algorithms/visual/bogo-sort-visual";
+import { bubbleSortVisual } from "./algorithms/visual/bubble-sort-visual";
+import { heapSortVisual } from "./algorithms/visual/heap-sort-visual";
+import { insertionSortVisual } from "./algorithms/visual/insertion-sort-visual";
+import { mergeSortVisual } from "./algorithms/visual/merge-sort-visual";
+import { quickSortVisual } from "./algorithms/visual/quick-sort-visual";
+import { radixSortVisual } from "./algorithms/visual/radix-sort-visual";
+import { selectionSortVisual } from "./algorithms/visual/selection-sort-visual";
+import { shellSortVisual } from "./algorithms/visual/shell-sort-visual";
 
 /**
  * Describe your method...
@@ -31,23 +40,27 @@ export const SortPanelOptions = {
 } as const; 
 
 /**
- * A type for...
-*/
-
-export type SortPanelOptionKeys = ObjectKeys<typeof SortPanelOptions>;
-
-/**
- * A type for...
-*/
-
-export type SortPanelOptionValues = ObjectValues<typeof SortPanelOptions>;
-
-/**
  * An interface that details...
  *
  * @param interfaceParam This param represents...
 */
 
 export const sortSettingsPanelOptions: SortOptionItem[] = (Object.keys(SortPanelOptions) as SortPanelOptionKeys[]).map((i) => {
-  return { textContent: SortPanelOptions[i], key: i }
+  return { textContent: SortPanelOptions[i], key: i, isSelected: i === "BUBBLE" }
 })
+
+/**
+ * POJO Enum
+*/
+
+export const SortAlgorithmVisualOptions = {
+  BUBBLE: bubbleSortVisual,
+  SELECTION: selectionSortVisual, 
+  INSERTION: insertionSortVisual, 
+  HEAP: heapSortVisual, 
+  MERGE: mergeSortVisual, 
+  QUICK: quickSortVisual, 
+  RADIX: radixSortVisual, 
+  SHELL: shellSortVisual, 
+  BOGO: bogoSortVisual,
+} as const;

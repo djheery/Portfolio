@@ -1,0 +1,9 @@
+.sort-settings-panel {
+  position: relative;
+}
+
+.sort-settings-panel__inner {
+  display: flex; 
+  gap: 5px; 
+  /* align-items: flex-start; */
+}

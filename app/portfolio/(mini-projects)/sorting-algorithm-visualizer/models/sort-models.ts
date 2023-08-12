@@ -1,4 +1,5 @@
-import { SortPanelOptionKeys, SortPanelOptionValues } from "../util/sort-visualizer-helpers";
+import { SortAlgorithmVisualOptions, SortPanelOptions } from "../util/sort-visualizer-helpers";
+import { ObjectKeys, ObjectValues } from "@/app/models/global-types";
 
 /**
  * A type for...
@@ -37,14 +38,18 @@ export type PanelItemType = "BUTTON" | "SELECT" | "RANGE";
 export interface SettingsPanelItemButton {
   textContent: string, 
   type: PanelItemType,
-  callback: () => void;
+  callback: () => void | ((key: SortPanelOptionKeys) => void);
 }
 
 /**
  * A type for...
 */
 
-export interface SortOptionItem { textContent: SortPanelOptionValues, key: SortPanelOptionKeys };
+export interface SortOptionItem { 
+  textContent: SortPanelOptionValues, 
+  key: SortPanelOptionKeys,
+  isSelected: boolean, 
+};
 
 
 /**
@@ -52,7 +57,7 @@ export interface SortOptionItem { textContent: SortPanelOptionValues, key: SortP
 */
 
 export interface SettingsPanelSelect extends SettingsPanelItemButton {
-  options: SortOptionItem[]
+  options: SortOptionItem[],
 }
 
 /**
@@ -60,3 +65,27 @@ export interface SettingsPanelSelect extends SettingsPanelItemButton {
 */
 
 export type SettingsPanelItem = SettingsPanelItemButton | SettingsPanelSelect;
+
+/**
+ * A type for...
+*/
+
+export type SortPanelOptionKeys = ObjectKeys<typeof SortPanelOptions>;
+
+/**
+ * A type for...
+*/
+
+export type SortPanelOptionValues = ObjectValues<typeof SortPanelOptions>;
+
+/**
+ * A type for...
+*/
+
+export type SortingAlgorithmVisualKeys = ObjectKeys<typeof SortAlgorithmVisualOptions>; 
+
+/**
+ * A type for...
+*/
+
+export type SortingAlgorithmVisualValues = ObjectValues<typeof SortAlgorithmVisualOptions>;

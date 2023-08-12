@@ -2,13 +2,15 @@
 
 import { animationDebounce } from '@/app/util/debounce';
 import { useCallback, useEffect, useState } from 'react';
+import { SettingsPanelItem, SortingAlgorithmVisualKeys, SortingAlgorithmVisualValues, SortPanelOptionKeys } from '../models/sort-models';
 import { bogoSortVisual } from '../util/algorithms/visual/bogo-sort-visual';
 import { bubbleSortVisual } from '../util/algorithms/visual/bubble-sort-visual';
 import { insertionSortVisual } from '../util/algorithms/visual/insertion-sort-visual';
 import { mergeSortVisual } from '../util/algorithms/visual/merge-sort-visual';
 import { quickSortVisual } from '../util/algorithms/visual/quick-sort-visual';
 import { selectionSortVisual } from '../util/algorithms/visual/selection-sort-visual';
-import { sortSettingsPanelOptions } from '../util/sort-visualizer-helpers';
+import { SortPanelOptions, sortSettingsPanelOptions } from '../util/sort-visualizer-helpers';
+import { SortAlgorithmVisualOptions } from '../util/sort-visualizer-helpers';
 import styles from './useSortingVisualizer.module.css';
 
 /**
@@ -19,7 +21,7 @@ import styles from './useSortingVisualizer.module.css';
 
 const useSortingVisualizer = () => {
   const [sortItemArray, setSortItemArray] = useState<number[][]>([]);
-  const [method, setSortItemMethod] = useState<string>(); 
+  const [currentSortingAlgorithm, setCurrentSortingAlgorithm] = useState<SortingAlgorithmVisualKeys>("QUICK"); 
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
   /**
@@ -31,7 +33,7 @@ const useSortingVisualizer = () => {
 
   const newSortItemArray = useCallback(() => {
     const newItems = []; 
-    for(let i = 0; i < 100; i ++) {
+    for(let i = 0; i < 500; i ++) {
       const sortValue = Math.random() * 100; 
       newItems.push([sortValue < 1 ? 1 : sortValue, i]);
     }
@@ -48,7 +50,11 @@ const useSortingVisualizer = () => {
 
   const startSorting = async () => {
     if(isRunning) return; 
-    quickSortVisual(sortItemArray, swap);
+    if(currentSortingAlgorithm === "MERGE") 
+      SortAlgorithmVisualOptions[currentSortingAlgorithm](sortItemArray, setAtIndex);
+    else 
+      SortAlgorithmVisualOptions[currentSortingAlgorithm](sortItemArray, swap);
+
   }
 
   /**
@@ -92,15 +98,22 @@ const useSortingVisualizer = () => {
     await sleep();
   }
   
-  const setCurrentAlgorithm = () => {};
+  const setCurrentAlgorithm = (key: SortPanelOptionKeys) => {
+    const currentAlgo = sortSettingsPanelOptions.find(i => i.isSelected); 
+    const newAlgo = sortSettingsPanelOptions.find(i => i.key === key);
+    newAlgo!.isSelected = true; 
+    currentAlgo!.isSelected = false;
+    
+    setCurrentSortingAlgorithm(key);
+  };
 
   const setAlgorithmSpeed = () => {};
 
-  const actions = [
+  const actions: SettingsPanelItem[] = [
     {
       textContent: "Start", 
       type: "BUTTON",
-      callback: startSorting, 
+      callback: startSorting as () => void, 
     },
     {
       textContent: "Randomise Items",
@@ -110,6 +123,7 @@ const useSortingVisualizer = () => {
     {
       textContent: "Current Algorithm", 
       type: "SELECT", 
+      // @ts-ignore
       callback: setCurrentAlgorithm,
       options: sortSettingsPanelOptions,
     },
@@ -118,10 +132,12 @@ const useSortingVisualizer = () => {
       type: "RANGE", 
       callback: setAlgorithmSpeed
     },
-  ]
+  ] 
 
 
-  useEffect(() => newSortItemArray(), []);
+  useEffect(() => {
+    newSortItemArray()
+  }, []);
 
   
   return {

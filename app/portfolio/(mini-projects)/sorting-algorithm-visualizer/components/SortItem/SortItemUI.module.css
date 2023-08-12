@@ -3,6 +3,6 @@
   bottom: 0; 
   border-radius: 10px;
   background-color: var(--primary-blue);
-  border: 1px solid var(--white-accent);
+  /* border: 1px solid var(--white-accent); */
 }
 

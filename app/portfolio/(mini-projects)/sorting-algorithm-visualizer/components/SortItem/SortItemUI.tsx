@@ -11,7 +11,7 @@ import styles from './SortItemUI.module.css';
 
 const SortItemUI: React.FC<{itemValue: number, itemIdx: number}> = React.memo(({itemValue, itemIdx}) => {
   let s = {
-    width: 10, 
+    width: 3, 
     height: `${itemValue}%`,
   }
 

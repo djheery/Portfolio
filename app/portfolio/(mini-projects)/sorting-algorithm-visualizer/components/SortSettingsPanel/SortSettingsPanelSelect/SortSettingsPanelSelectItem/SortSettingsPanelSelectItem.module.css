@@ -1,0 +1,22 @@
+.select-item {
+  position: absolute;
+  width: 100%;
+  z-index: 20;
+  padding: 3px 7px 3px 7px;
+  right: 0;
+  background-color: var(--white-accent);
+  border: none; 
+  border-bottom: 1px solid var(--grey-accent);
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+}
+
+.select-item__text {
+  font-size: .8rem;
+  font-weight: bold;
+}
+
+.select-item:last-of-type {
+  border-bottom: none !important;
+}
