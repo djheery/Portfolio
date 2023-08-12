@@ -2,12 +2,14 @@
 
 import { animationDebounce } from '@/app/util/debounce';
 import { useCallback, useEffect, useState } from 'react';
+import { SortOptionItemArray } from '../models/sort-models';
 import { bogoSortVisual } from '../util/algorithms/visual/bogo-sort-visual';
 import { bubbleSortVisual } from '../util/algorithms/visual/bubble-sort-visual';
 import { insertionSortVisual } from '../util/algorithms/visual/insertion-sort-visual';
 import { mergeSortVisual } from '../util/algorithms/visual/merge-sort-visual';
 import { quickSortVisual } from '../util/algorithms/visual/quick-sort-visual';
 import { selectionSortVisual } from '../util/algorithms/visual/selection-sort-visual';
+import { sortSettingsPanelOptions } from '../util/sort-visualizer-helpers';
 import styles from './useSortingVisualizer.module.css';
 
 /**
@@ -90,17 +92,42 @@ const useSortingVisualizer = () => {
 
     await sleep();
   }
+  
+  const setCurrentAlgorithm = () => {};
+
+  const setAlgorithmSpeed = () => {};
+
+  const actions = [
+    {
+      textContent: "Start", 
+      type: "BUTTON",
+      callback: startSorting, 
+    },
+    {
+      textContent: "Randomise Items",
+      type: "BUTTON",
+      callback: newSortItemArray, 
+    },
+    {
+      textContent: "Current Algorithm", 
+      type: "SELECT", 
+      callback: setCurrentAlgorithm,
+      options: sortSettingsPanelOptions,
+    },
+    {
+      textContent: "Set Speed", 
+      type: "RANGE", 
+      callback: setAlgorithmSpeed
+    },
+  ]
 
 
-  useEffect(() => {
-    newSortItemArray();
-  }, [])
+  useEffect(() => newSortItemArray(), []);
 
   
   return {
-    startSorting,
     sortItemArray,
-    randomise: newSortItemArray, 
+    actions: actions
   }
 }
 

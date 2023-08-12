@@ -14,6 +14,7 @@ export enum TextColorOptions {
   GREY_ACCENT = 'c__grey-accent'
 }
 
+export type ObjectKeys<T> = keyof T; 
 export type ObjectValues<T> = T[keyof T];
 
 export type TextColor = TextColorOptions.PRIMARY_BLUE

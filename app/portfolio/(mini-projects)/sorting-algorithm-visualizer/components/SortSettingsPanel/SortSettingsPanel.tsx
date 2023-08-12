@@ -1,14 +1,7 @@
 import React from 'react';
 import SortSettingsPanelButton, { SortSettingsButtonProps } from './SortSettingsPanelButton/SortSettingsPanelButton'
 import styles from './SortSettingsPanel.module.css';
-
-/**
- * An interface that details...
- *
- * @param interfaceParam This param represents...
-*/
-
-export type SettingsArray = [string, () => void]
+import { SettingsPanelItem } from '../../models/sort-models';
 
 /**
  * The functional component for the SortSettingsPanel
@@ -16,12 +9,12 @@ export type SettingsArray = [string, () => void]
  * @param myParam your params here
 */
 
-const SortSettingsPanel: React.FC<{settings: SettingsArray[]}> = React.memo(({settings}) => {
+const SortSettingsPanel: React.FC<{settings: SettingsPanelItem[]}> = React.memo(({settings}) => {
   return (
     <div className={styles["sort-settings-panel"]}>
       <div className={styles["sort-settings-panel__inner"]}>
         {settings.map((s, idx) => {
-          const props: SortSettingsButtonProps = { textContent: s[0], callback: s[1] } 
+          const props: SortSettingsButtonProps = { textContent: s.textContent, callback: s.callback } 
           return <SortSettingsPanelButton settingBtnProps={props}/>
         })}
       </div>

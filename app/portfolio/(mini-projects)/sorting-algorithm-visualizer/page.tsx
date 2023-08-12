@@ -2,6 +2,8 @@ import styles from './page.module.css';
 import FullScreenContainer from '@/app/components/Containers/FullScreenContainer/FullScreenContainer';
 import ContentContainer from '@/app/components/Containers/ContentContainer/ContentContainer';
 import SortContainer from './components/SortWidgetContainer/SortWidgetContainer';
+import { Suspense } from 'react';
+import NoSSRWrapper from '@/app/components/Containers/NoSSRWrapper/NoSSRWrapper';
 
 /**
  * The functional component for the SortingAlgorithmVisualizer page
@@ -25,7 +27,11 @@ const SortingAlgorithmVisualizerPage: React.FC = () => {
         </ContentContainer>
       </FullScreenContainer>
       <ContentContainer>
-        <SortContainer />
+        <Suspense>
+          <NoSSRWrapper>
+            <SortContainer />
+          </NoSSRWrapper>
+        </Suspense>
       </ContentContainer>
     </>
   )
