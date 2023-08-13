@@ -1,13 +1,8 @@
 "use client"
 
 import { animationDebounce } from '@/app/util/debounce';
-import { MutableRefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { SettingsPanelItem, SortingAlgorithmVisualKeys, SortItem, SortItemArray, SortItemColorOptionValues, SortPanelOptionKeys } from '../models/sort-models';
-import { bubbleSortVisual } from '../util/algorithms/visual/bubble-sort-visual';
-import { insertionSortVisual } from '../util/algorithms/visual/insertion-sort-visual';
-import { mergeSortVisual } from '../util/algorithms/visual/merge-sort-visual';
-import { quickSortVisual } from '../util/algorithms/visual/quick-sort-visual';
-import { selectionSortVisual } from '../util/algorithms/visual/selection-sort-visual';
 import { SortItemColorOptions, sortSettingsPanelOptions } from '../util/sort-visualizer-helpers';
 import { SortAlgorithmVisualOptions } from '../util/sort-visualizer-helpers';
 
@@ -20,7 +15,6 @@ import { SortAlgorithmVisualOptions } from '../util/sort-visualizer-helpers';
 const useSortingVisualizer = () => {
   const sortItemArray = useRef<SortItemArray>([]);
   const [currentSortingAlgorithm, setCurrentSortingAlgorithm] = useState<SortingAlgorithmVisualKeys>("BUBBLE"); 
-  const [isRunning, setIsRunning] = useState<boolean>(false);
   const [tick, setTick] = useState<number>(0);
   const [arrayGenerations, setArrayGenerations] = useState<number>(0);
   const [timer, setTimer] = useState<any>(undefined);

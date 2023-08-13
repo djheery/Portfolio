@@ -1,4 +1,3 @@
-import { arrayBuffer } from "stream/consumers";
 import { SortItemArray, SortOptionItem } from "../models/sort-models";
 import { SortPanelOptionKeys } from "../models/sort-models";
 import { bogoSortVisual } from "./algorithms/visual/bogo-sort-visual";
