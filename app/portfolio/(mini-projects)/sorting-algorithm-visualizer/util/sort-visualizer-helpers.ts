@@ -1,4 +1,5 @@
-import { SortOptionItem } from "../models/sort-models";
+import { arrayBuffer } from "stream/consumers";
+import { SortItemArray, SortOptionItem } from "../models/sort-models";
 import { SortPanelOptionKeys } from "../models/sort-models";
 import { bogoSortVisual } from "./algorithms/visual/bogo-sort-visual";
 import { bubbleSortVisual } from "./algorithms/visual/bubble-sort-visual";
@@ -17,8 +18,22 @@ import { shellSortVisual } from "./algorithms/visual/shell-sort-visual";
  * This param represents...
 */
 
-export const swap = (sortItemArray: number[], i: number, j: number) => {
-  [sortItemArray[j], sortItemArray[i]] = [sortItemArray[i], sortItemArray[j]]; 
+export const swap = (sortItemArray: SortItemArray, i: number, j: number) => {
+  const temp = sortItemArray[i][0]; 
+  sortItemArray[i][0] = sortItemArray[j][0]; 
+  sortItemArray[j][0] = temp; 
+  return sortItemArray; 
+}
+
+/**
+ * Describe your method...
+ *
+ * @param paramName This param represents...
+ * @returns This method returns...
+*/
+
+export const setAtIndex = (arr: SortItemArray, i:number, value:number) => {
+  arr[i][0] = value; 
 }
 
 /**
@@ -64,3 +79,15 @@ export const SortAlgorithmVisualOptions = {
   SHELL: shellSortVisual, 
   BOGO: bogoSortVisual,
 } as const;
+
+/**
+ * An enum that details...
+*/
+
+export const SortItemColorOptions = {
+  NORMAL: "normal", 
+  PIVOT: "pivot", 
+  L_IDX: "larger-idx", 
+  S_IDX: "smaller-idx", 
+  SUBARR_BOUND: "sub-arr-bound",
+}

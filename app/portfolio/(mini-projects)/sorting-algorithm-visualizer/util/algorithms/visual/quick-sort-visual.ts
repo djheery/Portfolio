@@ -1,4 +1,5 @@
 import { SortItemArray, SwapFn } from "../../../models/sort-models";
+import { swap } from "../../sort-visualizer-helpers";
 
 /**
  * Describe your method...
@@ -7,9 +8,12 @@ import { SortItemArray, SwapFn } from "../../../models/sort-models";
  * @returns This method returns...
 */
 
-export const quickSortVisual = async (sortItemArray: SortItemArray, swap: SwapFn) => {
-  const n = sortItemArray.length - 1; 
-  quickSortHelper(sortItemArray, 0, n, swap);
+
+export function* quickSortVisual(sortItemArray: SortItemArray) {
+  const array = JSON.parse(JSON.stringify(sortItemArray)); 
+  const n = array.length - 1; 
+  yield* quickSortHelper(array, 0, n);
+  yield {action: "complete", indicies: [-1, -1]}
 }
 
 /**
@@ -19,16 +23,12 @@ export const quickSortVisual = async (sortItemArray: SortItemArray, swap: SwapFn
  * @returns This method returns...
 */
 
-const quickSortHelper = async (
-  sortItemArray: SortItemArray, 
-  start: number, 
-  end: number, swap: 
-  SwapFn) => {
-
+function* quickSortHelper(array: SortItemArray, start:number, end:number): any {
+  
   if(start < end) {
-    let p = await partition(sortItemArray, start, end, swap); 
-    await quickSortHelper(sortItemArray, start, p - 1, swap);
-    await quickSortHelper(sortItemArray, p + 1, end, swap);
+    let p = yield* partition(array, start, end);
+    yield* quickSortHelper(array, start, p - 1); 
+    yield* quickSortHelper(array, p + 1, end);
   }
 }
 
@@ -39,24 +39,20 @@ const quickSortHelper = async (
  * @returns This method returns...
 */
 
-const partition = async (
-  sortItemArray: SortItemArray, 
-  start: number, 
-  end: number, 
-  swap: SwapFn) => {
-  
-  let pivot =  sortItemArray[end][0]; 
+function* partition(array: SortItemArray, start: number, end: number): any {
+  let pivot =  array[end][0]; 
   let i = start - 1; 
   
   for(let j = start; j <= end - 1; j ++) {
-    if(sortItemArray[j][0] < pivot) {
+    if(array[j][0] < pivot) {
       i++;
-      await swap(i, j);
+      swap(array, i, j);
+      yield { action: "swap", indicies: [i, j]}
     }
   }
 
-  await swap(i + 1, end); 
+  swap(array, i + 1, end); 
+  yield {action: "swap", indicies: [i + 1, end]}
 
   return i + 1; 
 }
-

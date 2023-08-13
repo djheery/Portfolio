@@ -1,6 +1,7 @@
 import { animationDebounce } from "@/app/util/debounce";
 import { addSyntheticLeadingComment } from "@/node_modules/typescript/lib/typescript";
 import { SortItemArray, SwapFn } from "../../../models/sort-models"
+import { swap } from "../../sort-visualizer-helpers";
 
 /**
  * Describe your method...
@@ -9,7 +10,8 @@ import { SortItemArray, SwapFn } from "../../../models/sort-models"
  * @returns This method returns...
 */
 
-export const bogoSortVisual = async (sortItemArray: SortItemArray, swap: SwapFn) => {
+export function* bogoSortVisual(sortItemArray: SortItemArray) {
+  const arr = JSON.parse(JSON.stringify(sortItemArray))
   let iterationCount = 0;
   let isSorted = false;  
   let n = sortItemArray.length;
@@ -18,7 +20,8 @@ export const bogoSortVisual = async (sortItemArray: SortItemArray, swap: SwapFn)
     for(let i = 0; i < n; i++) {
       let idx1 = Math.floor(Math.random() * (n)); 
       let idx2 = Math.floor(Math.random() * (n));
-      await swap(idx1, idx2) ;
+      swap(arr, idx1, idx2);
+      yield {action: "swap", indicies: [idx1, idx2]}
     }
 
     isSorted = checkSorted(sortItemArray);

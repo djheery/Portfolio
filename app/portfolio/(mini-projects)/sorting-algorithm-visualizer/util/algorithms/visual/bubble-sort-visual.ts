@@ -1,24 +1,34 @@
+import { RefObject } from "react";
 import { SortItemArray, SwapFn } from "../../../models/sort-models";
+import { swap } from "../../sort-visualizer-helpers";
 
-/**
- * Describe your method...
- *
- * @param paramName This param represents...
- * @returns This method returns...
-*/
 
-export const bubbleSortVisual = async (sortItemArray: SortItemArray, swap: SwapFn) => {
-  let sorted = false; 
+export function* bubbleSortVisual(sortItemArray: SortItemArray) {
+  let array = JSON.parse(JSON.stringify(sortItemArray));
+  let sorted = false;  
   let counter = sortItemArray.length - 1; 
-  
   while(!sorted) {
-    let sorted = true; 
+    let swapped = false; 
+    sorted = true;
     for(let i = 0; i < counter; i++) {
-      let j = i + 1;
-      if(sortItemArray[i][0] > sortItemArray[j][0]) {
+      let j = i + 1; 
+      if(array[i][0] > array[j][0]) {
+        swap(array, i, j);
         sorted = false; 
-        await swap(i, j);
+        swapped = true; 
+        yield { action: "swap", indicies: [i, j]}; 
       }
-    }
+      
+      if(!swapped) yield { action: "compare", indicies: [i, j] };
+    } 
+
+    counter--; 
   }
+
+  yield { action: "complete", indicies: [-1, -1] };
 }
+
+ // if(currentSortingAlgorithm === "MERGE") 
+    //   await SortAlgorithmVisualOptions[currentSortingAlgorithm](sortItemArray, setAtIndex);
+    // else 
+    //   await SortAlgorithmVisualOptions[currentSortingAlgorithm](sortItemArray, swap);

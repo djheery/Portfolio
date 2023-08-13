@@ -1,4 +1,4 @@
-import { SortAlgorithmVisualOptions, SortPanelOptions } from "../util/sort-visualizer-helpers";
+import { SortAlgorithmVisualOptions, SortPanelOptions, SortItemColorOptions } from "../util/sort-visualizer-helpers";
 import { ObjectKeys, ObjectValues } from "@/app/models/global-types";
 
 /**
@@ -13,11 +13,17 @@ export type SwapFn = (i: number, j: number) => void;
 
 export type SetAtIndexFn = (i: number, value: number) => void;
 
+
 /**
  * A type for...
 */
 
-export type SortItemArray = number[][]; 
+export type SortItem = [number, number, string]
+/**
+ * A type for...
+*/
+
+export type SortItemArray = SortItem[]; 
 
 /**
  * A type for...
@@ -89,3 +95,15 @@ export type SortingAlgorithmVisualKeys = ObjectKeys<typeof SortAlgorithmVisualOp
 */
 
 export type SortingAlgorithmVisualValues = ObjectValues<typeof SortAlgorithmVisualOptions>;
+
+/**
+ * A type for...
+*/
+
+export type SortItemColorOptionKeys = ObjectKeys<typeof SortItemColorOptions>;
+
+/**
+ * A type for...
+*/
+
+export type SortItemColorOptionValues = ObjectValues<typeof SortItemColorOptions>; 

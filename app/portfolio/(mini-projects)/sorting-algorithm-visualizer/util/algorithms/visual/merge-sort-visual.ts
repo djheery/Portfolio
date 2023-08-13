@@ -1,4 +1,5 @@
 import { SetAtIndexFn, SortItemArray } from "../../../models/sort-models";
+import { setAtIndex } from "../../sort-visualizer-helpers";
 
 /**
  * Describe your method...
@@ -7,13 +8,13 @@ import { SetAtIndexFn, SortItemArray } from "../../../models/sort-models";
  * @returns This method returns...
 */
 
-export const mergeSortVisual = async (
-  sortItemArray: SortItemArray,  
-  setAtIndex: SetAtIndexFn) => {
-    const start = 0; 
-    const end = sortItemArray.length - 1; 
+export function* mergeSortVisual(sortItemArray: SortItemArray) {
+  const arr = JSON.parse(JSON.stringify(sortItemArray));
+  let start = 0; 
+  let end = arr.length - 1; 
 
-    await mergeSortHelper(sortItemArray, start, end, setAtIndex);
+  yield* mergeSortHelper(arr, start, end);
+
 }
 
 /**
@@ -23,19 +24,13 @@ export const mergeSortVisual = async (
  * @returns This method returns...
 */
 
-const mergeSortHelper = async (
-  sortItemArray: SortItemArray, 
-  start: number, 
-  end: number, 
-  setAtIndex: SetAtIndexFn
-) => {
-  if(start < end) {    
+function* mergeSortHelper(arr: SortItemArray, start:number, end:number):any {
+   if(start < end) {    
     const mid = start + Math.floor((end - start) / 2);
-    await mergeSortHelper(sortItemArray, start, mid, setAtIndex);
-    await mergeSortHelper(sortItemArray, mid + 1, end, setAtIndex);
-    await merge(sortItemArray, start, mid, end, setAtIndex); 
+    yield* mergeSortHelper(arr, start, mid);
+    yield* mergeSortHelper(arr, mid + 1, end);
+    yield* merge(arr, start, mid, end); 
   }
-
 }
 
 /**
@@ -45,14 +40,7 @@ const mergeSortHelper = async (
  * @returns This method returns...
 */
 
-const merge = async (
-  sortItemArray: SortItemArray, 
-  start: number,
-  mid: number,  
-  end: number, 
-  setAtIndex: SetAtIndexFn
-) => {
-
+function* merge(arr: SortItemArray, start: number, mid: number, end: number): any {
   const subArrayOneLength = mid - start + 1;
   const subArrayTwoLength = end - mid;  
 
@@ -60,18 +48,20 @@ const merge = async (
   const subArrayTwo = new Array(subArrayTwoLength);
 
   for(let i = 0; i < subArrayOneLength; i++) 
-    subArrayOne[i] = sortItemArray[start + i][0];
+    subArrayOne[i] = arr[start + i][0];
   for(let j = 0; j < subArrayTwoLength; j++) 
-    subArrayTwo[j] = sortItemArray[mid + 1 + j][0]; 
+    subArrayTwo[j] = arr[mid + 1 + j][0]; 
   
   let subOneIdx = 0, subTwoIdx = 0, mergedIdx = start;
   
   while(subOneIdx < subArrayOneLength && subTwoIdx < subArrayTwoLength) {
     if(subArrayOne[subOneIdx] <= subArrayTwo[subTwoIdx]) {
-      await setAtIndex(mergedIdx, subArrayOne[subOneIdx]);
+      setAtIndex(arr, mergedIdx, subArrayOne[subOneIdx]);
+      yield { action: "set at index", indicies: [mergedIdx, subArrayOne[subOneIdx]]}
       subOneIdx++;
     } else {
-      await setAtIndex(mergedIdx, subArrayTwo[subTwoIdx]);
+      yield { action: "set at index", indicies: [mergedIdx, subArrayTwo[subTwoIdx]]}
+      setAtIndex(arr, mergedIdx, subArrayTwo[subTwoIdx]);
       subTwoIdx++;
     }
 
@@ -79,13 +69,15 @@ const merge = async (
   }
 
   while(subOneIdx < subArrayOneLength) {
-    await setAtIndex(mergedIdx, subArrayOne[subOneIdx]);
+    setAtIndex(arr, mergedIdx, subArrayOne[subOneIdx]);
+    yield { action: "set at index", indicies: [mergedIdx, subArrayOne[subOneIdx]]}
     subOneIdx++; 
     mergedIdx++; 
   }
 
   while (subTwoIdx < subArrayTwoLength) {
-    await setAtIndex(mergedIdx, subArrayTwo[subTwoIdx]);
+    setAtIndex(arr, mergedIdx, subArrayTwo[subTwoIdx]);
+    yield { action: "set at index", indicies: [mergedIdx, subArrayTwo[subTwoIdx]]}
     subTwoIdx++;
     mergedIdx++; 
   }

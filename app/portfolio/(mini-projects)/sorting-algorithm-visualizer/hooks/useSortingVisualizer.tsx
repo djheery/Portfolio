@@ -1,9 +1,14 @@
 "use client"
 
 import { animationDebounce } from '@/app/util/debounce';
-import { useCallback, useEffect, useState } from 'react';
-import { SettingsPanelItem, SortingAlgorithmVisualKeys, SortPanelOptionKeys } from '../models/sort-models';
-import { sortSettingsPanelOptions } from '../util/sort-visualizer-helpers';
+import { MutableRefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { SettingsPanelItem, SortingAlgorithmVisualKeys, SortItem, SortItemArray, SortItemColorOptionValues, SortPanelOptionKeys } from '../models/sort-models';
+import { bubbleSortVisual } from '../util/algorithms/visual/bubble-sort-visual';
+import { insertionSortVisual } from '../util/algorithms/visual/insertion-sort-visual';
+import { mergeSortVisual } from '../util/algorithms/visual/merge-sort-visual';
+import { quickSortVisual } from '../util/algorithms/visual/quick-sort-visual';
+import { selectionSortVisual } from '../util/algorithms/visual/selection-sort-visual';
+import { SortItemColorOptions, sortSettingsPanelOptions } from '../util/sort-visualizer-helpers';
 import { SortAlgorithmVisualOptions } from '../util/sort-visualizer-helpers';
 
 /**
@@ -13,10 +18,13 @@ import { SortAlgorithmVisualOptions } from '../util/sort-visualizer-helpers';
 */
 
 const useSortingVisualizer = () => {
-  const [sortItemArray, setSortItemArray] = useState<number[][]>([]);
+  const sortItemArray = useRef<SortItemArray>([]);
   const [currentSortingAlgorithm, setCurrentSortingAlgorithm] = useState<SortingAlgorithmVisualKeys>("BUBBLE"); 
   const [isRunning, setIsRunning] = useState<boolean>(false);
-
+  const [tick, setTick] = useState<number>(0);
+  const [arrayGenerations, setArrayGenerations] = useState<number>(0);
+  const [timer, setTimer] = useState<any>(undefined);
+  const [generator, setGenerator] = useState<Generator<{action: string, indicies: number[]}>>();
   /**
    * Describe your method...
    *
@@ -24,15 +32,28 @@ const useSortingVisualizer = () => {
    * This param represents...
   */
 
-  const newSortItemArray = useCallback(() => {
+  const newSortItemArray = () => {
+    if(timer !== undefined) {
+      clearTimer();
+      setTimer(undefined)
+    }
     const newItems = []; 
-    for(let i = 0; i < 500; i ++) {
+    for(let i = 0; i < 4000; i ++) {
       const sortValue = Math.random() * 100; 
-      newItems.push([sortValue < 1 ? 1 : sortValue, i]);
+      const itemDetails = [
+        sortValue < 1 ? 1 : sortValue, 
+        i, 
+        SortItemColorOptions.NORMAL
+      ] as SortItem
+      
+      newItems.push(itemDetails);
     }
 
-    setSortItemArray(newItems)
-  }, [])
+    
+    sortItemArray.current = newItems;
+    setTick((prevTick) => prevTick + 1);
+    setArrayGenerations((pg) => pg + 1);
+  }
 
   /**
    * Describe your method...
@@ -41,14 +62,50 @@ const useSortingVisualizer = () => {
    * This param represents...
   */
 
-  const startSorting = async () => {
-    if(isRunning) return; 
-    if(currentSortingAlgorithm === "MERGE") 
-      SortAlgorithmVisualOptions[currentSortingAlgorithm](sortItemArray, setAtIndex);
-    else 
-      SortAlgorithmVisualOptions[currentSortingAlgorithm](sortItemArray, swap);
-
+ const startSorting = () => {
+    !timer && setTimer(setInterval(() => {
+      processNextStep();
+    }, .5));
+    processNextStep();
   }
+
+  const processNextStep = () => {
+    let nextStep =  generator!.next();
+    let i, j;
+
+    if(!nextStep.value) {
+      clearInterval(timer);
+      setTimer(() => undefined);
+      return;
+    }
+
+
+    switch(nextStep.value.action) {
+      case "swap" :
+        [i, j] = nextStep.value.indicies;
+        swap(i, j);
+        console.log("swap");
+        break;
+      case "compare" :
+        // Will handle after visualization works
+        break;
+      case "set at index" :
+        [i, j] = nextStep.value.indicies;
+        setAtIndex(i, j); 
+        break;
+      case "complete": 
+        clearTimer();
+        // Will handle after visualization works
+        break; 
+    }
+
+    animationDebounce(setTick(pt => pt + 1));
+
+    if(!timer) {
+      return;
+    }
+
+  } 
 
   /**
    * Describe your method...
@@ -68,19 +125,12 @@ const useSortingVisualizer = () => {
    * This param represents...
   */
 
-  const swap = async (i: number, j: number) => {
-    animationDebounce(setSortItemArray((prevItems) => {
-      const newItems = [...prevItems];
+  const swap = (i: number, j: number) => {
+      const newItems = JSON.parse(JSON.stringify(sortItemArray.current));
       const temp = newItems[i][0];
       newItems[i][0] = newItems[j][0];
       newItems[j][0] = temp; 
-  
-      return newItems;
-    }));
-
-    await sleep();
-
-    return isRunning;
+      sortItemArray.current = newItems;
   }
 
   /**
@@ -91,13 +141,16 @@ const useSortingVisualizer = () => {
   */
 
   const setAtIndex = async (i: number, value: number) => {
-    animationDebounce(setSortItemArray((prevItems) => {
-      const newItems = [...prevItems];
-      newItems[i][0] = value;
-      return newItems; 
-    }))
+    const newItems =  JSON.parse(JSON.stringify(sortItemArray.current));
+    newItems[i][0] = value;
+    sortItemArray.current = newItems;
+  }
 
-    await sleep();
+  const clearTimer = () => {
+    setTimer(() => {
+      clearInterval(timer);
+      return undefined; 
+    })
   }
 
   /**
@@ -114,6 +167,7 @@ const useSortingVisualizer = () => {
     currentAlgo!.isSelected = false;
     
     setCurrentSortingAlgorithm(key);
+    clearTimer();
   };
 
   /**
@@ -126,6 +180,21 @@ const useSortingVisualizer = () => {
   const setAlgorithmSpeed = () => {};
 
   /**
+   * Stepo
+   *
+   * @param paramName This param represents...
+   * @returns This method returns...
+  */
+
+  const step = () => {
+    if(timer !== undefined) {
+      clearTimer();
+    }
+
+    processNextStep();
+  }
+
+   /**
    * An interface that details...
    *
    * @param interfaceParam This param represents...
@@ -141,6 +210,11 @@ const useSortingVisualizer = () => {
       textContent: "Randomise Items",
       type: "BUTTON",
       callback: newSortItemArray, 
+    },
+    {
+      textContent: "One Step",
+      type: "BUTTON",
+      callback: step, 
     },
     {
       textContent: "Current Algorithm", 
@@ -164,13 +238,26 @@ const useSortingVisualizer = () => {
   */
 
   useEffect(() => {
-    newSortItemArray();
+    newSortItemArray(); 
+    return () => {
+      if(timer !== undefined) {
+        clearTimer();
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    // @ts-ignore
+    setGenerator(() => SortAlgorithmVisualOptions[currentSortingAlgorithm](sortItemArray.current))
+  }, [arrayGenerations, currentSortingAlgorithm])
+
+  const getCurrent = () => sortItemArray.current
 
   
   return {
-    sortItemArray,
-    actions: actions
+    sortItemArray: getCurrent,
+    actions: actions,
+    tick: tick,
   }
 }
 

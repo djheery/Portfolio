@@ -1,4 +1,5 @@
 import { SortItemArray, SwapFn } from "../../../models/sort-models";
+import { swap } from "../../sort-visualizer-helpers";
 
 /**
  * Describe your method...
@@ -7,18 +8,21 @@ import { SortItemArray, SwapFn } from "../../../models/sort-models";
  * @returns This method returns...
 */
 
-export const selectionSortVisual = async (sortItemArray: SortItemArray, swap: SwapFn) => {
-  let n = sortItemArray.length; 
+export function* selectionSortVisual(sortItemArray: SortItemArray) {
+  const arr = JSON.parse(JSON.stringify(sortItemArray));
+  let n = arr.length;
 
   for(let i = 0; i < n; i++) {
     let min = i; 
     for(let j = i + 1; j < n; j++) {
-      if(sortItemArray[j][0] < sortItemArray[min][0]) {
-        min = j;
+      if(arr[j][0] < arr[min][0]) {
+        min = j; 
       }
     }
-    
-    if(i !== min) 
-      await swap(i, min); 
-  }
+
+    if(min !== i) {
+      swap(arr, i, min)
+      yield { action: "swap", indicies: [min, i]};
+    }
+  } 
 }
