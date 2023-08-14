@@ -1,5 +1,4 @@
 "use client"
-import { useEffect, useState } from 'react';
 import React from 'react';
 import styles from './SortItemUI.module.css';
 
@@ -9,17 +8,18 @@ import styles from './SortItemUI.module.css';
  * @param myParam your params here
 */
 
-const SortItemUI: React.FC<{itemValue: number, itemIdx: number}> = React.memo(({itemValue, itemIdx}) => {
+const SortItemUI: React.FC<{itemValue: number, itemIdx: number, itemClass: string}> = ({itemValue, itemIdx, itemClass }) => {
   let s = {
     width: 3, 
     height: `${itemValue}%`,
   }
+  const itemClassList  = `${styles["sort-item"]} ${styles[`${itemClass}`]}`
 
   return (
-    <div className={styles["sort-item"]} style={s}>
+    <div className={itemClassList} style={s}>
       
     </div>
   )
-})
+}
 
-export default SortItemUI;
+export default React.memo(SortItemUI)
