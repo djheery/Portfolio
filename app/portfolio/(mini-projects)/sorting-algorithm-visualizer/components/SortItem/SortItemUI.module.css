@@ -1,8 +1,25 @@
 .sort-item { 
-  /* position: absolute;  */
   bottom: 0; 
   border-radius: 10px;
   background-color: var(--primary-blue);
-  /* border: 1px solid var(--white-accent); */
 }
 
+.normal {
+  background-color: var(--primary-blue); 
+}
+
+.pivot {
+  .background-color: orange; 
+}
+
+.larger-idx {
+  background-color: red;
+}
+
+.smaller-idx {
+  background-color: green;
+}
+
+.sub-arr-bound {
+  background-color: purple; 
+}

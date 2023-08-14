@@ -2,7 +2,7 @@
 
 import { animationDebounce } from '@/app/util/debounce';
 import { useEffect, useRef, useState } from 'react';
-import { SettingsPanelItem, SortingAlgorithmVisualKeys, SortItem, SortItemArray, SortItemColorOptionValues, SortPanelOptionKeys } from '../models/sort-models';
+import { SettingsPanelItem, SortingAlgorithmVisualKeys, SortItem, SortItemArray,  SortPanelOptionKeys } from '../models/sort-models';
 import { SortItemColorOptions, sortSettingsPanelOptions } from '../util/sort-visualizer-helpers';
 import { SortAlgorithmVisualOptions } from '../util/sort-visualizer-helpers';
 
@@ -19,31 +19,30 @@ const useSortingVisualizer = () => {
   const [arrayGenerations, setArrayGenerations] = useState<number>(0);
   const [timer, setTimer] = useState<any>(undefined);
   const [generator, setGenerator] = useState<Generator<{action: string, indicies: number[]}>>();
-  /**
+
+/**
    * Describe your method...
    *
    * @param paramName This param represents...
    * This param represents...
   */
-
+ 
   const newSortItemArray = () => {
     if(timer !== undefined) {
       clearTimer();
       setTimer(undefined)
     }
     const newItems = []; 
-    for(let i = 0; i < 4000; i ++) {
+    for(let i = 0; i < 300; i ++) {
       const sortValue = Math.random() * 100; 
       const itemDetails = [
         sortValue < 1 ? 1 : sortValue, 
         i, 
         SortItemColorOptions.NORMAL
       ] as SortItem
-      
       newItems.push(itemDetails);
     }
 
-    
     sortItemArray.current = newItems;
     setTick((prevTick) => prevTick + 1);
     setArrayGenerations((pg) => pg + 1);
@@ -78,13 +77,12 @@ const useSortingVisualizer = () => {
       case "swap" :
         [i, j] = nextStep.value.indicies;
         swap(i, j);
-        console.log("swap");
         break;
       case "compare" :
         // Will handle after visualization works
         break;
       case "set at index" :
-        [i, j] = nextStep.value.indicies;
+        [i, j] = nextStep.value.indicies; 
         setAtIndex(i, j); 
         break;
       case "complete": 
