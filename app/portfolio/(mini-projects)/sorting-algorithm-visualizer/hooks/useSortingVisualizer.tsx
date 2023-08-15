@@ -33,7 +33,7 @@ const useSortingVisualizer = () => {
       setTimer(undefined)
     }
     const newItems = []; 
-    for(let i = 0; i < 300; i ++) {
+    for(let i = 0; i < 100; i ++) {
       const sortValue = Math.random() * 100; 
       const itemDetails = [
         sortValue < 1 ? 1 : sortValue, 
@@ -58,13 +58,13 @@ const useSortingVisualizer = () => {
  const startSorting = () => {
     !timer && setTimer(setInterval(() => {
       processNextStep();
-    }, .5));
-    processNextStep();
+    }, 1));
   }
 
   const processNextStep = () => {
     let nextStep =  generator!.next();
     let i, j;
+    let newItems: SortItemArray = JSON.parse(JSON.stringify(sortItemArray.current)); 
 
     if(!nextStep.value) {
       clearInterval(timer);
@@ -72,24 +72,33 @@ const useSortingVisualizer = () => {
       return;
     }
 
-
-    switch(nextStep.value.action) {
+    for(let action of nextStep.value) {
+      switch(action.action) {
       case "swap" :
-        [i, j] = nextStep.value.indicies;
-        swap(i, j);
-        break;
-      case "compare" :
-        // Will handle after visualization works
+        [i, j] = action.indicies;
+        swap(newItems, i, j);
         break;
       case "set at index" :
-        [i, j] = nextStep.value.indicies; 
-        setAtIndex(i, j); 
+        [i, j] = action.indicies; 
+        setAtIndex(newItems, i, j); 
+        break;
+      case "highlight min" :
+        let [min, prevMin] = action.indicies;
+        highlightMin(newItems, min, prevMin); 
+        break;
+      case "remove min" :
+        let [target, _] = action.indicies; 
+        removeMin(newItems, target);
         break;
       case "complete": 
         clearTimer();
         // Will handle after visualization works
         break; 
     }
+ 
+    }
+
+    sortItemArray.current = newItems;
 
     animationDebounce(setTick(pt => pt + 1));
 
@@ -98,7 +107,15 @@ const useSortingVisualizer = () => {
     }
 
   } 
-
+ 
+  const removeMin = (arr: SortItemArray, target:number) => {
+    arr[target][2] = SortItemColorOptions.NORMAL; 
+  }
+ 
+  const highlightMin = (arr: SortItemArray, newMin: number, prevMin: number) => {
+    arr[prevMin][2] = SortItemColorOptions.NORMAL;
+    arr[newMin][2] = SortItemColorOptions.S_IDX;
+  }
   /**
    * Describe your method...
    *
@@ -117,12 +134,10 @@ const useSortingVisualizer = () => {
    * This param represents...
   */
 
-  const swap = (i: number, j: number) => {
-      const newItems = JSON.parse(JSON.stringify(sortItemArray.current));
-      const temp = newItems[i][0];
-      newItems[i][0] = newItems[j][0];
-      newItems[j][0] = temp; 
-      sortItemArray.current = newItems;
+  const swap = (arr: SortItemArray, i: number, j: number) => {
+      const temp = arr[i][0];
+      arr[i][0] = arr[j][0];
+      arr[j][0] = temp;
   }
 
   /**
@@ -132,10 +147,8 @@ const useSortingVisualizer = () => {
    * @returns This method returns...
   */
 
-  const setAtIndex = async (i: number, value: number) => {
-    const newItems =  JSON.parse(JSON.stringify(sortItemArray.current));
-    newItems[i][0] = value;
-    sortItemArray.current = newItems;
+  const setAtIndex = async (arr: SortItemArray, i: number, value: number) => {
+    arr[i][0] = value;
   }
 
   const clearTimer = () => {
@@ -157,9 +170,11 @@ const useSortingVisualizer = () => {
     const newAlgo = sortSettingsPanelOptions.find(i => i.key === key);
     newAlgo!.isSelected = true; 
     currentAlgo!.isSelected = false;
-    
-    setCurrentSortingAlgorithm(key);
-    clearTimer();
+    newSortItemArray();  
+    if(timer) {
+      setCurrentSortingAlgorithm(key);
+      clearTimer();
+    }
   };
 
   /**

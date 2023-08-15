@@ -19,8 +19,8 @@ This code base is not meant to act as a template thus if you should want to use 
   - [x] JavaScript
   - [ ] Rust 
   - [ ] Java
-- [ ] Sorting Algoritm Visualizer 
-  - [ ] JavaScript
+- [x] Sorting Algoritm Visualizer 
+  - [x] JavaScript
   - [ ] Rust
   - [ ] Python
 - [ ] Graph Algorithm Visualizer (Java, Rust, JS)

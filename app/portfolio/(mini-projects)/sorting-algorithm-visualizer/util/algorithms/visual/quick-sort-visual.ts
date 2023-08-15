@@ -1,4 +1,4 @@
-import { SortItemArray, SwapFn } from "../../../models/sort-models";
+import { SortItemArray } from "../../../models/sort-models";
 import { swap } from "../../sort-visualizer-helpers";
 
 /**
@@ -13,7 +13,7 @@ export function* quickSortVisual(sortItemArray: SortItemArray) {
   const array = JSON.parse(JSON.stringify(sortItemArray)); 
   const n = array.length - 1; 
   yield* quickSortHelper(array, 0, n);
-  yield {action: "complete", indicies: [-1, -1]}
+  yield [{action: "complete", indicies: [-1, -1]}]
 }
 
 /**
@@ -40,19 +40,27 @@ function* quickSortHelper(array: SortItemArray, start:number, end:number): any {
 */
 
 function* partition(array: SortItemArray, start: number, end: number): any {
-  let pivot =  array[end][0]; 
-  let i = start - 1; 
-  
+  let pivot =  array[end][0];
+  let swapIdx = start - 1; 
+  let actionBatch = [];
+
   for(let j = start; j <= end - 1; j ++) {
     if(array[j][0] < pivot) {
-      i++;
-      swap(array, i, j);
-      yield { action: "swap", indicies: [i, j]}
+      swapIdx++;
+      swap(array, swapIdx, j);
+      actionBatch.push({action: "highlight min", indicies: [j, swapIdx]})
+      actionBatch.push({ action: "swap", indicies: [swapIdx, j]});
+      yield actionBatch; 
+      actionBatch = []; 
     }
   }
 
-  swap(array, i + 1, end); 
-  yield {action: "swap", indicies: [i + 1, end]}
+  swap(array, swapIdx + 1, end); 
+  actionBatch.push({action: "highlight min", indicies: [swapIdx + 1, end]})
+  actionBatch.push({ action: "swap", indicies: [swapIdx + 1, end]});
+  yield actionBatch; 
 
-  return i + 1; 
+  return swapIdx + 1; 
 }
+
+

@@ -1,6 +1,5 @@
 "use client"
 
-import useSortingVisualizer from '../../hooks/useSortingVisualizer';
 import { SortItemArray } from '../../models/sort-models';
 import SortItemUI from '../SortItem/SortItemUI';
 import styles from './SortItemsContainer.module.css';
@@ -19,7 +18,7 @@ const SortItemsContainer: React.FC<{sortItemArray: () => SortItemArray, tick: nu
       <div style={{display: "hidden", height: 0, width: 0}}>{tick}</div>
       <div className={styles["sort-items-container"]}>
         {sortItemArray().map((i) => {
-          return <SortItemUI itemIdx={i[1]} itemValue={i[0]} itemClass={i[2]} key={`${i[0]}-${i[1]}`}/>
+          return <SortItemUI itemIdx={i[1]} itemValue={i[0]} itemClass={i[2]} key={`sort-item--${i[0]}-${i[1]}`}/>
         })}
       </div>
     </>

@@ -1,6 +1,5 @@
 import { BackgroundColor } from '@/app/models/global-types';
 import { PropsWithChildren } from 'react';
-import styles from './BackgroundContainer.module.css';
 
 /**
  * An interface for defining sections with a different background color
