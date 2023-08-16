@@ -61,6 +61,7 @@ const useSortingVisualizer = () => {
     }, 1));
   }
 
+  // TODO THis isi my todo
   const processNextStep = () => {
     let nextStep =  generator!.next();
     let i, j;
@@ -106,7 +107,9 @@ const useSortingVisualizer = () => {
       return;
     }
 
-  } 
+  }
+
+  // TODO Leave better comments;
  
   const removeMin = (arr: SortItemArray, target:number) => {
     arr[target][2] = SortItemColorOptions.NORMAL; 
@@ -158,7 +161,7 @@ const useSortingVisualizer = () => {
     })
   }
 
-  /**
+ /**
    * Describe your method...
    *
    * @param paramName This param represents...

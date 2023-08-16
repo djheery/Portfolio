@@ -1,12 +1,13 @@
-import { log } from "console";
 import { SortItemArray } from "../../../models/sort-models";
 import { swap } from "../../sort-visualizer-helpers";
 
 /**
- * Describe your method...
+ * This method is used to visualize the Selection Sort Algorithm 
+ * You can read more here: about the algorithm here:  https://en.wikipedia.org/wiki/Selection_sort 
+ *  
+ * Batch updates are used to mitigate unecessary UI step rerendering. 
  *
- * @param paramName This param represents...
- * @returns This method returns...
+ * @param: paramName This param represents...
 */
 
 export function* selectionSortVisual(sortItemArray: SortItemArray) {
