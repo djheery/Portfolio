@@ -7,9 +7,9 @@ import { SortItemColorOptions, sortSettingsPanelOptions } from '../util/sort-vis
 import { SortAlgorithmVisualOptions } from '../util/sort-visualizer-helpers';
 
 /**
- * The functional component for the useSortingVisualizer
- *
- * @param myParam your params here
+ * HACK: This Hook forces rerender by incrementing a tick due to the sortItemArray being a Ref.
+ * 
+ * A Hook for managing the state of the sorting visualizer.  
 */
 
 const useSortingVisualizer = () => {
@@ -21,17 +21,13 @@ const useSortingVisualizer = () => {
   const [generator, setGenerator] = useState<Generator<{action: string, indicies: number[]}>>();
 
 /**
-   * Describe your method...
-   *
-   * @param paramName This param represents...
-   * This param represents...
-  */
+  * Randomises the current array/ sets one on entry 
+  * See the first useEffect for the setting of the array
+  * */
  
   const newSortItemArray = () => {
-    if(timer !== undefined) {
-      clearTimer();
-      setTimer(undefined)
-    }
+    clearTimer();
+    
     const newItems = []; 
     for(let i = 0; i < 100; i ++) {
       const sortValue = Math.random() * 100; 
@@ -49,11 +45,8 @@ const useSortingVisualizer = () => {
   }
 
   /**
-   * Describe your method...
-   *
-   * @param paramName This param represents...
-   * This param represents...
-  */
+   * Starts the chosen sorting algorithm 
+   * */
 
  const startSorting = () => {
     !timer && setTimer(setInterval(() => {
@@ -61,7 +54,11 @@ const useSortingVisualizer = () => {
     }, 1));
   }
 
-  // TODO THis isi my todo
+  /* 
+   * Processes the next step of a given algorithm and 
+   * visualizes it.
+   */
+
   const processNextStep = () => {
     let nextStep =  generator!.next();
     let i, j;
@@ -93,14 +90,13 @@ const useSortingVisualizer = () => {
         break;
       case "complete": 
         clearTimer();
-        // Will handle after visualization works
+        // TODO: Implement a visualization of the checking of the array.  
         break; 
     }
  
     }
 
     sortItemArray.current = newItems;
-
     animationDebounce(setTick(pt => pt + 1));
 
     if(!timer) {
@@ -109,31 +105,38 @@ const useSortingVisualizer = () => {
 
   }
 
-  // TODO Leave better comments;
- 
+/* 
+ * TODO: Rename the method and params "min" is not an accurate statement in all algorithms. 
+ *
+ * Remove the color from the previous target index
+ *   
+ * @param: arr: a copy of the sortItemArray to be manipulated 
+ * @param: target: The target index that needs to be changed.
+ */ 
+
   const removeMin = (arr: SortItemArray, target:number) => {
     arr[target][2] = SortItemColorOptions.NORMAL; 
   }
+
+ /* 
+  * TODO: Rename the method and Params "min" is not an accurate statement in all algorithms.  
+  *
+  * Highlight the target index and remove the previous target 
+  * 
+  * @param: arr: A copy of the sortItemArray to be manipulated. 
+  * @param: newMin: The new target to be highlighted 
+  * @param: prevMin: The previous target for the highlight to be removed from
+  */
  
   const highlightMin = (arr: SortItemArray, newMin: number, prevMin: number) => {
     arr[prevMin][2] = SortItemColorOptions.NORMAL;
     arr[newMin][2] = SortItemColorOptions.S_IDX;
   }
-  /**
-   * Describe your method...
-   *
-   * @param paramName This param represents...
-   * This param represents...
-  */
-
-  const sleep = async (ms = 10) => {
-    return new Promise((res) => setTimeout(res, ms));
-  }
 
   /**
    * Describe your method...
    *
-   * @param paramName This param represents...
+   * @param: paramName This param represents...
    * This param represents...
   */
 
@@ -146,8 +149,8 @@ const useSortingVisualizer = () => {
   /**
    * Describe your method...
    *
-   * @param paramName This param represents...
-   * @returns This method returns...
+   * @param: paramName This param represents...
+   * @returns: This method returns...
   */
 
   const setAtIndex = async (arr: SortItemArray, i: number, value: number) => {
@@ -155,59 +158,60 @@ const useSortingVisualizer = () => {
   }
 
   const clearTimer = () => {
-    setTimer(() => {
-      clearInterval(timer);
-      return undefined; 
-    })
+    if(timer !== undefined) {
+      setTimer(() => {
+          clearInterval(timer);
+          return undefined; 
+       })
+    }
   }
 
  /**
-   * Describe your method...
+   * A method for setting a new algorithm.
+   * It works by taking in a key for the new algorithm of type SortPanelOptionKeys
    *
-   * @param paramName This param represents...
-   * @returns This method returns...
+   * @param: key: A key of type SortPanelKeys to be used to set the new algorithm.  
   */
   
   const setCurrentAlgorithm = (key: SortPanelOptionKeys) => {
+     console.log(key); 
     const currentAlgo = sortSettingsPanelOptions.find(i => i.isSelected); 
     const newAlgo = sortSettingsPanelOptions.find(i => i.key === key);
     newAlgo!.isSelected = true; 
     currentAlgo!.isSelected = false;
     newSortItemArray();  
+    setCurrentSortingAlgorithm(key);
     if(timer) {
-      setCurrentSortingAlgorithm(key);
       clearTimer();
     }
   };
 
   /**
-   * Describe your method...
+   * TODO: Implement this algorithm.
    *
-   * @param paramName This param represents...
-   * @returns This method returns...
+   * A method for changing the current interval of of the timer. 
+   * This changes how fast the visualization occurs. 
+   *
+   * @param: newIntervalMS: The new interval to for the timer to carry the next step of an algorithm (ms)  
   */
 
-  const setAlgorithmSpeed = () => {};
+  const setAlgorithmSpeed = (newIntervalMS: number) => {
+    clearTimer();  
+  };
 
   /**
-   * Stepo
-   *
-   * @param paramName This param represents...
-   * @returns This method returns...
-  */
+   * Increment the step of the current algorithm 
+   */
 
   const step = () => {
-    if(timer !== undefined) {
-      clearTimer();
-    }
-
+    clearTimer();
     processNextStep();
   }
 
    /**
-   * An interface that details...
-   *
-   * @param interfaceParam This param represents...
+   * 
+   * These are the actions to be returned to the component 
+   * consuming this hook. 
   */
 
   const actions: SettingsPanelItem[] = [
@@ -235,26 +239,27 @@ const useSortingVisualizer = () => {
     },
     {
       textContent: "Set Speed", 
-      type: "RANGE", 
+      type: "RANGE",
+      // @ts-ignore
       callback: setAlgorithmSpeed
     },
   ] 
 
   /**
-   * Describe your method...
-   *
-   * @param paramName This param represents...
-   * @returns This method returns...
-  */
+   * This useEffect sets up the array and handles clean up of the timer on unmount of the Component. 
+   */
 
   useEffect(() => {
     newSortItemArray(); 
     return () => {
-      if(timer !== undefined) {
-        clearTimer();
-      }
+      clearTimer();
     }
   }, []);
+
+  /* 
+   * This use effect sets up the the current algorithm when the sortItemArray changes. 
+   * 
+   */
 
   useEffect(() => {
     // @ts-ignore

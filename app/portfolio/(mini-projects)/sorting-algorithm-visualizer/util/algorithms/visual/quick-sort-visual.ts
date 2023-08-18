@@ -1,11 +1,10 @@
-import { SortItemArray } from "../../../models/sort-models";
-import { swap } from "../../sort-visualizer-helpers";
+import { SortItemArray } from "../../../models/sort-models"; import { swap } from "../../sort-visualizer-helpers";
 
 /**
  * Describe your method...
  *
- * @param paramName This param represents...
- * @returns This method returns...
+ * @param: paramName This param: represents...
+ * @returns: This method returns:...
 */
 
 
@@ -19,8 +18,8 @@ export function* quickSortVisual(sortItemArray: SortItemArray) {
 /**
  * Describe your method...
  *
- * @param paramName This param represents...
- * @returns This method returns...
+ * @param: paramName This param: represents...
+ * @returns: This method returns:...
 */
 
 function* quickSortHelper(array: SortItemArray, start:number, end:number): any {
@@ -35,8 +34,8 @@ function* quickSortHelper(array: SortItemArray, start:number, end:number): any {
 /**
  * Describe your method...
  *
- * @param paramName This param represents...
- * @returns This method returns...
+ * @param: paramName This param: represents...
+ * @returns: This method returns:...
 */
 
 function* partition(array: SortItemArray, start: number, end: number): any {
@@ -53,12 +52,15 @@ function* partition(array: SortItemArray, start: number, end: number): any {
       yield actionBatch; 
       actionBatch = []; 
     }
+
+    yield [{action: "remove min", indicies: [j, -1]}]
   }
 
   swap(array, swapIdx + 1, end); 
   actionBatch.push({action: "highlight min", indicies: [swapIdx + 1, end]})
   actionBatch.push({ action: "swap", indicies: [swapIdx + 1, end]});
   yield actionBatch; 
+  yield [{action: "remove min", indicies: [swapIdx + 1]}]
 
   return swapIdx + 1; 
 }
