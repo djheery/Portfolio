@@ -3,11 +3,14 @@ import { swap } from "../../sort-visualizer-helpers";
 
 /**
  * This method is used to visualize the Selection Sort Algorithm 
- * You can read more here: about the algorithm here:  https://en.wikipedia.org/wiki/Selection_sort 
+ * You can read more below: 
+ * 
+ * https://en.wikipedia.org/wiki/Selection_sort 
  *  
  * Batch updates are used to mitigate unecessary UI step rerendering. 
  *
- * @param: paramName This param represents...
+ * @param: sortItemArray A reference to the current sort Item array 
+ * @returns: This method returns yields where the action denotes the relevant action to be taken and the indices represents the indicies to be manipulate
 */
 
 export function* selectionSortVisual(sortItemArray: SortItemArray) {

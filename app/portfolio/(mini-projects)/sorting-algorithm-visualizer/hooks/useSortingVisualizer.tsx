@@ -8,7 +8,7 @@ import { SortAlgorithmVisualOptions } from '../util/sort-visualizer-helpers';
 
 /**
  * HACK: This Hook forces rerender by incrementing a tick due to the sortItemArray being a Ref.
- * 
+ * TODO: At some point I should probably reset the tick and use it visually to show the iteration count of an algorith
  * A Hook for managing the state of the sorting visualizer.  
 */
 
@@ -19,6 +19,8 @@ const useSortingVisualizer = () => {
   const [arrayGenerations, setArrayGenerations] = useState<number>(0);
   const [timer, setTimer] = useState<any>(undefined);
   const [generator, setGenerator] = useState<Generator<{action: string, indicies: number[]}>>();
+  const [currentInterval, setCurrentInterval] = useState<number>(1); 
+  const [sortItemCount, setSortItemCount] = useState<number>(300); 
 
 /**
   * Randomises the current array/ sets one on entry 
@@ -29,7 +31,7 @@ const useSortingVisualizer = () => {
     clearTimer();
     
     const newItems = []; 
-    for(let i = 0; i < 100; i ++) {
+    for(let i = 0; i < sortItemCount; i ++) {
       const sortValue = Math.random() * 100; 
       const itemDetails = [
         sortValue < 1 ? 1 : sortValue, 
@@ -51,7 +53,7 @@ const useSortingVisualizer = () => {
  const startSorting = () => {
     !timer && setTimer(setInterval(() => {
       processNextStep();
-    }, 1));
+    }, currentInterval));
   }
 
   /* 
@@ -88,6 +90,11 @@ const useSortingVisualizer = () => {
         let [target, _] = action.indicies; 
         removeMin(newItems, target);
         break;
+      case "highlight bound": 
+        let [startIdx, endIdx] = action.indicies;
+        console.log("called"); 
+        highlightBounds(newItems, startIdx, endIdx);
+        break; 
       case "complete": 
         clearTimer();
         // TODO: Implement a visualization of the checking of the array.  
@@ -118,6 +125,20 @@ const useSortingVisualizer = () => {
     arr[target][2] = SortItemColorOptions.NORMAL; 
   }
 
+  /* 
+   * Used to highlight the bounds in Merge Sort
+   * 
+ * @param: arr: a copy of the sortItemArray to be manipulated 
+ * @param: startIdx, endIdx - The Indexes of the array to be highlights from::to
+   */
+
+  const highlightBounds = (arr: SortItemArray,startIdx: number, endIdx: number) => {
+    console.log("called"); 
+    for(let i = startIdx; i <= endIdx; i++) {
+      arr[i][2] = SortItemColorOptions.PIVOT; 
+    }
+  }
+
  /* 
   * TODO: Rename the method and Params "min" is not an accurate statement in all algorithms.  
   *
@@ -134,10 +155,11 @@ const useSortingVisualizer = () => {
   }
 
   /**
-   * Describe your method...
+   * A utility swap method for visualization 
    *
-   * @param: paramName This param represents...
-   * This param represents...
+   * @param: arr - A copy of the sortItemArray ref for update. 
+   * @param: i - an index in the array to be swapped
+   * @param: j - an index in the array to be swapped
   */
 
   const swap = (arr: SortItemArray, i: number, j: number) => {
@@ -147,15 +169,22 @@ const useSortingVisualizer = () => {
   }
 
   /**
-   * Describe your method...
+   * A utility method for setting a new value at a specific index 
+   * for the Merge Sort algorithm.
    *
-   * @param: paramName This param represents...
-   * @returns: This method returns...
+   * @param: arr - A copy of the sortItemArray ref for update. 
+   * @param: i - an index in the array to be swapped
+   * @param: value - the value to be set at that index.  
   */
 
   const setAtIndex = async (arr: SortItemArray, i: number, value: number) => {
     arr[i][0] = value;
+    arr[i][2] = SortItemColorOptions.S_IDX; 
   }
+
+  /* 
+   * Clear the interval timer to stop an algorithm mid step. 
+*/
 
   const clearTimer = () => {
     if(timer !== undefined) {
@@ -167,6 +196,8 @@ const useSortingVisualizer = () => {
   }
 
  /**
+   * TODO: Potentially rethink how the algorithm POJO is handled/ where it is located
+   *
    * A method for setting a new algorithm.
    * It works by taking in a key for the new algorithm of type SortPanelOptionKeys
    *
@@ -174,7 +205,6 @@ const useSortingVisualizer = () => {
   */
   
   const setCurrentAlgorithm = (key: SortPanelOptionKeys) => {
-     console.log(key); 
     const currentAlgo = sortSettingsPanelOptions.find(i => i.isSelected); 
     const newAlgo = sortSettingsPanelOptions.find(i => i.key === key);
     newAlgo!.isSelected = true; 
@@ -198,6 +228,29 @@ const useSortingVisualizer = () => {
   const setAlgorithmSpeed = (newIntervalMS: number) => {
     clearTimer();  
   };
+
+  /* 
+   * A method for altering the currentInterval that a step re-executes
+   * 
+   * @param: newIntervalMs the new interval to be set. 
+   */
+
+   const setNewStepInterval = (newIntervalMs: number) => {
+     clearTimer(); 
+     setCurrentInterval(() => newIntervalMs); 
+   }
+
+  /* 
+   * A method for setting a new sortItem count
+   * 
+   * @param: newItemCount the new count of Sort items to be set
+   */
+
+   const setNewSortItemCount = (newItemCount: number) => {
+     clearTimer(); 
+     setSortItemCount(() => newItemCount); 
+     newSortItemArray(); 
+   }
 
   /**
    * Increment the step of the current algorithm 

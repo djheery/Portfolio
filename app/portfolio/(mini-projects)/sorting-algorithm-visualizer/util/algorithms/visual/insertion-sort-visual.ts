@@ -3,10 +3,13 @@ import { SortItemArray, SwapFn } from "../../../models/sort-models";
 import { swap } from "../../sort-visualizer-helpers";
 
 /**
- * Describe your method...
+ * A method for visualizing the Insertion Sort sorting algorithm 
+ * You can see more about this algorithm below:
  *
- * @param paramName This param represents...
- * @returns This method returns...
+ * https://www.geeksforgeeks.org/insertion-sort/
+ *
+ * @param: sortItemArray A reference to the smain sortItemArray
+ * @returns: This method returns yields for the visualization process
 */
 
 export function* insertionSortVisual(sortItemArray: SortItemArray) {
@@ -24,6 +27,12 @@ export function* insertionSortVisual(sortItemArray: SortItemArray) {
       k--;
       actionsBatch = []; 
     }
-    yield [{ action: "remove min", inidcies: [j, -1]}];
+    
+    actionsBatch.push({ action: "remove min", indicies: [j, -1]});
+    if(k >= 0)
+      actionsBatch.push({ action: "remove min", indicies: [k, -1]}); 
+
+    yield actionsBatch; 
+    
   }
 }

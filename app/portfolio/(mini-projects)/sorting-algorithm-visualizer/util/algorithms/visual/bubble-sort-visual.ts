@@ -2,10 +2,16 @@ import { SortItemArray, SwapFn } from "../../../models/sort-models";
 import { swap } from "../../sort-visualizer-helpers";
 
 /*
-  *
-  *
-  * TODO: Hello 
-  * */
+ * This method is used to visualize the BubbleSort Algorithm 
+ * You can view more about this algorithm at the link below: 
+ * 
+ * https://www.programiz.com/dsa/bubble-sort
+ *
+ * I have use a generator pattern to visualize each step of the algorithm 
+ *
+ * @param: sortItemArray A reference to the current sort Item array 
+ * @returns: This method returns yields where the action denotes the relevant action to be taken and the indices represents the indicies to be manipulate
+ */
 
 export function* bubbleSortVisual(sortItemArray: SortItemArray) {
   let array = JSON.parse(JSON.stringify(sortItemArray));
