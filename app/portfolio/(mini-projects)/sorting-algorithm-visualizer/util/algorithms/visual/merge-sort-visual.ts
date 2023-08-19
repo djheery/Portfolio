@@ -61,13 +61,8 @@ function* merge(arr: SortItemArray, startIdx: number, midIdx: number, endIdx: nu
   const subArrayOne = new Array(subArrayOneLength); 
   const subArrayTwo = new Array(subArrayTwoLength);
 
-  // yield* highlightBoundHelper(startIdx, midIdx, subArrayOneLength, subArrayTwoLength); 
-  let actionBatch = []
-  const subOneEnd = startIdx + subArrayOneLength - 1; 
-  const subTwoEnd = midIdx + subArrayTwoLength - 1; 
-  actionBatch.push([{ action: "highlight bound", indicies: [midIdx, subOneEnd]}])
-  actionBatch.push([{ action: "highlight bound", indicies: [startIdx, subTwoEnd]}])
-  yield actionBatch;
+  yield* highlightBoundHelper(startIdx, midIdx, subArrayOneLength, subArrayTwoLength); 
+
   for(let i = 0; i < subArrayOneLength; i++) 
     subArrayOne[i] = arr[startIdx + i][0];
   for(let j = 0; j < subArrayTwoLength; j++) 
@@ -119,8 +114,8 @@ function* highlightBoundHelper(startIdx: number, midIdx: number, subOneLength: n
   console.log("highlightBound"); 
   const subOneEnd = startIdx + subOneLength - 1; 
   const subTwoEnd = midIdx + subTwoLength - 1; 
-  actionBatch.push([{ action: "highlight bound", indicies: [midIdx, subOneEnd]}])
-  actionBatch.push([{ action: "highlight bound", indicies: [startIdx, subTwoEnd]}])
+  actionBatch.push({ action: "highlight bound", indicies: [midIdx, subOneEnd]})
+  actionBatch.push({ action: "highlight bound", indicies: [startIdx, subTwoEnd]})
   yield actionBatch;
 
 }

@@ -74,33 +74,32 @@ const useSortingVisualizer = () => {
 
     for(let action of nextStep.value) {
       switch(action.action) {
-      case "swap" :
-        [i, j] = action.indicies;
-        swap(newItems, i, j);
-        break;
-      case "set at index" :
-        [i, j] = action.indicies; 
-        setAtIndex(newItems, i, j); 
-        break;
-      case "highlight min" :
-        let [min, prevMin] = action.indicies;
-        highlightMin(newItems, min, prevMin); 
-        break;
-      case "remove min" :
-        let [target, _] = action.indicies; 
-        removeMin(newItems, target);
-        break;
-      case "highlight bound": 
-        let [startIdx, endIdx] = action.indicies;
-        console.log("called"); 
-        highlightBounds(newItems, startIdx, endIdx);
-        break; 
-      case "complete": 
-        clearTimer();
-        // TODO: Implement a visualization of the checking of the array.  
-        break; 
-    }
- 
+        case "swap" :
+          [i, j] = action.indicies;
+          swap(newItems, i, j);
+          break;
+        case "set at index" :
+          [i, j] = action.indicies; 
+          setAtIndex(newItems, i, j); 
+          break;
+        case "highlight min" :
+          let [min, prevMin] = action.indicies;
+          highlightMin(newItems, min, prevMin); 
+          break;
+        case "remove min" :
+          let [target, _] = action.indicies; 
+          removeMin(newItems, target);
+          break;
+        case "highlight bound": 
+          let [startIdx, endIdx] = action.indicies;
+          highlightBounds(newItems, startIdx, endIdx);
+          break; 
+        case "complete": 
+          clearTimer();
+          // TODO: Implement a visualization of the checking of the array.  
+          break; 
+      }
+
     }
 
     sortItemArray.current = newItems;
@@ -179,7 +178,7 @@ const useSortingVisualizer = () => {
 
   const setAtIndex = async (arr: SortItemArray, i: number, value: number) => {
     arr[i][0] = value;
-    arr[i][2] = SortItemColorOptions.S_IDX; 
+    // arr[i][2] = SortItemColorOptions.S_IDX; 
   }
 
   /* 
