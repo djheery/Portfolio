@@ -111,7 +111,6 @@ function* merge(arr: SortItemArray, startIdx: number, midIdx: number, endIdx: nu
 
 function* highlightBoundHelper(startIdx: number, midIdx: number, subOneLength: number, subTwoLength: number): any {
   let actionBatch = []
-  console.log("highlightBound"); 
   const subOneEnd = startIdx + subOneLength - 1; 
   const subTwoEnd = midIdx + subTwoLength - 1; 
   actionBatch.push({ action: "highlight bound", indicies: [midIdx, subOneEnd]})

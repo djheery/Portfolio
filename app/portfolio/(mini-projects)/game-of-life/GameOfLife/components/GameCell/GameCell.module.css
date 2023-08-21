@@ -6,6 +6,7 @@
   height: 100%; 
   width: 100%; 
   border: 1px #222 solid;
+  border-radius: 50%;
 }
 
 .cell--dead {
