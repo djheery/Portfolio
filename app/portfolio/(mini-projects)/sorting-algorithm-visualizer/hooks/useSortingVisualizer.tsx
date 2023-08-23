@@ -92,7 +92,7 @@ const useSortingVisualizer = () => {
           break;
         case "highlight bound": 
           let [startIdx, endIdx] = action.indicies;
-          highlightBounds(newItems, startIdx, endIdx);
+          highlightBounds(newItems, startIdx, endIdx, action.bound);
           break; 
         case "complete": 
           clearTimer();
@@ -131,10 +131,10 @@ const useSortingVisualizer = () => {
  * @param: startIdx, endIdx - The Indexes of the array to be highlights from::to
    */
 
-  const highlightBounds = (arr: SortItemArray,startIdx: number, endIdx: number) => {
-    console.log("called"); 
+  const highlightBounds = (arr: SortItemArray,startIdx: number, endIdx: number, bound: number) => {
     for(let i = startIdx; i <= endIdx; i++) {
-      arr[i][2] = SortItemColorOptions.PIVOT; 
+      const itemClass = bound === 1 ? SortItemColorOptions.PIVOT : SortItemColorOptions.SUBARR_BOUND;
+      arr[i][2] = itemClass; 
     }
   }
 

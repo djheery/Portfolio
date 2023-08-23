@@ -1,6 +1,7 @@
 .sort-items-container {
-  height: 500px; 
+  height: 500px;
   position: relative; 
-  display: flex; 
-  align-items: baseline;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
 }

@@ -56,7 +56,7 @@ function* mergeSortHelper(arr: SortItemArray, startIdx:number, endIdx:number):an
 
 function* merge(arr: SortItemArray, startIdx: number, midIdx: number, endIdx: number): any {
   const subArrayOneLength = midIdx - startIdx + 1;
-  const subArrayTwoLength = endIdx - midIdx;  
+  const subArrayTwoLength = endIdx - midIdx; 
 
   const subArrayOne = new Array(subArrayOneLength); 
   const subArrayTwo = new Array(subArrayTwoLength);
@@ -111,10 +111,27 @@ function* merge(arr: SortItemArray, startIdx: number, midIdx: number, endIdx: nu
 
 function* highlightBoundHelper(startIdx: number, midIdx: number, subOneLength: number, subTwoLength: number): any {
   let actionBatch = []
-  const subOneEnd = startIdx + subOneLength - 1; 
-  const subTwoEnd = midIdx + subTwoLength - 1; 
-  actionBatch.push({ action: "highlight bound", indicies: [midIdx, subOneEnd]})
-  actionBatch.push({ action: "highlight bound", indicies: [startIdx, subTwoEnd]})
+  const subOneEnd = startIdx + subOneLength; 
+  const subTwoEnd = midIdx + subTwoLength;
+  actionBatch.push({ action: "highlight bound", indicies: [startIdx, subTwoEnd], bound: 1})
+  actionBatch.push({ action: "highlight bound", indicies: [midIdx, subOneEnd], bound: 1})
+  yield actionBatch;
+
+}
+
+/* 
+ * Remove the highlight colours on the bound
+ * 
+ * @param: startIdx, midIdx - These are parameters for the start of the two sub bounds 
+ * @param: subOneLength, subTwoLength - These are parameters to be used to calculate the end Idx of the bounds
+ */
+
+function* removeBoundHighlight(startIdx: number, midIdx: number, subOneLength: number, subTwoLength: number): any {
+  let actionBatch = []
+  const subOneEnd = startIdx + subOneLength; 
+  const subTwoEnd = midIdx + subTwoLength;
+  actionBatch.push({ action: "remove bound", indicies: [startIdx, subTwoEnd] })
+  actionBatch.push({ action: "remove bound", indicies: [midIdx, subOneEnd]})
   yield actionBatch;
 
 }
