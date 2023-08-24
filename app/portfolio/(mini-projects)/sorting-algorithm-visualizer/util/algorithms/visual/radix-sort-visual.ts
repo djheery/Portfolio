@@ -1,10 +1,13 @@
+import { SortItemArray } from "../../../models/sort-models";
+
 /**
  * Describe your method...
  *
- * @param paramName This param represents...
- * @returns This method returns...
+ * @param: paramName This param represents...
+ * @returns: This method returns...
 */
 
-export const radixSortVisual = () => {
+
+export function* radixSortVisual(arr: SortItemArray) {
 
 }

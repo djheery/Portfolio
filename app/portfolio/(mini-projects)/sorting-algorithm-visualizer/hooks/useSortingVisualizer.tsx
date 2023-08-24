@@ -104,11 +104,6 @@ const useSortingVisualizer = () => {
 
     sortItemArray.current = newItems;
     animationDebounce(setTick(pt => pt + 1));
-
-    if(!timer) {
-      return;
-    }
-
   }
 
 /* 
@@ -133,7 +128,7 @@ const useSortingVisualizer = () => {
 
   const highlightBounds = (arr: SortItemArray,startIdx: number, endIdx: number, bound: number) => {
     for(let i = startIdx; i <= endIdx; i++) {
-      const itemClass = bound === 1 ? SortItemColorOptions.PIVOT : SortItemColorOptions.SUBARR_BOUND;
+      const itemClass = SortItemColorOptions.SUBARR_BOUND;
       arr[i][2] = itemClass; 
     }
   }
@@ -187,10 +182,11 @@ const useSortingVisualizer = () => {
 
   const clearTimer = () => {
     if(timer !== undefined) {
+      clearInterval(timer);
       setTimer(() => {
-          clearInterval(timer);
           return undefined; 
        })
+      setTick(0); 
     }
   }
 
