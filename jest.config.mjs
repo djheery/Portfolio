@@ -5,7 +5,7 @@ const createJestConfig = nextJest({
   dir: './',
 })
  
-// Add any custom config to be passed to Jest
+//center Add any custom config to be passed to Jest
 /** @type {import('jest').Config} */
 const config = {
   // Add more setup options before each test is run
