@@ -52,6 +52,7 @@ const useSortingVisualizer = () => {
    * */
 
  const startSorting = () => {
+    if(timer != undefined) return; 
     !timer && setTimer(setInterval(() => {
       processNextStep();
     }, currentInterval));

@@ -1,20 +1,45 @@
 import { SortItemArray } from "../../../models/sort-models";
 
+/* 
+ * Details about your method
+ * 
+ * @param: myParam
+ * @returns: This returns
+ */
+
 export function* radixSortVisual(arr: SortItemArray) {
   let max = getMax(arr); 
+  let copy = JSON.parse(JSON.stringify(arr)); 
   for(let i = 0; i < max; i++) {
-    let buckets = Array.from({length: 10}, () => []); 
+    let buckets: any = Array.from({length: 10}, () => []); 
 
-    for(let j = 0; j < arr.length; j++) {
-      let didgit = getDigit(arr[i][0], i); 
-
+    for(let j = 0; j < copy.length; j++) {
+      let didgit = getDigit(copy[j][0], i); 
+      if(didgit !== undefined)  buckets[didgit].push(copy[j]); 
     };
+
+    console.log(buckets); 
+
   };
 }
+
+/* 
+ * Details about your method
+ * 
+ * @param: num - The num to get the place for  
+ * @returns: This returns
+ */
 
 function getDigit(num: number, idx: number) {
   return Math.floor(Math.abs(num) / Math.pow(10, idx)) % 10;  
 }
+
+/* 
+ * Get the maximum number in the Array to be used by the Radix Sort Method
+ * 
+ * @param: arr - A copy of the sort Item array 
+ * @returns: The length of the longest number. 
+ */
 
 function getMax(arr: SortItemArray): number {
   let max = arr[0][0];
