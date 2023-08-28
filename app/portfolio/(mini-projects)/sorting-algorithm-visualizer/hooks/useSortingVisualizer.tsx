@@ -10,7 +10,6 @@ import { SortAlgorithmVisualOptions } from '../util/sort-visualizer-helpers';
  * HACK: This Hook forces rerender by incrementing a tick due to the sortItemArray being a Ref.
  * TODO: At some point I should probably reset the tick and use it visually to show the iteration count of an algorith
  * A Hook for managing the state of the sorting visualizer.  
-*  A comment for the sake of it!
 */
 
 const useSortingVisualizer = () => {
