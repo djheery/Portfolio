@@ -10,12 +10,13 @@ import { SortItemArray } from "../../../models/sort-models";
 export function* radixSortVisual(arr: SortItemArray) {
   let max = getMax(arr); 
   let copy = JSON.parse(JSON.stringify(arr)); 
+  console.log(max); 
   for(let i = 0; i < max; i++) {
     let buckets: any = Array.from({length: 10}, () => []); 
 
     for(let j = 0; j < copy.length; j++) {
-      let didgit = getDigit(copy[j][0], i); 
-      if(didgit !== undefined)  buckets[didgit].push(copy[j]); 
+      let digit = getDigit(copy[j][0], i); 
+      if(digit !== undefined)  buckets[digit].push(copy[j]); 
     };
 
     console.log(buckets); 

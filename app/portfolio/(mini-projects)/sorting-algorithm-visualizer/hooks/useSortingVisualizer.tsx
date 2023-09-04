@@ -26,18 +26,22 @@ const useSortingVisualizer = () => {
   * Randomises the current array/ sets one on entry 
   * See the first useEffect for the setting of the array
   * */
- 
+  const getSortValue = (): number => {
+   let sortValue = Math.random() * 100;
+   if(sortValue < 1) sortValue = 1; 
+
+   return currentSortingAlgorithm === "RADIX" 
+          ? Math.floor(sortValue) 
+          : sortValue; 
+  }
+
   const newSortItemArray = () => {
     clearTimer();
     
     const newItems = []; 
     for(let i = 0; i < sortItemCount; i ++) {
-      const sortValue = Math.random() * 100; 
-      const itemDetails = [
-        sortValue < 1 ? 1 : sortValue, 
-        i, 
-        SortItemColorOptions.NORMAL
-      ] as SortItem
+      const sortValue = getSortValue();  
+      const itemDetails = [sortValue, i, SortItemColorOptions.NORMAL] as SortItem
       newItems.push(itemDetails);
     }
 
