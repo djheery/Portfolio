@@ -10,7 +10,6 @@ import { SortItemArray } from "../../../models/sort-models";
 export function* radixSortVisual(arr: SortItemArray) {
   let max = getMax(arr); 
   let copy = JSON.parse(JSON.stringify(arr)); 
-  console.log(max); 
   for(let i = 0; i < max; i++) {
     let buckets: any = Array.from({length: 10}, () => []); 
 
@@ -19,9 +18,10 @@ export function* radixSortVisual(arr: SortItemArray) {
       if(digit !== undefined)  buckets[digit].push(copy[j]); 
     };
 
-    console.log(buckets); 
-
+    copy = [].concat(...buckets); 
   };
+
+  console.log(copy); 
 }
 
 /* 
