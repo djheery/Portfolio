@@ -29,7 +29,9 @@ This code base is not meant to act as a template thus if you should want to use 
 - [ ] UK Tax API (Python)
 - [ ] Markdown Editior (JS, PostgreSQL)
 - [ ] ChatRoom App
-- [ ] UnNamed AI project 
+- [ ] UnNamed AI project
+
+- [x] data structures
 
 ## Larger Websites 
 
@@ -39,4 +41,5 @@ This code base is not meant to act as a template thus if you should want to use 
 - Georgina Website 
 - Playthrough Practice 
 - Sonic Share 
+
 
